@@ -20,8 +20,7 @@ if (
     "Email address: {$email}" . PHP_EOL . PHP_EOL .
     $message
   ;
-  $response->success = mail("deutschl.markus@gmail.com", "Contact request from the website.", $message);
-//  $response->success = mail("contact@4000milestare.com", "Contact request from the website.", $message);
+  $response->success = mail("contact@4000milestare.com", "Contact request from the website.", $message);
 }
 
 echo json_encode($response);
