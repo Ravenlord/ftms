@@ -1,0 +1,163 @@
+/*
+* This file is part of the "4000 mile stare" website.
+* @author Markus Deutschl <mdeutschl.mmt-m2012@fh-salzburg.at>
+*/
+
+
+/* ==== GRID ======================================================================================================== */
+
+
+.container {
+  margin: 0 auto;
+  width: 980px;
+}
+
+.row {
+  margin-left: -10px;
+}
+
+.span {
+  display: inline-block;
+  float: left;
+  margin-left: 10px;
+  min-height: 1px;
+}
+
+.span-1 {
+  width: 100px;
+}
+.span-2 {
+  width: 210px;
+}
+.span-3 {
+  width: 320px;
+}
+.span-4 {
+  width: 430px;
+}
+.span-5 {
+  width: 540px;
+}
+.span-6 {
+  width: 650px;
+}
+.span-7 {
+  width: 760px;
+}
+.span-8 {
+  width: 870px;
+}
+.span-9 {
+  width: 980px;
+}
+
+.offset-1 {
+  margin-left: 120px;
+}
+.offset-2 {
+  margin-left: 230px;
+}
+.offset-3 {
+  margin-left: 340px;
+}
+.offset-4 {
+  margin-left: 450px;
+}
+.offset-5 {
+  margin-left: 560px;
+}
+.offset-6 {
+  margin-left: 670px;
+}
+.offset-7 {
+  margin-left: 780px;
+}
+.offset-8 {
+  margin-left: 890px;
+}
+.offset-9 {
+  margin-left: 1000px;
+}
+
+
+/* ==== HEADER AND FOOTER =========================================================================================== */
+
+
+#main-navigation {
+  padding: 10px 0;
+  text-align: right;
+}
+
+#main-navigation a {
+  color: #666;
+  font-weight: 400;
+  margin-left: 20px;
+  transition: color 0.4s ease-in-out;
+}
+
+#main-navigation a:hover,
+#main-navigation a:focus,
+#main-navigation a:active {
+  color: #000;
+}
+
+#image-header {
+  background-color: #000;
+}
+
+#image-header .container{
+  position: relative;
+}
+
+#image-header .row {
+  position: relative;
+}
+
+#image-header_image {
+  background-color: #ccc;
+  height: 500px;
+}
+
+#image-header_logo {
+  background-color: #fff;
+}
+
+#image-header_text {
+  color: #fff;
+  position: absolute;
+  text-align: center;
+  top: 215px;
+  width: 100%;
+}
+
+#image-header_text div {
+  background: rgba(0,0,0,0.5);
+  display: inline-block;
+  font-size: 24px;
+  font-weight: 300;
+  letter-spacing: 3px;
+  margin-bottom: 10px;
+  padding: 0 15px;
+}
+
+#logos {
+  background-color: #f2f2f2;
+  height: 80px;
+  padding: 10px 0;
+}
+
+#logos .row div:first-of-type {
+  text-align: right;
+}
+
+#footer {
+  background-color: #000;
+  color: #ccc;
+  margin-top: 80px;
+}
+
+#footer .container {
+  background: url(../img/ftms_image_footer.png) top left no-repeat;
+  height: 375px;
+  padding: 20px 0;
+}

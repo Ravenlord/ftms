@@ -1,0 +1,56 @@
+/*
+* This file is part of the "4000 mile stare" website.
+* @author Markus Deutschl <mdeutschl.mmt-m2012@fh-salzburg.at>
+*/
+
+#contact form div:first-of-type,
+#submit {
+  margin-left: 0;
+}
+
+#contact textarea {
+  height: 200px;
+}
+
+#contact p {
+  margin-bottom: 40px;
+}
+
+#contact form {
+  margin-bottom: 80px;
+}
+
+#reset {
+  display: none;
+}
+
+#mail-form_response {
+  color: #67b07b;
+  text-align: right;
+}
+
+#mail-form_response.error {
+  color: #e81d30;
+}
+
+#facebook,
+#back-to-top {
+  padding: 40px 0;
+  text-align: center;
+}
+
+#facebook a {
+  background: url(../img/ftms_facebook_icon.png) top center no-repeat;
+  color: #4b6ea9;
+  display: block;
+  font-weight: 400;
+  font-size: 16px;
+  padding-top: 50px;
+}
+
+#back-to-top a {
+  background: url(../img/ftms_logo_top_icon.png) top center no-repeat;
+  color: #666;
+  display: block;
+  padding-top: 25px;
+}

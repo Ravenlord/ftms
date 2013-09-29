@@ -3,56 +3,100 @@
   <head>
     <title>4000 mile stare</title>
     <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="img/ftms_favicon_16px.png" />
+    <link rel="icon" type="image/png" href="img/ftms_favicon_32px.png" />
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>
-    <link href="style.css" rel="stylesheet" type="text/css">
-     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <link href="css/generic.css" rel="stylesheet" type="text/css">
+    <link href="css/layout.css" rel="stylesheet" type="text/css">
+    <link href="css/style.css" rel="stylesheet" type="text/css">
   </head>
   <body>
-    <div id="container">
-      <header id="header">
-        <nav id="main-navigation">
-          <span style="color:#000">Home</span>
-          <a href="#project">Project</a>
-          <a href="#team">Team</a>
-          <a href="#contact">Contact</a>
-        </nav>
-        <div id="image-header">
-          <div id="image-header_logo">
-            <img src="logo_ftms_grey_small.jpg" alt="4000 mile stare logo.">
+    <header id="header">
+      <nav class="container" id="main-navigation">
+        <span style="color:#000">Home</span>
+        <a href="#project">Project</a>
+        <a href="#team">Team</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div id="image-header">
+        <div class="container">
+          <div class="row">
+            <div class="offset-1 span span-2" id="image-header_logo">
+              <img src="img/ftms_logo.png" alt="4000 mile stare logo.">
+            </div>
+            <div id="image-header_image"></div>
+            <div id="image-header_text">
+              <div>A short film project by students of the</div><br>
+              <div>MultiMediaArt master study program of the University</div><br>
+              <div>of applied sciences Salburg, Austria.</div>
+            </div>
           </div>
-          <div id="image-header_image"></div>
-          <div id="image-header_text">
-            <div>A short film project by students of the</div><br>
-            <div>MultiMediaArt master study program of the University</div><br>
-            <div>of applied sciences Salburg, Austria.</div>
-          </div>
-        </div>
-        <div id="logos">
-          <div><img src="logo_fhs.jpg" alt="University of applied sciences Salzburg logo"></div>
-          <div><img src="logo_mma.jpg" alt="MultiMediaArt logo."></div>
-        </div>
-      </header>
-      <div id="content">
-        <div id="project">
-          <h2>About the project</h2>
-          <p>Kitty ipsum dolor sit amet, chuf cras nec rhoncus sleep on your face, jump on the table puking attack your ankles faucibus puking meow. Climb the curtains stretching scratched hairball tempus, elit catnip I don't like that food vulputate knock over the lamp rip the couch. Judging you sniff hairball sunbathe, knock over the lamp scratched jump on the table shed everywhere I don't like that food hairball. Hairball run faucibus orci turpis purr sleep on your keyboard, faucibus chase the red dot jump on the table suspendisse. Purr stuck in a tree enim ut dolor bibendum sagittis, catnip quis feed me biting vulputate hairball. Et sunbathe sleep in the sink sleep on your keyboard justo, faucibus biting suscipit pharetra feed me sniff etiam.</p>
-          <p>Quis nunc shed everywhere nibh neque vehicula sleep in the sink, nunc judging you orci turpis biting. Shed everywhere aliquam lay down in your way sunbathe eat the grass fluffy fur, pellentesque quis scratched zzz orci turpis attack your ankles. Amet quis in viverra stuck in a tree, enim amet jump faucibus nullam leap vel. Run sleep on your keyboard toss the mousie knock over the lamp puking, neque climb the curtains purr give me fish rip the couch vehicula. Egestas toss the mousie judging you tempus hiss elit, consectetur enim ut vestibulum puking hairball. Pharetra climb the curtains hairball jump on the table, nibh claw fluffy fur ac amet dolor.</p>
-        </div>
-        <div class="spacer"></div>
-        <div id="team">
-          <h2>About the team</h2>
-          <p>Kitty ipsum dolor sit amet, chuf cras nec rhoncus sleep on your face, jump on the table puking attack your ankles faucibus puking meow. Climb the curtains stretching scratched hairball tempus, elit catnip I don't like that food vulputate knock over the lamp rip the couch. Judging you sniff hairball sunbathe, knock over the lamp scratched jump on the table shed everywhere I don't like that food hairball. Hairball run faucibus orci turpis purr sleep on your keyboard, faucibus chase the red dot jump on the table suspendisse. Purr stuck in a tree enim ut dolor bibendum sagittis, catnip quis feed me biting vulputate hairball. Et sunbathe sleep in the sink sleep on your keyboard justo, faucibus biting suscipit pharetra feed me sniff etiam.</p>
-          <p>Quis nunc shed everywhere nibh neque vehicula sleep in the sink, nunc judging you orci turpis biting. Shed everywhere aliquam lay down in your way sunbathe eat the grass fluffy fur, pellentesque quis scratched zzz orci turpis attack your ankles. Amet quis in viverra stuck in a tree, enim amet jump faucibus nullam leap vel. Run sleep on your keyboard toss the mousie knock over the lamp puking, neque climb the curtains purr give me fish rip the couch vehicula. Egestas toss the mousie judging you tempus hiss elit, consectetur enim ut vestibulum puking hairball. Pharetra climb the curtains hairball jump on the table, nibh claw fluffy fur ac amet dolor.</p>
-        </div>
-        <div class="spacer"></div>
-        <div id="contact">
-          <h2>Contact</h2>
         </div>
       </div>
-      <footer id="footer">
-        <div class="spacer"></div>
-        <a href="#">Imprint</a>
-      </footer>
+      <div id="logos">
+        <div class="container">
+          <div class="row">
+            <div class="span span-4"><img alt="University of applied sciences Salzburg logo" height="60" src="img/logo_fhs.jpg" width="213"></div>
+            <div class="offset-1 span span-4"><img alt="MultiMediaArt logo." height="60" src="img/logo_mma.jpg" width="172"></div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="container" id="content">
+      <div class="row">
+        <div class="offset-1 span span-7">
+          <article id="project">
+            <h2>About the project</h2>
+            <p>Kitty ipsum dolor sit amet, chuf cras nec rhoncus sleep on your face, jump on the table puking attack your ankles faucibus puking meow. Climb the curtains stretching scratched hairball tempus, elit catnip I don't like that food vulputate knock over the lamp rip the couch. Judging you sniff hairball sunbathe, knock over the lamp scratched jump on the table shed everywhere I don't like that food hairball. Hairball run faucibus orci turpis purr sleep on your keyboard, faucibus chase the red dot jump on the table suspendisse. Purr stuck in a tree enim ut dolor bibendum sagittis, catnip quis feed me biting vulputate hairball. Et sunbathe sleep in the sink sleep on your keyboard justo, faucibus biting suscipit pharetra feed me sniff etiam.</p>
+            <p>Quis nunc shed everywhere nibh neque vehicula sleep in the sink, nunc judging you orci turpis biting. Shed everywhere aliquam lay down in your way sunbathe eat the grass fluffy fur, pellentesque quis scratched zzz orci turpis attack your ankles. Amet quis in viverra stuck in a tree, enim amet jump faucibus nullam leap vel. Run sleep on your keyboard toss the mousie knock over the lamp puking, neque climb the curtains purr give me fish rip the couch vehicula. Egestas toss the mousie judging you tempus hiss elit, consectetur enim ut vestibulum puking hairball. Pharetra climb the curtains hairball jump on the table, nibh claw fluffy fur ac amet dolor.</p>
+          </article>
+          <div class="spacer"></div>
+          <article id="team">
+            <h2>About the team</h2>
+            <p>Kitty ipsum dolor sit amet, chuf cras nec rhoncus sleep on your face, jump on the table puking attack your ankles faucibus puking meow. Climb the curtains stretching scratched hairball tempus, elit catnip I don't like that food vulputate knock over the lamp rip the couch. Judging you sniff hairball sunbathe, knock over the lamp scratched jump on the table shed everywhere I don't like that food hairball. Hairball run faucibus orci turpis purr sleep on your keyboard, faucibus chase the red dot jump on the table suspendisse. Purr stuck in a tree enim ut dolor bibendum sagittis, catnip quis feed me biting vulputate hairball. Et sunbathe sleep in the sink sleep on your keyboard justo, faucibus biting suscipit pharetra feed me sniff etiam.</p>
+            <p>Quis nunc shed everywhere nibh neque vehicula sleep in the sink, nunc judging you orci turpis biting. Shed everywhere aliquam lay down in your way sunbathe eat the grass fluffy fur, pellentesque quis scratched zzz orci turpis attack your ankles. Amet quis in viverra stuck in a tree, enim amet jump faucibus nullam leap vel. Run sleep on your keyboard toss the mousie knock over the lamp puking, neque climb the curtains purr give me fish rip the couch vehicula. Egestas toss the mousie judging you tempus hiss elit, consectetur enim ut vestibulum puking hairball. Pharetra climb the curtains hairball jump on the table, nibh claw fluffy fur ac amet dolor.</p>
+          </article>
+          <div class="spacer"></div>
+          <article class="clear-fix" id="contact">
+            <h2>Contact</h2>
+            <p>For further information of if you have any questions, please do not hesitate to contact us directly at <a href="mailto:contact@4000milestare.com">contact@4000milestare.com</a> or use our contact form below.</p>
+            <form class="clear-fix" id="mail-form">
+              <div class="span span-2">
+                <input id="first-name" name="first-name" type="text" placeholder="FIRST NAME *" required="required">
+                <input id="last-name" name="last-name" type="text" placeholder="LAST NAME *" required="required">
+                <input id="email" name="email" type="email" placeholder="EMAIL ADDRESS *" required="required">
+              </div>
+              <div class="span span-5">
+                <textarea id="message" name="message" placeholder="MESSAGE *" required="required"></textarea>
+                <input class="span span-1" id="submit" type="submit" value="SUBMIT">
+                <input id="reset" type="reset">
+                <span class="span span-4" id="mail-form_response"></span>
+              </div>
+            </form>
+          </article>
+          <div class="spacer"></div>
+          <div id="facebook">
+            <a href="https://www.facebook.com/4000milestare" target="_blank">Find us ... like us ... write us ... on facebook.</a>
+          </div>
+          <div class="spacer"></div>
+        </div>
+      </div>
     </div>
+    <footer id="footer">
+      <div class="container">
+        <div class="row">
+          <div class="offset-1 span span-1 uppercase">Imprint</div>
+        </div>
+      </div>
+    </footer>
+    <div class="container" id="back-to-top">
+      <a href="#header">
+        <span class="uppercase">Back to top</span>
+      </a>
+    </div>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="js/jquery.scrollTo.min.js"></script>
+    <script src="js/jquery.localScroll.min.js"></script>
+    <script src="js/script.js"></script>
   </body>
 </html>
