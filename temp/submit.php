@@ -10,7 +10,7 @@ $response->success = false;
 
 if (
     ($first_name = filter_input(INPUT_POST, "first_name", FILTER_SANITIZE_STRING)) !== false
-    && ($last_name = filter_input(INPUT_POST, "first_name", FILTER_SANITIZE_STRING)) !== false
+    && ($last_name = filter_input(INPUT_POST, "last_name", FILTER_SANITIZE_STRING)) !== false
     && ($email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_EMAIL)) !== false
     && ($message = filter_input(INPUT_POST, "message", FILTER_SANITIZE_STRING)) !== false
   ) {
