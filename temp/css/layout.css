@@ -114,8 +114,9 @@
 }
 
 #image-header_image {
-  background-color: #ccc;
+  background: url(../img/bg_img_drone.jpg) no-repeat;
   height: 500px;
+  margin-left: 10px;
 }
 
 #image-header_logo {
@@ -131,11 +132,11 @@
 }
 
 #image-header_text div {
-  background: rgba(0,0,0,0.5);
+  background: rgba(0,0,0,0.75);
   display: inline-block;
   font-size: 24px;
   font-weight: 300;
-  letter-spacing: 3px;
+  letter-spacing: 2px;
   margin-bottom: 10px;
   padding: 0 15px;
 }
@@ -146,8 +147,16 @@
   padding: 10px 0;
 }
 
-#logos .row div:first-of-type {
+#logos .row a {
+  display: block;
+}
+
+#logos .row a:first-of-type {
   text-align: right;
+}
+
+#logos .row a:last-of-type img {
+  margin-left: 75px;
 }
 
 #footer {
@@ -156,8 +165,34 @@
   margin-top: 80px;
 }
 
+#footer dl {
+  margin-top: 20px;
+}
+
+#footer dt, dd {
+  margin-top: 10px;
+}
+
+#footer a {
+  color: #fff;
+  font-weight: 400;
+}
+
+#footer p {
+  margin: 0 0 10px 0;
+}
+
 #footer .container {
   background: url(../img/ftms_image_footer.png) top left no-repeat;
   height: 375px;
   padding: 20px 0;
+  position: relative;
+}
+
+#copyright {
+  bottom: 20px;
+  left: 0;
+  position: absolute;
+  right: 0;
+  text-align: center;
 }
