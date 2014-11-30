@@ -1,0 +1,12 @@
+{
+  "name":         "FTMS",
+  "version":      "0.0.1-dev",
+  "author":       "Markus Deutschl <deutschl.markus@gmail.com>",
+  "repository":   {
+    "type": "git",
+    "url":  "https://github.com/Ravenlord/ftms"
+  },
+  "dependencies": {
+    "bootstrap":  ">=3 <4"
+  }
+}
