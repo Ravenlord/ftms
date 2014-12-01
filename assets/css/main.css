@@ -130,6 +130,7 @@ header a {
 /* Enhance the header menu experience for bigger screens. */
 @media (min-width: 768px) {
   header {
+    background-color: transparent;
     border-bottom: 0 none;
     color: #999;
     height: auto;
