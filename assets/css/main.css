@@ -164,6 +164,7 @@ header a {
     color: inherit;
     display: inline-block;
     margin-left: 20px;
+    padding-left: 0;
     transition: color 0.4s ease-in-out;
   }
 
@@ -178,7 +179,7 @@ header a {
     margin-top: 4.25%
   }
 
-  #social a{
+  #social a {
     opacity: 0.5;
     padding: 0;
     transition: opacity 0.4s ease-in-out;
@@ -203,7 +204,7 @@ header a {
 }
 
 #footer-logos a {
-  opacity: 0.7;
+  opacity: 0.5;
   transition: opacity 0.4s ease-in-out;
 }
 
