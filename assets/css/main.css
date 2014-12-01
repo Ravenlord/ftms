@@ -1,8 +1,8 @@
 /* Test code, remove!!!*/
-*[class^='col-'],
+/* *[class^='col-'],
 .container {
   border: 1px solid red;
-}
+} */
 
 /* ==== GENERAL STUFF =============================================================================================== */
 
@@ -23,6 +23,7 @@ header {
 a {
   border: 0 none;
   color: #666;
+  cursor: pointer;
   font-weight: 700;
   text-decoration: none;
   transition: color 0.4s ease-in-out;
@@ -68,13 +69,52 @@ p {
 /* ==== HEADER AND FOOTER =========================================================================================== */
 
 
+#top {
+  margin-top: 20px;
+}
+
+/* TODO: Replace with SVG styles, once implemented. */
+#logo {
+  opacity: 0.5;
+  transition: opacity 0.4s ease-in-out;
+}
+
+#logo:hover,
+#logo:focus,
+#logo:active {
+  opacity: 1;
+}
+
 #main-navigation {
-  padding: 10px 20px 10px 0;
+  margin-top: 4%;
+  padding: 0px 10px;
   text-align: right;
 }
 
 #main-navigation a {
   margin-left: 20px;
+}
+
+#social {
+  margin-top: 4%
+}
+
+#social a{
+  opacity: 0.5;
+  padding: 0;
+  transition: opacity 0.4s ease-in-out;
+  width: 40%;
+}
+
+#social a:hover,
+#social a:focus,
+#social a:active {
+  opacity: 1;
+}
+
+#social a:last-child {
+  text-align: right;
+  margin-left: 20%;
 }
 
 #footer-logos {
@@ -95,8 +135,16 @@ p {
 
 #footer-lower {
   color: #666;
-  height: 50px;
+  padding-bottom: 15px;
   padding-top: 15px;
+  text-transform: uppercase;
+}
+
+/* Bigger screens, different alignment. */
+@media (min-width: 960px) {
+  #social {
+    margin-top: 3.5%
+  }
 }
 
 
@@ -104,36 +152,54 @@ p {
 
 
 #upper-wrapper-outer {
-  background-color: #eee;
+  background-color: #000;
   width: 100%;
   height: 100%;
 }
 
 #upper-wrapper-inner {
-  background: url(../img/spacer.png) repeat -3px top;
   width: 100%;
   height: 100%;
 }
 
-#content-wrapper {
-  padding-bottom: 80px;
-  margin-top: 80px;
-}
-
-#content-wrapper > .row {
-  background-color: rgba(0,0,0,0.8);
-}
-
 #content {
-  padding-bottom: 50px;
-  padding-top: 50px;
+  padding-bottom: 20px;
+}
+
+/* Enhance the experience for bigger screens */
+@media (min-width: 768px) {
+
+  #upper-wrapper-inner {
+    background: url(../img/spacer.png) repeat -3px top;
+  }
+
+  /* TODO: Insert full screen background images in upper-wrapper-outer. */
+
+  #content-wrapper {
+    padding-bottom: 80px;
+    margin-top: 80px;
+  }
+
+  #content {
+    padding-bottom: 50px;
+    padding-top: 50px;
+  }
+
+  #content-wrapper > .row {
+    background-color: rgba(0,0,0,0.8);
+  }
 }
 
 
-/* ==== BREAKPOINT CUSTOMIZATIONS =================================================================================== */
+/* ==== GENERAL BREAKPOINT CUSTOMIZATIONS =========================================================================== */
 
 
-/* Everything below this breakpoint will only be present on small phones */
+/* Everything below this breakpoint will only be present on small phones. */
 @media (max-width: 767px) {
+
+}
+
+/* Advanced rules for all bigger screens. */
+@media (min-width: 768px) {
 
 }
