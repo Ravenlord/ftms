@@ -76,6 +76,8 @@ header {
   height: 50px;
   position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   transition: height 0.4s ease-in-out;
   z-index: 10;
 }
@@ -86,6 +88,10 @@ header.expanded {
 
 header a {
   color: #fff;
+}
+
+#logo .img-responsive{
+  max-height: 45px;
 }
 
 #mobile-menu {
@@ -106,7 +112,7 @@ header a {
 
 #main-navigation {
   margin-top: 3.5%;
-  padding: 0px 10px;
+  padding: 0 10px;
 }
 
 #main-navigation a {
@@ -137,6 +143,8 @@ header a {
     margin-top: 20px;
     position: static;
     top: auto;
+    left: auto;
+    right: auto;
   }
 
   header a {
@@ -155,8 +163,12 @@ header a {
     opacity: 1;
   }
 
+  #logo .img-responsive {
+    max-height: none;
+  }
+
   #main-navigation {
-    padding: 0px 10px;
+    padding: 0 10px;
     text-align: right;
   }
 
