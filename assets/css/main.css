@@ -79,11 +79,17 @@ header {
   left: 0;
   right: 0;
   transition: height 0.4s ease-in-out;
-  z-index: 10;
+  z-index: 1;
+}
+
+header,
+footer {
+  font-size: 12px;
 }
 
 header.expanded {
   height: 100vh;
+  overflow: auto;
 }
 
 header a {
@@ -111,22 +117,43 @@ header a {
 }
 
 #main-navigation {
-  margin-top: 3.5%;
+  margin-top: 4%;
   padding: 0 10px;
 }
 
-#main-navigation a {
+.main-nav-first,
+.main-nav-second {
   background-color: inherit;
-  display: block;
-  border-bottom: 1px solid #666;
-  padding: 5px 0 5px 20px;
+  font-weight: 700;
   transition: background-color 0.4s ease-in-out;
 }
 
-#main-navigation a:hover,
-#main-navigation a:focus,
-#main-navigation a:active {
+a.main-nav-first:hover,
+a.main-nav-first:focus,
+a.main-nav-first:active,
+.main-nav-second:hover,
+.main-nav-second:focus,
+.main-nav-second:active {
   background-color: #333;
+}
+
+.main-nav-first {
+  cursor: pointer;
+  display: block;
+  border-bottom: 1px solid #666;
+  padding: 5px 0 5px 20px;
+}
+
+.main-nav-second {
+  display: inline-block;
+  margin-top: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.main-nav-second:before {
+  content: "//";
+  margin-right: 4px;
 }
 
 #social {
@@ -141,6 +168,7 @@ header a {
     color: #999;
     height: auto;
     margin-top: 20px;
+    overflow: visible;
     position: static;
     top: auto;
     left: auto;
@@ -172,24 +200,122 @@ header a {
     text-align: right;
   }
 
-  #main-navigation a {
+  .main-nav-first,
+  .main-nav-second,
+  .main-nav-second-wrapper {
     border: 0 none;
     color: inherit;
     display: inline-block;
-    margin-left: 20px;
-    padding-left: 0;
+  }
+
+  .main-nav-first,
+  .main-nav-second {
+    position: relative;
     transition: color 0.4s ease-in-out;
   }
 
-  #main-navigation a:hover,
-  #main-navigation a:focus,
-  #main-navigation a:active {
+  .main-nav-second {
+    color: #999;
+    display: block;
+    margin: 10px 0 0 15px;
+    padding: 0;
+  }
+
+  .main-nav-first:hover,
+  .main-nav-first:focus,
+  .main-nav-first:active,
+  a.main-nav-first:hover,
+  a.main-nav-first:focus,
+  a.main-nav-first:active,
+  .main-nav-second:hover,
+  .main-nav-second:focus,
+  .main-nav-second:active {
     background-color: transparent;
     color: #fff;
   }
 
+  .main-nav-first {
+    margin-left: 20px;
+    padding-left: 0;
+  }
+
+  .main-nav-second-wrapper {
+    background-color: #000;
+    min-width: 100px;
+    padding: 0 10px 10px 0;
+    text-align: left;
+    opacity: 0.1;
+    position: absolute;
+    top: -999999px;
+    width: 0;
+    height: 0;
+    z-index: 2;
+    transition: opacity 0.4s ease-in-out;
+  }
+
+  .main-nav-second-wrapper:before {
+    content: '';
+    position: absolute;
+    top: -999999px;
+    width: 0;
+    height: 0;
+  }
+
+  .main-nav-first:hover .main-nav-second-wrapper,
+  .main-nav-first:focus .main-nav-second-wrapper,
+  .main-nav-first:active .main-nav-second-wrapper {
+    left: 0;
+    top: 33px;
+    width: auto;
+    height: auto;
+    opacity: 1;
+  }
+
+  .main-nav-first:hover .main-nav-second-wrapper:before,
+  .main-nav-first:focus .main-nav-second-wrapper:before,
+  .main-nav-first:active .main-nav-second-wrapper:before {
+    top: -15px;
+    left: -10px;
+    width: calc(100% + 20px);
+    height: calc(100% + 25px);
+  }
+
+  .main-nav-second-wrapper-nw,
+  .main-nav-second-wrapper-ne,
+  .main-nav-second-wrapper-sw,
+  .main-nav-second-wrapper-se {
+    border: 1px solid #999;
+    height: 10px;
+    position: absolute;
+    width: 10px;
+  }
+
+  .main-nav-second-wrapper-nw,
+  .main-nav-second-wrapper-ne {
+    border-bottom: 0 none;
+    top: 0;
+  }
+
+  .main-nav-second-wrapper-nw,
+  .main-nav-second-wrapper-sw {
+    border-right: 0 none;
+    left: 0;
+  }
+
+  .main-nav-second-wrapper-ne,
+  .main-nav-second-wrapper-se {
+    border-left: 0 none;
+    right: 0;
+  }
+
+  .main-nav-second-wrapper-sw,
+  .main-nav-second-wrapper-se {
+    border-top: 0 none;
+    bottom: 0;
+  }
+
   #social {
-    margin-top: 4.25%
+    margin-top: 4.5%
   }
 
   #social a {
@@ -208,6 +334,13 @@ header a {
   #social a:last-child {
     text-align: right;
     margin-left: 20%;
+  }
+}
+
+/* Bigger screens, different alignment. */
+@media (min-width: 960px) {
+  #social {
+    margin-top: 4%
   }
 }
 
@@ -231,13 +364,6 @@ header a {
   color: #666;
   padding-bottom: 15px;
   padding-top: 15px;
-}
-
-/* Bigger screens, different alignment. */
-@media (min-width: 960px) {
-  #social {
-    margin-top: 3.75%
-  }
 }
 
 
@@ -268,6 +394,9 @@ header a {
   }
 
   /* TODO: Insert full screen background images in upper-wrapper-outer. */
+  #upper-wrapper-outer {
+    background-color: #eee;
+  }
 
   #content-wrapper {
     padding-bottom: 80px;
