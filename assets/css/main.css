@@ -393,9 +393,47 @@ a.main-nav-first:active,
     background: url(../img/spacer.png) repeat -3px top;
   }
 
-  /* TODO: Insert full screen background images in upper-wrapper-outer. */
   #upper-wrapper-outer {
-    background-color: #eee;
+    background-attachment: fixed;
+    background-position: center center;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+
+  /* TODO: Insert actual FTMS images. */
+  #upper-wrapper-outer.bg-start {
+    background-image: url(http://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-2437.jpg);
+  }
+
+  #upper-wrapper-outer.bg-base {
+    background-image: url(http://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-2437.jpg);
+  }
+
+  #upper-wrapper-outer.bg-project {
+    background-image: url(http://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-2437.jpg);
+  }
+
+  #upper-wrapper-outer.bg-crew-about {
+    background-image: url(http://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-2437.jpg);
+  }
+
+  #upper-wrapper-outer.bg-crew-staff {
+    background-image: url(http://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-2437.jpg);
+  }
+
+  #upper-wrapper-outer.bg-cast {
+    background-image: url(http://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-2437.jpg);
+  }
+
+  #upper-wrapper-outer.bg-media-gallery {
+    background-image: url(http://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-2437.jpg);
+  }
+
+  #upper-wrapper-outer.bg-media-video {
+    background-image: url(http://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-2437.jpg);
   }
 
   #content-wrapper {
