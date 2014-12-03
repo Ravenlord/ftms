@@ -24,9 +24,23 @@ module.exports = function(grunt) {
         expand: true,
         src:    '*.less'
       },
+      bootstrapJs: {
+        cwd:    'node_modules/bootstrap/dist/js/',
+        dest:   'dist/assets/js/',
+        expand: true,
+        src:    [ '*.js', '!npm.js' ]
+      },
       css: {
         dest:   'dist/',
         src:    'assets/css/*.css'
+      },
+      img: {
+        dest:   'dist/',
+        src:    'assets/img/*'
+      },
+      js: {
+        dest:   'dist/',
+        src:    'assets/js/*.js'
       }
     },
     clean: {
@@ -70,7 +84,7 @@ module.exports = function(grunt) {
     grunt.log.write('Logging some stuff...').ok();
   });
 
-  grunt.registerTask('bootstrap', [ 'copy:bootstrap', 'copy:bootstrapConfig', 'less', 'clean:temp' ]);
+  grunt.registerTask('bootstrap', [ 'copy:bootstrap', 'copy:bootstrapConfig', 'less', 'clean:temp', 'copy:bootstrapJs' ]);
 
   grunt.registerTask('css', [ 'copy:css', 'bootstrap', 'cssmin' ])
 
