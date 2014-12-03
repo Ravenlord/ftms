@@ -1,14 +1,25 @@
 {
-  "name":                   "FTMS",
-  "version":                "0.0.1-dev",
-  "author":                 "Markus Deutschl <deutschl.markus@gmail.com>",
+  "name":                     "FTMS",
+  "version":                  "0.0.1-dev",
+  "author":                   "Markus Deutschl <deutschl.markus@gmail.com>",
   "repository":   {
     "type": "git",
     "url":  "https://github.com/Ravenlord/ftms"
   },
   "dependencies": {
-    "bootstrap":            ">=3 <4",
-    "grunt":                ">=0.4",
-    "grunt-contrib-cssmin": "*"
+    "bootstrap":              ">=3 <4"
+  },
+  "devDependencies": {
+    "grunt":                  ">=0.4",
+    "grunt-contrib-clean":    "~0.6.0",
+    "grunt-contrib-concat":   "~0.5.0",
+    "grunt-contrib-copy":     "~0.7.0",
+    "grunt-contrib-cssmin":   "~0.10.0",
+    "grunt-contrib-jshint":   "~0.10.0",
+    "grunt-contrib-less":     "~0.12.0",
+    "grunt-contrib-uglify":   "~0.6.0",
+    "grunt-contrib-watch":    "~0.6.1",
+    "grunt-exec":             "~0.4.6",
+    "grunt-html-validation":  "~0.1.18"
   }
 }
