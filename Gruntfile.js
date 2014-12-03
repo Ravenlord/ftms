@@ -11,6 +11,7 @@ module.exports = function(grunt) {
 
 
   grunt.initConfig({
+    // Copy source files.
     copy: {
       bootstrap: {
         cwd:    'node_modules/bootstrap/less',
@@ -43,10 +44,12 @@ module.exports = function(grunt) {
         src:    'assets/js/*.js'
       }
     },
+    // Delete directories.
     clean: {
       dist: [ 'dist/' ],
       temp: [ 'dist/temp/' ]
     },
+    // Minify CSS.
     cssmin: {
       dist: {
         expand:              true,
@@ -55,11 +58,25 @@ module.exports = function(grunt) {
         src:                 'dist/assets/css/*.css'
       }
     },
+    // Custom HTML construction task.
+    ftmsHTML: {
+      dist: {
+        cwd:      'content/',
+        dest:     'dist/',
+        expand:   true,
+        footer:   'config/html/footer.html',
+        header:   'config/html/header.html',
+        // Let Grunt glob everything.
+        src:      '**/*.html',
+        template: 'config/html/template.html'
+      }
+    },
+    // Compile less files.
     less: {
       bootstrap: {
         dest: 'dist/assets/css/bootstrap.css',
         options: {
-          strictMath:       true
+          strictMath: true
         },
         src:  'dist/temp/bootstrap/bootstrap.less'
       }
@@ -79,13 +96,44 @@ module.exports = function(grunt) {
   // ------------------------------------------------------------------------------------------------------------------- Task registry
 
 
-  // A very basic default task.
-  grunt.registerTask('default', 'Log some stuff.', function() {
-    grunt.log.write('Logging some stuff...').ok();
-  });
-
+  // Compile bootstrap CSS and copy all bootstrap assets to the output directory.
   grunt.registerTask('bootstrap', [ 'copy:bootstrap', 'copy:bootstrapConfig', 'less', 'clean:temp', 'copy:bootstrapJs' ]);
 
+  // Compile bootstrap CSS, copy everything to the output directory and minify CSS.
   grunt.registerTask('css', [ 'copy:css', 'bootstrap', 'cssmin' ])
+
+  // Custom task: Construct HTML output and move it to the output directory.
+  grunt.registerMultiTask('ftmsHTML', 'HTML construction task.', function (){
+    // TODO: Set to true if page is ready for final deployment.
+    var production = false;
+
+    if (production !== true) {
+      grunt.log.error('Building HTML in development mode.');
+    }
+
+    // Retrieve the template, header and footer (only once!).
+    var template  = fs.readFileSync(this.files[0].template, 'utf-8');
+    var header    = fs.readFileSync(this.files[0].header, 'utf-8');
+    var footer    = fs.readFileSync(this.files[0].footer, 'utf-8');
+
+    var menuTree  = {}
+
+    this.files.forEach(function(filePair) {
+      filePair.src.forEach(function(src){
+        var path = src.replace(filePair.orig.cwd, '').replace('.html', '').split('/')
+        if (menuTree.hasOwnProperty(path[0]) === false) {
+          menuTree[path[0]] = [];
+        }
+        if (path.length > 1) {
+          menuTree[path[0]].push(path[1]);
+        }
+      });
+    });
+
+    // TODO: Build HTML menu + set current page active!
+    console.dir(menuTree);
+
+    //TODO: Concatenate files, include CSS (also for specific page if present) and JS according to production flag.
+  });
 
 };
