@@ -11,6 +11,30 @@ module.exports = function(grunt) {
 
 
   grunt.initConfig({
+    // Apply vendor prefixes to CSS files.
+    autoprefixer: {
+      options: {
+        browsers: [
+          "Android 2.3",
+          "Android >= 4",
+          "Chrome >= 20",
+          "Firefox >= 24",
+          "Explorer >= 8",
+          "iOS >= 6",
+          "Opera >= 12",
+          "Safari >= 6"
+        ]
+      },
+      dist: {
+        cwd:      'dist/assets/css/',
+        dest:     'dist/assets/css/',
+        expand:   true,
+        options:  {
+        },
+        src:      [ '*.css', '!*.min.css' ]
+      }
+    },
+
     // Copy source files.
     copy: {
       bootstrap: {
@@ -44,11 +68,27 @@ module.exports = function(grunt) {
         src:    'assets/js/*.js'
       }
     },
+
     // Delete directories.
     clean: {
       dist: [ 'dist/' ],
       temp: [ 'dist/temp/' ]
     },
+
+    // Order CSS properties and tidy it.
+    csscomb: {
+      options: {
+        // Use bootstrap's config.
+        config: 'node_modules/bootstrap/less/.csscomb.json'
+      },
+      dist: {
+        cwd:    'dist/assets/css/',
+        dest:   'dist/assets/css/',
+        expand: true,
+        src:    [ '*.css', '!*.min.css' ]
+      }
+    },
+
     // Minify CSS.
     cssmin: {
       dist: {
@@ -58,6 +98,7 @@ module.exports = function(grunt) {
         src:                 'dist/assets/css/*.css'
       }
     },
+
     // Custom HTML construction task.
     ftmsHTML: {
       dist: {
@@ -71,6 +112,7 @@ module.exports = function(grunt) {
         template: 'config/html/template.html'
       }
     },
+
     // Compile less files.
     less: {
       bootstrap: {
@@ -80,27 +122,36 @@ module.exports = function(grunt) {
         },
         src:  'dist/temp/bootstrap/bootstrap.less'
       }
+    },
+
+    // Uglify JavaScript, unfortunately the uglify task cannot glob properly.
+    uglify: {
+      options:  {
+        preserveComments: false
+      },
+      // Target for main.js.
+      main:     {
+        dest: 'dist/assets/js/main.min.js',
+        src:  'assets/js/main.js'
+      }
     }
   });
-
-
-  // ------------------------------------------------------------------------------------------------------------------- External tasks
-
-
-  grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-contrib-cssmin');
-  grunt.loadNpmTasks('grunt-contrib-less');
 
 
   // ------------------------------------------------------------------------------------------------------------------- Task registry
 
 
-  // Compile bootstrap CSS and copy all bootstrap assets to the output directory.
-  grunt.registerTask('bootstrap', [ 'copy:bootstrap', 'copy:bootstrapConfig', 'less', 'clean:temp', 'copy:bootstrapJs' ]);
+  // Load all external tasks at once.
+  require('load-grunt-tasks')(grunt, { scope: 'devDependencies' });
 
-  // Compile bootstrap CSS, copy everything to the output directory and minify CSS.
-  grunt.registerTask('css', [ 'copy:css', 'bootstrap', 'cssmin' ])
+  // Compile bootstrap CSS and copy it to the output directory.
+  grunt.registerTask('css-bootstrap', [ 'copy:bootstrap', 'copy:bootstrapConfig', 'less', 'clean:temp' ]);
+
+  // Compile bootstrap CSS, copy all CSS to the output directory and minify CSS.
+  grunt.registerTask('css', [ 'copy:css', 'css-bootstrap', 'autoprefixer:dist', 'csscomb:dist', 'cssmin' ])
+
+  // Copy all JS to the output directory and uglify it. TODO: Add uglify task.
+  grunt.registerTask('js', [ 'copy:js', 'uglify', 'copy:bootstrapJs' ]);
 
   // Custom task: Construct HTML output and move it to the output directory.
   grunt.registerMultiTask('ftmsHTML', 'HTML construction task.', function (){
