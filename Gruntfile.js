@@ -104,6 +104,16 @@ module.exports = function(grunt) {
       }
     },
 
+    // Pretty print HTML for development purposes.
+    prettify: {
+      all: {
+        cwd:    'dist/',
+        dest:   'dist/',
+        expand: true,
+        src:    '**/*.html'
+      }
+    },
+
     // Uglify JavaScript, unfortunately the uglify task cannot glob properly.
     uglify: {
       options:  {
@@ -320,6 +330,8 @@ module.exports = function(grunt) {
   // Compile bootstrap CSS, copy all CSS to the output directory and minify CSS.
   grunt.registerTask('css', [ 'copy:css', 'css-bootstrap', 'autoprefixer:dist', 'csscomb:dist', 'cssmin' ]);
 
+  grunt.registerTask('html-dev', [ 'ftmsHTML', 'prettify' ]);
+
   // Copy all JS to the output directory and uglify it.
   grunt.registerTask('js', [ 'copy:js', 'uglify', 'copy:bootstrapJs' ]);
 
@@ -413,16 +425,11 @@ module.exports = function(grunt) {
           // Iterate over all second level pages and to the substitutions.
           for (var secondLevel in menuTree[firstLevel].children) {
             fileContents = template;
-            grunt.log.writeln(firstLevel + '/' + secondLevel)
-            grunt.log.writeln(menuTree[firstLevel].children[secondLevel].path);
             if (menuTree[firstLevel].children.hasOwnProperty(secondLevel)) {
-              var content = grunt.file.read(contentDirectory + menuTree[firstLevel].children[secondLevel].path, fileOptions);
-              grunt.log.writeln(content);
-              grunt.log.writeln();
               fileContents = insertPageContent(
                 fileContents,
                 menuTree[firstLevel].name + '/' + menuTree[firstLevel].children[secondLevel].name,
-                content,
+                grunt.file.read(contentDirectory + menuTree[firstLevel].children[secondLevel].path, fileOptions),
                 false,
                 header,
                 footer
