@@ -233,8 +233,8 @@ module.exports = function(grunt) {
 
     for (var firstLevel in menuTree) {
       if (menuTree.hasOwnProperty(firstLevel)) {
-        // Skip index page altogether.
-        if (firstLevel === 'index.html') {
+        // Skip index page and footer altogether.
+        if (firstLevel === 'index.html' || firstLevel === 'footer') {
           continue;
         }
         var firstClassString  = firstLevelClass;
@@ -312,7 +312,7 @@ module.exports = function(grunt) {
     }
 
     // Replace the page name.
-    html = html.replace('##PAGENAME##',pageName.toLowerCase().replace('/', '-'));
+    html = html.replace('##PAGENAME##',pageName.toLowerCase().replace('/', '-').replace(' ', '-'));
 
     return html;
   }
@@ -370,6 +370,7 @@ module.exports = function(grunt) {
     var filePrefix = /[0-9]*_/;
 
     // Build the menu tree for easier processing.
+    // TODO: Implement footer links handling.
     files.forEach(function (element) {
       var path = element.split('/');
       // Add primary level of navigation elements.
