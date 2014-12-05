@@ -7,7 +7,7 @@
     "url":  "https://github.com/Ravenlord/ftms"
   },
   "dependencies": {
-    "bootstrap":              ">=3 <4"
+    "bootstrap":              "~3.3"
   },
   "devDependencies": {
     "grunt":                  ">=0.4",

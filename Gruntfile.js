@@ -141,13 +141,13 @@ module.exports = function(grunt) {
     var stylesheets = [ 'bootstrap', 'main' ];
 
     // Include stylesheet with the same name as page if it exists.
-    if (grunt.file.isFile(cssDir, pageName + '.css')) {
+    if (grunt.file.isFile(cssDir, pageName.toLowerCase() + '.css')) {
       stylesheets.push(pageName);
     }
 
     // Construct the includes.
     stylesheets.forEach(function (stylesheet) {
-      includes += '<link href="assets/css/' + stylesheet;
+      includes += '<link href="/assets/css/' + stylesheet;
       // Include minified CSS if in production mode.
       if (production === true) {
         includes += '.min';
@@ -156,6 +156,43 @@ module.exports = function(grunt) {
     });
 
     return source.replace('##CSS##', includes);
+  }
+
+  /**
+   * Inserts the JavaScript includes into a page.
+   *
+   * @param source string
+   *   The source content which needs the includes.
+   * @param pageName string
+   *   The name of the current page.
+   * @param jsDir string
+   *   The directory where the scripts are located.
+   * @param production boolean
+   *   Determines if the uncompressed or compressed JS files will be included.
+   * @return string
+   *   The source content with the includes.
+   */
+  function insertJS(source, pageName, jsDir, production) {
+    var includes = '';
+    // Bootstrap and main CSS files will always be included.
+    var scripts = [ 'bootstrap', 'main' ];
+
+    // Include script with the same name as page if it exists.
+    if (grunt.file.isFile(jsDir, pageName.toLowerCase() + '.js')) {
+      scripts.push(pageName);
+    }
+
+    // Construct the includes.
+    scripts.forEach(function (script) {
+      includes += '<script src="/assets/js/' + script;
+      // Include minified JS if in production mode.
+      if (production === true) {
+        includes += '.min';
+      }
+      includes += '.js"></script>\n'
+    });
+
+    return source.replace('##JS##', includes);
   }
 
   /**
@@ -180,10 +217,18 @@ module.exports = function(grunt) {
       return source;
     }
 
+    // Class strings for links.
+    var firstLevelClass   = 'main-nav-first';
+    var secondLevelClass  = 'main-nav-second';
+
     for (var firstLevel in menuTree) {
       if (menuTree.hasOwnProperty(firstLevel)) {
-        var classString = 'main-nav-first';
-        var href        = '/' + menuTree[firstLevel].name;
+        // Skip index page altogether.
+        if (firstLevel === 'index.html') {
+          continue;
+        }
+        var firstClassString  = firstLevelClass;
+        var href              = '/' + menuTree[firstLevel].name.toLowerCase();
         if (production === false) {
           href += '.html';
         }
@@ -191,56 +236,49 @@ module.exports = function(grunt) {
         if (menuTree[firstLevel].children === false) {
           // Set menu point active.
           if (firstLevel === file) {
-            classString += ' active';
+            firstClassString += ' active';
             href = '#';
           }
-          menu += '<a class="' + classString + ' href="' + href + '">' + menuTree[firstLevel].name + '</a>';
+          menu += '<a class="' + firstClassString + '" href="' + href + '">' + menuTree[firstLevel].name + '</a>';
         }
         // Process second level and set parent active as well.
         else {
-          // TODO: Process second level navigation.
+          var active          = false;
+          var secondaryLinks  = '';
+          for (var secondLevel in menuTree[firstLevel].children) {
+            if (menuTree[firstLevel].children.hasOwnProperty(secondLevel)) {
+              href = '/' + menuTree[firstLevel].name.toLowerCase() + '/'
+                + menuTree[firstLevel].children[secondLevel].name.toLowerCase();
+              var secondClassString = secondLevelClass;
+              if (production === false) {
+                href += '.html';
+              }
+              // Set menu point active.
+              if (secondLevel === file) {
+                firstClassString  += ' active';
+                secondClassString += ' active';
+                href    = '#';
+              }
+              secondaryLinks += '<a class="' + secondClassString + '" href="' + href + '">'
+                + menuTree[firstLevel].children[secondLevel].name + '</a>';
+            }
+          }
+          // Secondary items processed, add the first level menu point.
+          menu += '<div class="' + firstClassString + '">' + menuTree[firstLevel].name
+            + '<div class="main-nav-second-wrapper">'
+              + '<div class="hidden-xs main-nav-second-wrapper-nw"></div>'
+              + '<div class="hidden-xs main-nav-second-wrapper-ne"></div>'
+              + '<div class="hidden-xs main-nav-second-wrapper-sw"></div>'
+              + '<div class="hidden-xs main-nav-second-wrapper-se"></div>'
+              + secondaryLinks
+              + '</div>'
+            + '</div>'
+          ;
         }
       }
     }
 
     return source.replace('##MENU##', menu);
-  }
-
-  /**
-   * Inserts the JavaScript includes into a page.
-   *
-   * @param source string
-   *   The source content which needs the includes.
-   * @param pageName string
-   *   The name of the current page.
-   * @param jsDir string
-   *   The directory where the scripts are located.
-   * @param production boolean
-   *   Determines if the uncompressed or compressed JS files will be included.
-   * @return string
-   *   The source content with the includes.
-   */
-  function insertJS(source, pageName, jsDir, production) {
-    var includes = '';
-    // Bootstrap and main CSS files will always be included.
-    var scripts = [ 'bootstrap', 'main' ];
-
-    // Include script with the same name as page if it exists.
-    if (grunt.file.isFile(jsDir, pageName + '.js')) {
-      scripts.push(pageName);
-    }
-
-    // Construct the includes.
-    scripts.forEach(function (script) {
-      includes += '<script src="assets/js/' + script;
-      // Include minified JS if in production mode.
-      if (production === true) {
-        includes += '.min';
-      }
-      includes += '.js"></script>\n'
-    });
-
-    return source.replace('##JS##', includes);
   }
 
   function insertPageContent(source, pageName, content, isIndex, header, footer) {
@@ -264,7 +302,7 @@ module.exports = function(grunt) {
     }
 
     // Replace the page name.
-    html = html.replace('##PAGENAME##',pageName.toLowerCase());
+    html = html.replace('##PAGENAME##',pageName.toLowerCase().replace('/', '-'));
 
     return html;
   }
@@ -302,6 +340,7 @@ module.exports = function(grunt) {
     var header    = grunt.file.read('config/html/header.html', fileOptions);
     var footer    = grunt.file.read('config/html/footer.html', fileOptions);
 
+    // Various directories for later reference.
     var contentDirectory      = 'content/';
     var distributionDirectory = 'dist/';
     var assetsDirectory       = distributionDirectory + 'assets/';
@@ -345,11 +384,12 @@ module.exports = function(grunt) {
 
     // Build and concatenate the HTML files from the templates.
     for (var firstLevel in menuTree) {
-      var fileContents = template;
+      var fileContents = '';
       // Filter properties possibly inherited from the prototype.
       if (menuTree.hasOwnProperty(firstLevel)) {
         // We have a first level page.
         if (menuTree[firstLevel].children === false) {
+          fileContents = template;
           fileContents = insertPageContent(
             fileContents,
             menuTree[firstLevel].name,
@@ -363,16 +403,26 @@ module.exports = function(grunt) {
           fileContents = insertJS(fileContents, menuTree[firstLevel].name, jsDirectory, production);
 
           // Write the file contents to the respective output file.
-          grunt.file.write(distributionDirectory + menuTree[firstLevel].name + '.html', fileContents, fileOptions);
+          grunt.file.write(
+            distributionDirectory + menuTree[firstLevel].name.toLowerCase() + '.html',
+            fileContents,
+            fileOptions
+          );
         }
         else {
           // Iterate over all second level pages and to the substitutions.
           for (var secondLevel in menuTree[firstLevel].children) {
+            fileContents = template;
+            grunt.log.writeln(firstLevel + '/' + secondLevel)
+            grunt.log.writeln(menuTree[firstLevel].children[secondLevel].path);
             if (menuTree[firstLevel].children.hasOwnProperty(secondLevel)) {
+              var content = grunt.file.read(contentDirectory + menuTree[firstLevel].children[secondLevel].path, fileOptions);
+              grunt.log.writeln(content);
+              grunt.log.writeln();
               fileContents = insertPageContent(
                 fileContents,
-                menuTree[firstLevel].children[secondLevel].name,
-                grunt.file.read(contentDirectory + menuTree[firstLevel].children[secondLevel].path, fileOptions),
+                menuTree[firstLevel].name + '/' + menuTree[firstLevel].children[secondLevel].name,
+                content,
                 false,
                 header,
                 footer
@@ -383,9 +433,9 @@ module.exports = function(grunt) {
 
               // Write the file contents to the respective output file.
               grunt.file.write(distributionDirectory
-                               + menuTree[firstLevel].name
+                               + menuTree[firstLevel].name.toLowerCase()
                                + '/'
-                               + menuTree[firstLevel].children[secondLevel].name
+                               + menuTree[firstLevel].children[secondLevel].name.toLowerCase()
                                + '.html',
                 fileContents,
                 fileOptions
