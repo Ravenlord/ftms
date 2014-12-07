@@ -1,4 +1,5 @@
 module.exports = function(grunt) {
+  'use strict';
 
 
   // ------------------------------------------------------------------------------------------------------------------- Configuration
@@ -85,6 +86,15 @@ module.exports = function(grunt) {
       }
     },
 
+    // Lint CSS with the bootstrap configuration.
+    csslint: {
+      options: {
+        csslintrc:  'node_modules/bootstrap/less/.csslintrc',
+        ids:        false
+      },
+      css: [ 'assets/css/**/*.css' ]
+    },
+
     // Minify CSS.
     cssmin: {
       dist: {
@@ -92,6 +102,37 @@ module.exports = function(grunt) {
         ext:                 '.min.css',
         keepSpecialComments: 0,
         src:                 'dist/assets/css/*.css'
+      }
+    },
+
+    // Minify HTML.
+    htmlmin: {
+      options: {
+        collapseWhitespace: true,
+        //lint:               true,
+        removeComments:     true
+      },
+      dist: {
+        files: [{
+          cwd:    'dist/',
+          dest:   'dist/',
+          expand: true,
+          src:    '**/*.html'
+        }]
+      }
+    },
+
+    // Lint the JS files with bootstrap's configuration.
+    jshint: {
+      options: {
+        jshintrc: 'node_modules/bootstrap/js/.jshintrc'
+      },
+      // Also lint grunt files.
+      grunt: {
+        src:  'Gruntfile.js'
+      },
+      js: {
+        src:  'assets/js/**/*.js'
       }
     },
 
@@ -128,6 +169,19 @@ module.exports = function(grunt) {
       }
     },
 
+    // Validate HTML.
+    validation: {
+      options: {
+        charset:  'utf-8',
+        doctype:  'HTML5',
+        failHard: true,
+        reset:    true
+      },
+      html: {
+        src:  'dist/**/*.html'
+      }
+    },
+
     // File watcher for development convenience.
     watch: {
       // Recompile bootstrap on less changes.
@@ -138,7 +192,7 @@ module.exports = function(grunt) {
       // Reprocess CSS files on changes.
       css: {
         files:  'assets/css/**/*.css',
-        tasks:  [ 'copy:css', 'autoprefixer:dist', 'csscomb:dist' ]
+        tasks:  [ 'csslint:css', 'copy:css', 'autoprefixer:dist', 'csscomb:dist' ]
       },
       // Rebuild HTML output on changes.
       html: {
@@ -148,7 +202,7 @@ module.exports = function(grunt) {
       // Copy JS files on changes.
       js: {
         files:  'assets/js/**/*.js',
-        tasks:  [ 'copy:js' ]
+        tasks:  [ 'jshint:js', 'copy:js' ]
       }
     }
   });
@@ -435,19 +489,22 @@ module.exports = function(grunt) {
   grunt.registerTask('css-bootstrap', [ 'copy:bootstrap', 'copy:bootstrapConfig', 'less', 'clean:temp' ]);
 
   // Compile bootstrap CSS, copy all CSS to the output directory, prefix and prettify CSS.
-  grunt.registerTask('css-dev', [ 'copy:css', 'css-bootstrap', 'autoprefixer:dist', 'csscomb:dist' ]);
+  grunt.registerTask('css-dev', [ 'csslint:css', 'copy:css', 'css-bootstrap', 'autoprefixer:dist', 'csscomb:dist' ]);
 
   // Compile bootstrap CSS, copy all CSS to the output directory, prefix and minify CSS.
-  grunt.registerTask('css-prod', [ 'css-dev', 'cssmin', 'clean:prodCSS' ])
+  grunt.registerTask('css-prod', [ 'css-dev', 'cssmin', 'clean:prodCSS' ]);
 
-  // Build HTML and prettify it.
-  grunt.registerTask('html-dev', [ 'ftmsHTML', 'prettify' ]);
+  // Build HTML, validate and prettify it.
+  grunt.registerTask('html-dev', [ 'ftmsHTML', 'validation', 'prettify' ]);
+
+  // Build HTML, validate and minify it.
+  grunt.registerTask('html-prod', [ 'ftmsHTML', 'validation', 'htmlmin' ]);
 
   // Copy all JS to the output directory.
-  grunt.registerTask('js-dev', [ 'copy:js', 'copy:bootstrapJs' ]);
+  grunt.registerTask('js-dev', [ 'jshint:js', 'copy:js', 'copy:bootstrapJs' ]);
 
   // Copy all JS to the output directory and uglify it.
-  grunt.registerTask('js-prod', [ 'js-dev', 'uglify' ]);
+  grunt.registerTask('js-prod', [ 'js-dev', 'uglify', 'clean:prodJS' ]);
 
   // TODO: Add task for Apache config.
 
