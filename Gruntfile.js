@@ -297,7 +297,7 @@ module.exports = function(grunt) {
           continue;
         }
         var firstClassString  = firstLevelClass;
-        var href              = '/' + menuTree[firstLevel].name.toLowerCase().replace(' ', '-');
+        var href              = '/' + nameToURL(menuTree[firstLevel].name);
         if (production === false) {
           href += '.html';
         }
@@ -316,8 +316,8 @@ module.exports = function(grunt) {
           var secondaryLinks  = '';
           for (var secondLevel in menuTree[firstLevel].children) {
             if (menuTree[firstLevel].children.hasOwnProperty(secondLevel)) {
-              href = '/' + menuTree[firstLevel].name.toLowerCase().replace(' ', '-') + '/'
-                + menuTree[firstLevel].children[secondLevel].name.toLowerCase().replace(' ', '-');
+              href = '/' + nameToURL(menuTree[firstLevel].name) + '/'
+                + nameToURL(menuTree[firstLevel].children[secondLevel].name);
               var secondClassString = secondLevelClass;
               if (production === false) {
                 href += '.html';
@@ -381,9 +381,21 @@ module.exports = function(grunt) {
     }
 
     // Replace the page name.
-    html = html.replace('##PAGENAME##',pageName.toLowerCase().replace('/', '-').replace(' ', '-'));
+    html = html.replace('##PAGENAME##', nameToURL(pageName));
 
     return html;
+  }
+
+  /**
+   * Convert a name to a proper URL.
+   *
+   * @param name string
+   *   The name to convert.
+   * @return string
+   *   The converted name.
+   */
+  function nameToURL(name) {
+    return name.toLowerCase().replace(' ', '-').replace('/', '-');
   }
 
 
@@ -494,7 +506,7 @@ module.exports = function(grunt) {
 
           // Write the file contents to the respective output file.
           grunt.file.write(
-            distributionDirectory + menuTree[firstLevel].name.toLowerCase().replace(' ', '-') + '.html',
+            distributionDirectory + nameToURL(menuTree[firstLevel].name) + '.html',
             fileContents,
             fileOptions
           );
@@ -526,9 +538,9 @@ module.exports = function(grunt) {
               var path = distributionDirectory;
               // Write footer pages on the first level.
               if (firstLevel !== 'footer') {
-                path +=  menuTree[firstLevel].name.toLowerCase().replace(' ', '-') + '/';
+                path +=  nameToURL(menuTree[firstLevel].name) + '/';
               }
-              path += menuTree[firstLevel].children[secondLevel].name.toLowerCase().replace(' ', '-') + '.html';
+              path += nameToURL(menuTree[firstLevel].children[secondLevel].name) + '.html';
               // Write the file contents to the respective output file.
               grunt.file.write(path, fileContents, fileOptions);
             }
