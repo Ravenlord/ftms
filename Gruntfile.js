@@ -129,6 +129,9 @@ module.exports = function(grunt) {
       },
       // Also lint grunt files.
       grunt: {
+        options:  {
+          jshintrc: 'node_modules/bootstrap/grunt/.jshintrc'
+        },
         src:  'Gruntfile.js'
       },
       js: {
@@ -194,6 +197,11 @@ module.exports = function(grunt) {
         files:  'assets/css/**/*.css',
         tasks:  [ 'csslint:css', 'copy:css', 'autoprefixer:dist', 'csscomb:dist' ]
       },
+      // Lint Gruntfile on changes.
+      grunt: {
+        files:  'Gruntfile.js',
+        tasks:  'jshint:grunt'
+      },
       // Rebuild HTML output on changes.
       html: {
         files:  [ 'config/html/**/*.html', 'content/**/*.html' ],
@@ -242,7 +250,7 @@ module.exports = function(grunt) {
       if (production === true) {
         includes += '.min';
       }
-      includes += '.css" rel="stylesheet">\n'
+      includes += '.css" rel="stylesheet">\n';
     });
 
     return source.replace('##CSS##', includes);
@@ -273,7 +281,7 @@ module.exports = function(grunt) {
     }
 
     var html = source.replace('##FOOTER##', footer);
-    var links  = '';
+    var regex;
     for (var page in footerLinks) {
       // Add html suffix to footer links if we are in dev mode.
       if (production === false) {
@@ -282,7 +290,7 @@ module.exports = function(grunt) {
       }
       if (page === file) {
         // Add active class if this page is the current one.
-        var regex = new RegExp('(<a class=".*)(" href=").*(">' + footerLinks[page].name + '</a>)');
+        regex = new RegExp('(<a class=".*)(" href=").*(">' + footerLinks[page].name + '</a>)');
         html = html.replace(regex, '$1 active$2#$3');
       }
     }
@@ -338,7 +346,7 @@ module.exports = function(grunt) {
       if (production === true) {
         includes += '.min';
       }
-      includes += '.js"></script>\n'
+      includes += '.js"></script>\n';
     });
 
     return source.replace('##JS##', includes);
@@ -392,7 +400,6 @@ module.exports = function(grunt) {
         }
         // Process second level and set parent active as well.
         else {
-          var active          = false;
           var secondaryLinks  = '';
           for (var secondLevel in menuTree[firstLevel].children) {
             if (menuTree[firstLevel].children.hasOwnProperty(secondLevel)) {
@@ -530,7 +537,7 @@ module.exports = function(grunt) {
     var distributionDirectory = 'dist/';
     var assetsDirectory       = distributionDirectory + 'assets/';
     var cssDirectory          = assetsDirectory + 'css/';
-    var jsDirectory           = assetsDirectory + 'js/'
+    var jsDirectory           = assetsDirectory + 'js/';
 
     // All files in the content directory, globbed by grunt.
     var files = grunt.file.expand({ cwd: contentDirectory, filter: 'isFile' }, '**/*.html');
@@ -562,7 +569,7 @@ module.exports = function(grunt) {
           menuTree[path[0]].children[path[1]] = {
             name: path[1].replace(filePrefix, '').replace('.html', ''),
             path: element
-          }
+          };
         }
       }
     });

@@ -1,4 +1,6 @@
 $(document).ready(function (){
+  'use strict';
+
   // Toggle mobile menu.
   $('#mobile-menu').click(function (ev) {
     ev.preventDefault();
