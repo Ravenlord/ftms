@@ -169,6 +169,65 @@ module.exports = function(grunt) {
   }
 
   /**
+   * Inserts the page footer into a page.
+   *
+   * @param source string
+   *   The source content which needs the header.
+   * @param file string
+   *   The file which reflects the current page.
+   * @param isIndex boolean
+   *   Flag that determines if it's an index page or not.
+   * @param footer string
+   *   The footer template.
+   * @param footerLinks object
+   *   The footer links extracted from the menu tree.
+   * @param production boolean
+   *   Build the links in development or production format.
+   * @return string
+   *   The page with the inserted footer.
+   */
+  function insertFooter(source, file, isIndex, footer, footerLinks, production) {
+    // Don't output the footer if it's an index page.
+    if (isIndex === true) {
+      return source.replace('##FOOTER##', '');
+    }
+
+    var html = source.replace('##FOOTER##', footer);
+    var links  = '';
+    for (var page in footerLinks) {
+      // Add html suffix to footer links if we are in dev mode.
+      if (production === false) {
+        regex = new RegExp('(<a class=".*" href=".*)(">' + footerLinks[page].name + '</a>)');
+        html = html.replace(regex, '$1.html$2');
+      }
+      if (page === file) {
+        // Add active class if this page is the current one.
+        var regex = new RegExp('(<a class=".*)(" href=").*(">' + footerLinks[page].name + '</a>)');
+        html = html.replace(regex, '$1 active$2#$3');
+      }
+    }
+
+    return html;
+  }
+
+  /**
+   * Inserts the page header into a page.
+   *
+   * @param source string
+   *   The source content which needs the header.
+   * @param isIndex boolean
+   *   Flag that determines if it's an index page or not.
+   * @param header string
+   *   The header template.
+   * @return string
+   *   The page with the inserted header.
+   */
+  function insertHeader(source, isIndex, header) {
+    // Don't output the header if it's an index page.
+    return isIndex === true ? source.replace('##HEADER##', '') : source.replace('##HEADER##', header);
+  }
+
+  /**
    * Inserts the JavaScript includes into a page.
    *
    * @param source string
@@ -238,7 +297,7 @@ module.exports = function(grunt) {
           continue;
         }
         var firstClassString  = firstLevelClass;
-        var href              = '/' + menuTree[firstLevel].name.toLowerCase();
+        var href              = '/' + menuTree[firstLevel].name.toLowerCase().replace(' ', '-');
         if (production === false) {
           href += '.html';
         }
@@ -257,8 +316,8 @@ module.exports = function(grunt) {
           var secondaryLinks  = '';
           for (var secondLevel in menuTree[firstLevel].children) {
             if (menuTree[firstLevel].children.hasOwnProperty(secondLevel)) {
-              href = '/' + menuTree[firstLevel].name.toLowerCase() + '/'
-                + menuTree[firstLevel].children[secondLevel].name.toLowerCase();
+              href = '/' + menuTree[firstLevel].name.toLowerCase().replace(' ', '-') + '/'
+                + menuTree[firstLevel].children[secondLevel].name.toLowerCase().replace(' ', '-');
               var secondClassString = secondLevelClass;
               if (production === false) {
                 href += '.html';
@@ -291,24 +350,34 @@ module.exports = function(grunt) {
     return source.replace('##MENU##', menu);
   }
 
-  function insertPageContent(source, pageName, content, isIndex, header, footer) {
+  /**
+   * Inserts the content, title and page name into a page.
+   *
+   * @param source string
+   *   The source content which needs the includes.
+   * @param pageName string
+   *   The name of the current page.
+   * @param content string
+   *   The page's content.
+   * @param isIndex boolean
+   *   Flag determining if it's an index page or not.
+   * @return string
+   *   The page with page contents, title and page name inserted..
+   */
+  function insertPageContent(source, pageName, content, isIndex) {
     // Replace page content.
     var html = source.replace(
       '##CONTENT##',
       content
     );
 
-    // Just delete title, header and footer placeholders if it's the index page.
+    // Just delete title if it's the index page.
     if (isIndex === true) {
       html = html.replace('##TITLE##', '');
-      html = html.replace('##HEADER##', '');
-      html = html.replace('##FOOTER##', '');
     }
-    // Replace them properly otherwise.
+    // Replace it properly otherwise.
     else {
       html = html.replace('##TITLE##', pageName.toUpperCase() + ' — ');
-      html = html.replace('##HEADER##', header);
-      html = html.replace('##FOOTER##', footer);
     }
 
     // Replace the page name.
@@ -370,7 +439,6 @@ module.exports = function(grunt) {
     var filePrefix = /[0-9]*_/;
 
     // Build the menu tree for easier processing.
-    // TODO: Implement footer links handling.
     files.forEach(function (element) {
       var path = element.split('/');
       // Add primary level of navigation elements.
@@ -403,21 +471,30 @@ module.exports = function(grunt) {
         // We have a first level page.
         if (menuTree[firstLevel].children === false) {
           fileContents = template;
+          // Determine if it's the index page.
+          var isIndex = firstLevel === 'index.html';
           fileContents = insertPageContent(
             fileContents,
             menuTree[firstLevel].name,
             grunt.file.read(contentDirectory + firstLevel, fileOptions),
-            firstLevel === 'index.html',
-            header,
-            footer
+            isIndex
           );
-          fileContents = insertMenu(fileContents, menuTree, firstLevel, production, firstLevel === 'index.html');
+          fileContents = insertHeader(fileContents, isIndex, header);
+          fileContents = insertFooter(
+            fileContents,
+            firstLevel,
+            isIndex,
+            footer,
+            menuTree.footer.children,
+            production
+          );
+          fileContents = insertMenu(fileContents, menuTree, firstLevel, production, isIndex);
           fileContents = insertCSS(fileContents, menuTree[firstLevel].name, cssDirectory, production);
           fileContents = insertJS(fileContents, menuTree[firstLevel].name, jsDirectory, production);
 
           // Write the file contents to the respective output file.
           grunt.file.write(
-            distributionDirectory + menuTree[firstLevel].name.toLowerCase() + '.html',
+            distributionDirectory + menuTree[firstLevel].name.toLowerCase().replace(' ', '-') + '.html',
             fileContents,
             fileOptions
           );
@@ -431,23 +508,29 @@ module.exports = function(grunt) {
                 fileContents,
                 menuTree[firstLevel].name + '/' + menuTree[firstLevel].children[secondLevel].name,
                 grunt.file.read(contentDirectory + menuTree[firstLevel].children[secondLevel].path, fileOptions),
+                false
+              );
+              fileContents = insertHeader(fileContents, false, header);
+              fileContents = insertFooter(
+                fileContents,
+                secondLevel,
                 false,
-                header,
-                footer
+                footer,
+                menuTree.footer.children,
+                production
               );
               fileContents = insertMenu(fileContents, menuTree, secondLevel, production, false);
               fileContents = insertCSS(fileContents, menuTree[firstLevel].children[secondLevel].name, cssDirectory, production);
               fileContents = insertJS(fileContents, menuTree[firstLevel].children[secondLevel].name, jsDirectory, production);
 
+              var path = distributionDirectory;
+              // Write footer pages on the first level.
+              if (firstLevel !== 'footer') {
+                path +=  menuTree[firstLevel].name.toLowerCase().replace(' ', '-') + '/';
+              }
+              path += menuTree[firstLevel].children[secondLevel].name.toLowerCase().replace(' ', '-') + '.html';
               // Write the file contents to the respective output file.
-              grunt.file.write(distributionDirectory
-                               + menuTree[firstLevel].name.toLowerCase()
-                               + '/'
-                               + menuTree[firstLevel].children[secondLevel].name.toLowerCase()
-                               + '.html',
-                fileContents,
-                fileOptions
-              );
+              grunt.file.write(path, fileContents, fileOptions);
             }
           }
         }
