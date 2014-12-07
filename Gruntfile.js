@@ -65,8 +65,10 @@ module.exports = function(grunt) {
 
     // Delete directories.
     clean: {
-      dist: [ 'dist/' ],
-      temp: [ 'dist/temp/' ]
+      dist:     [ 'dist/' ],
+      prodCSS:  [ 'dist/*.css', '!dist/*.min.css' ],
+      prodJS:  [ 'dist/*.js', '!dist/*.min.js' ],
+      temp:     [ 'dist/temp/' ]
     },
 
     // Order CSS properties and tidy it.
@@ -123,6 +125,30 @@ module.exports = function(grunt) {
       main:     {
         dest: 'dist/assets/js/main.min.js',
         src:  'assets/js/main.js'
+      }
+    },
+
+    // File watcher for development convenience.
+    watch: {
+      // Recompile bootstrap on less changes.
+      bootstrap: {
+        files:  'config/bootstrap/**/*.less',
+        tasks:  [ 'css-bootstrap', 'autoprefixer:dist', 'csscomb:dist' ]
+      },
+      // Reprocess CSS files on changes.
+      css: {
+        files:  'assets/css/**/*.css',
+        tasks:  [ 'copy:css', 'autoprefixer:dist', 'csscomb:dist' ]
+      },
+      // Rebuild HTML output on changes.
+      html: {
+        files:  [ 'config/html/**/*.html', 'content/**/*.html' ],
+        tasks:  'html-dev'
+      },
+      // Copy JS files on changes.
+      js: {
+        files:  'assets/js/**/*.js',
+        tasks:  [ 'copy:js' ]
       }
     }
   });
@@ -408,13 +434,22 @@ module.exports = function(grunt) {
   // Compile bootstrap CSS and copy it to the output directory.
   grunt.registerTask('css-bootstrap', [ 'copy:bootstrap', 'copy:bootstrapConfig', 'less', 'clean:temp' ]);
 
-  // Compile bootstrap CSS, copy all CSS to the output directory and minify CSS.
-  grunt.registerTask('css', [ 'copy:css', 'css-bootstrap', 'autoprefixer:dist', 'csscomb:dist', 'cssmin' ]);
+  // Compile bootstrap CSS, copy all CSS to the output directory, prefix and prettify CSS.
+  grunt.registerTask('css-dev', [ 'copy:css', 'css-bootstrap', 'autoprefixer:dist', 'csscomb:dist' ]);
 
+  // Compile bootstrap CSS, copy all CSS to the output directory, prefix and minify CSS.
+  grunt.registerTask('css-prod', [ 'css-dev', 'cssmin', 'clean:prodCSS' ])
+
+  // Build HTML and prettify it.
   grunt.registerTask('html-dev', [ 'ftmsHTML', 'prettify' ]);
 
+  // Copy all JS to the output directory.
+  grunt.registerTask('js-dev', [ 'copy:js', 'copy:bootstrapJs' ]);
+
   // Copy all JS to the output directory and uglify it.
-  grunt.registerTask('js', [ 'copy:js', 'uglify', 'copy:bootstrapJs' ]);
+  grunt.registerTask('js-prod', [ 'js-dev', 'uglify' ]);
+
+  // TODO: Add task for Apache config.
 
   // Custom task: Construct HTML output and move it to the output directory.
   grunt.registerTask('ftmsHTML', 'HTML construction task.', function (){
