@@ -434,17 +434,17 @@ a.main-nav-first.active,
     background-image: url(http://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-2437.jpg);
   }
 
-  #upper-wrapper-outer.bg-legal-notice {
+  #upper-wrapper-outer.bg-footer-legal-notice {
     background-image: url(http://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-2437.jpg);
   }
 
-  #upper-wrapper-outer.bg-contact {
+  #upper-wrapper-outer.bg-footer-contact {
     background-image: url(http://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-2437.jpg);
   }
 
   #content-wrapper {
     padding-bottom: 80px;
-    margin-top: 80px;
+    padding-top: 80px;
   }
 
   #content {
