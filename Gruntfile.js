@@ -2,6 +2,14 @@ module.exports = function(grunt) {
   'use strict';
 
 
+  // ------------------------------------------------------------------------------------------------------------------- Includes
+
+
+  // Imagemin compressors.
+  var mozjpeg = require('imagemin-mozjpeg');
+  var pngquant = require('imagemin-pngquant');
+
+
   // ------------------------------------------------------------------------------------------------------------------- Configuration
 
 
@@ -53,10 +61,6 @@ module.exports = function(grunt) {
       css: {
         dest:   'dist/',
         src:    'assets/css/*.css'
-      },
-      img: {
-        dest:   'dist/',
-        src:    'assets/img/*'
       },
       js: {
         dest:   'dist/',
@@ -132,6 +136,20 @@ module.exports = function(grunt) {
           dest:   'dist/',
           expand: true,
           src:    '**/*.html'
+        }]
+      }
+    },
+
+    // Optimize images and put them into the output directory.
+    imagemin: {
+      dist: {
+        options: {
+          use:  [ mozjpeg(), pngquant() ]
+        },
+        files:  [{
+          dest:   'dist/',
+          expand: true,
+          src:    'assets/img/**/*.{png,jpg,gif,svg}'
         }]
       }
     },
@@ -220,6 +238,11 @@ module.exports = function(grunt) {
       html: {
         files:  [ 'config/html/**/*.html', 'content/**/*.html' ],
         tasks:  'html-dev'
+      },
+      // Optimize images on changes.
+      img: {
+        files:  'assets/img/**/*.{png,jpg,gif,svg}',
+        tasks:  'imagemin'
       },
       // Copy JS files on changes.
       js: {
