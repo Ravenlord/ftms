@@ -1,7 +1,14 @@
+# Netbeans
 /nbproject/
-node_modules/
+# PHPStorm/Webstorm/IntelliJ
 .idea/
+# Node dependencies
+node_modules/
+# Deployment files
 dist/
 
+# HTML validator
 validation-report.json
 validation-status.json
+# FTP credentials
+.ftppass

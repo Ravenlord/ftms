@@ -105,6 +105,20 @@ module.exports = function(grunt) {
       }
     },
 
+    // Upload source files with FTP.
+    'ftp-deploy': {
+      easyname: {
+        auth: {
+          authKey:  'easyname',
+          host:     'e36295-ftp.services.easyname.eu',
+          port:     21
+        },
+        dest:       'html/deploy/',
+        exclusions: [ 'dist/**/.DS_Store', 'dist/**/Thumbs.db' ],
+        src:        'dist/'
+      }
+    },
+
     // Minify HTML.
     htmlmin: {
       options: {
