@@ -553,6 +553,15 @@ module.exports = function(grunt) {
   // Compile bootstrap CSS, copy all CSS to the output directory, prefix and minify CSS.
   grunt.registerTask('css-prod', [ 'css-dev', 'cssmin', 'clean:prodCSS' ]);
 
+  // The default task.
+  grunt.registerTask('default', [ 'deploy-prod' ]);
+
+  // Deploy in development mode.
+  grunt.registerTask('deploy-dev', [ 'clean:dist', 'css-dev', 'js-dev', 'imagemin', 'html-dev', 'ftp-deploy:easyname' ]);
+
+  // Deploy in production mode.
+  grunt.registerTask('deploy-prod', [ 'clean:dist', 'css-prod', 'js-prod', 'imagemin', 'html-prod', 'ftp-deploy:easyname' ]);
+
   // Build HTML, validate and prettify it.
   grunt.registerTask('html-dev', [ 'ftmsHTML', 'validation', 'prettify' ]);
 
