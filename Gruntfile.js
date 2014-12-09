@@ -38,6 +38,17 @@ module.exports = function(grunt) {
       }
     },
 
+    // Concatenate source files and move them to the output directory.
+    concat: {
+      options: {
+        stripBanners: { block: true, line: true}
+      },
+      css: {
+        dest:   'dist/assets/css/main.css',
+        src:    [ 'assets/css/base/general.css', 'assets/css/base/header-footer.css', 'assets/css/base/content.css' ]
+      }
+    },
+
     // Copy source files.
     copy: {
       bootstrap: {
@@ -60,7 +71,7 @@ module.exports = function(grunt) {
       },
       css: {
         dest:   'dist/',
-        src:    'assets/css/*.css'
+        src:    'assets/css/modules/*.css'
       },
       js: {
         dest:   'dist/',
@@ -225,8 +236,12 @@ module.exports = function(grunt) {
         tasks:  [ 'css-bootstrap', 'autoprefixer:dist', 'csscomb:dist' ]
       },
       // Reprocess CSS files on changes.
-      css: {
-        files:  'assets/css/**/*.css',
+      cssBase: {
+        files:  'assets/css/base/**/*.css',
+        tasks:  [ 'csslint:css', 'concat:css', 'autoprefixer:dist', 'csscomb:dist' ]
+      },
+      cssModules: {
+        files:  'assets/css/modules/**/*.css',
         tasks:  [ 'csslint:css', 'copy:css', 'autoprefixer:dist', 'csscomb:dist' ]
       },
       // Lint Gruntfile on changes.
@@ -533,7 +548,7 @@ module.exports = function(grunt) {
   grunt.registerTask('css-bootstrap', [ 'copy:bootstrap', 'copy:bootstrapConfig', 'less', 'clean:temp' ]);
 
   // Compile bootstrap CSS, copy all CSS to the output directory, prefix and prettify CSS.
-  grunt.registerTask('css-dev', [ 'csslint:css', 'copy:css', 'css-bootstrap', 'autoprefixer:dist', 'csscomb:dist' ]);
+  grunt.registerTask('css-dev', [ 'csslint:css', 'concat:css', 'copy:css', 'css-bootstrap', 'autoprefixer:dist', 'csscomb:dist' ]);
 
   // Compile bootstrap CSS, copy all CSS to the output directory, prefix and minify CSS.
   grunt.registerTask('css-prod', [ 'css-dev', 'cssmin', 'clean:prodCSS' ]);
