@@ -70,8 +70,10 @@ module.exports = function(grunt) {
         src:    [ '*.js', '!npm.js' ]
       },
       css: {
-        dest:   'dist/',
-        src:    'assets/css/modules/*.css'
+        cwd:    'assets/css/modules/',
+        dest:   'dist/assets/css',
+        expand: true,
+        src:    '*.css'
       },
       js: {
         dest:   'dist/',
