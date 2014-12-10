@@ -592,7 +592,7 @@ module.exports = function(grunt) {
   grunt.registerTask('deploy-prod', [ 'clean:dist', 'css-prod', 'js-prod', 'imagemin', 'html-prod', 'copy:apache', 'ftp-deploy:easyname' ]);
 
   // Build HTML, validate and prettify it.
-  grunt.registerTask('html-dev', [ 'ftmsHTML', 'validation', 'prettify' ]);
+  grunt.registerTask('html-dev', [ 'ftmsHTML:development', 'validation', 'prettify' ]);
 
   // Build HTML, validate and minify it.
   grunt.registerTask('html-prod', [ 'ftmsHTML', 'validation', 'htmlmin' ]);
@@ -603,12 +603,12 @@ module.exports = function(grunt) {
   // Copy all JS to the output directory and uglify it.
   grunt.registerTask('js-prod', [ 'js-dev', 'uglify', 'clean:prodJS' ]);
 
-  // TODO: Add task for Apache config.
-
   // Custom task: Construct HTML output and move it to the output directory.
-  grunt.registerTask('ftmsHTML', 'HTML construction task.', function (){
-    // TODO: Set to true if page is ready for final deployment.
-    var production = false;
+  grunt.registerTask('ftmsHTML', 'HTML construction task.', function (mode){
+    var production = true;
+    if (mode === 'development') {
+      production = false;
+    }
 
     if (production !== true) {
       grunt.log.error('Building HTML in development mode.');
