@@ -51,6 +51,10 @@ module.exports = function(grunt) {
 
     // Copy source files.
     copy: {
+      apache: {
+        dest: 'dist/.htaccess',
+        src:  'config/apache/.htaccess'
+      },
       bootstrap: {
         cwd:    'node_modules/bootstrap/less',
         dest:   'dist/temp/bootstrap/',
@@ -232,6 +236,11 @@ module.exports = function(grunt) {
 
     // File watcher for development convenience.
     watch: {
+      // Copy apache config on changes.
+      apache: {
+        files:  'config/apache/.htaccess',
+        tasks:  'copy:apache'
+      },
       // Recompile bootstrap on less changes.
       bootstrap: {
         files:  'config/bootstrap/**/*.less',
@@ -577,10 +586,10 @@ module.exports = function(grunt) {
   grunt.registerTask('default', [ 'deploy-prod' ]);
 
   // Deploy in development mode.
-  grunt.registerTask('deploy-dev', [ 'clean:dist', 'css-dev', 'js-dev', 'imagemin', 'html-dev', 'ftp-deploy:easyname' ]);
+  grunt.registerTask('deploy-dev', [ 'clean:dist', 'css-dev', 'js-dev', 'imagemin', 'html-dev', 'copy:apache', 'ftp-deploy:easyname' ]);
 
   // Deploy in production mode.
-  grunt.registerTask('deploy-prod', [ 'clean:dist', 'css-prod', 'js-prod', 'imagemin', 'html-prod', 'ftp-deploy:easyname' ]);
+  grunt.registerTask('deploy-prod', [ 'clean:dist', 'css-prod', 'js-prod', 'imagemin', 'html-prod', 'copy:apache', 'ftp-deploy:easyname' ]);
 
   // Build HTML, validate and prettify it.
   grunt.registerTask('html-dev', [ 'ftmsHTML', 'validation', 'prettify' ]);
