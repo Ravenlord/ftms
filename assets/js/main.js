@@ -4,16 +4,16 @@ $(document).ready(function (){
   // Toggle mobile menu.
   $('#mobile-menu').click(function (ev) {
     ev.preventDefault();
-    var $header = $('#header');
-    var $mobileMenu = $('#mobile-menu')
-    if ($header.hasClass('expanded')) {
-      $header.removeClass('expanded');
-      $mobileMenu.removeClass('expanded');
-    }
-    else {
-      $header.addClass('expanded');
-      $mobileMenu.addClass('expanded');
-    }
+    $('#header').toggleClass('expanded');
+    $('#mobile-menu').toggleClass('expanded');
+    return false;
+  });
+
+  // Toggle crew members.
+  $('#crew-members-expander').click(function (ev) {
+    ev.preventDefault();
+    $('#crew-members').toggleClass('expanded');
+    $('#crew-members-expander').toggleClass('expanded');
     return false;
   });
 });

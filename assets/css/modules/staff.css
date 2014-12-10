@@ -1,0 +1,88 @@
+/* ==== GENERIC RULES =============================================================================================== */
+
+
+.crew-member {
+  margin-bottom: 20px;
+}
+
+.crew-description {
+  text-align: center;
+}
+
+.crew-member h3 {
+  color: #ccc;
+  margin-bottom: 0;
+}
+
+#crew-members {
+  height: 100px;
+  overflow: hidden;
+  padding-bottom: 50px;
+  transition: height 0.4s ease-in-out;
+}
+
+#crew-members.expanded {
+  height: auto;
+}
+
+#crew-members-expander {
+  cursor: pointer;
+}
+
+#crew-members-expander:before,
+#crew-members-expander:after {
+  content: '▼';
+}
+
+#crew-members-expander:before {
+  margin-right: 25px;
+}
+
+#crew-members-expander:after {
+  margin-left: 25px;
+}
+
+#crew-members-expander.expanded:before,
+#crew-members-expander.expanded:after {
+  content: '▲';
+}
+
+
+/* ==== SMALL SCREEN RULES ========================================================================================== */
+
+
+@media (min-width: 768px) {
+  .crew-member {
+    cursor: pointer;
+    position: relative;
+  }
+
+  .crew-description {
+    opacity: 0;
+    padding-bottom: 5px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transition: opacity 0.4s ease-in-out;
+  }
+
+  .crew-member:hover .crew-description,
+  .crew-member:focus .crew-description,
+  .crew-member:active .crew-description {
+    opacity: 1;
+  }
+
+  .crew-member img {
+    border: 1px solid #333;
+    filter: grayscale(100%);
+    transition: border-color 0.4s ease-in-out, filter 0.4s ease-in-out;
+  }
+
+  .crew-member:hover img,
+  .crew-member:focus img,
+  .crew-member:active img {
+    border-color: #999;
+    filter: grayscale(0%);
+  }
+}
