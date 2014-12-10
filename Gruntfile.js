@@ -539,6 +539,24 @@ module.exports = function(grunt) {
     return name.toLowerCase().replace(' ', '-').replace('/', '-');
   }
 
+  /**
+   * Strips development file endings from link targets to ensure clean URLs.
+   *
+   * @param source string
+   *   The source HTML to process.
+   * @param production boolean
+   *   Determines if the routes are cleaned up or not.
+   * @return string
+   *   The HTML with clean link targets.
+   */
+  function stripDevLinks(source, production) {
+    if (production !== true) {
+      return source;
+    }
+
+    return source.replace(/(<a.*href=".*)(\.html)(.*>)/g, '$1$3');
+  }
+
 
   // ------------------------------------------------------------------------------------------------------------------- Task registry
 
@@ -669,7 +687,7 @@ module.exports = function(grunt) {
           // Write the file contents to the respective output file.
           grunt.file.write(
             distributionDirectory + nameToURL(menuTree[firstLevel].name) + '.html',
-            fileContents,
+            stripDevLinks(fileContents, production),
             fileOptions
           );
         }
@@ -704,7 +722,7 @@ module.exports = function(grunt) {
               }
               path += nameToURL(menuTree[firstLevel].children[secondLevel].name) + '.html';
               // Write the file contents to the respective output file.
-              grunt.file.write(path, fileContents, fileOptions);
+              grunt.file.write(path, stripDevLinks(fileContents, production), fileOptions);
             }
           }
         }
