@@ -302,7 +302,6 @@ header a,
 /* ==== LARGE SCREEN RULES ========================================================================================== */
 
 
-/* Bigger screens, different alignment. */
 @media (min-width: 992px) {
   #main-navigation {
     margin-top: 4.25%;
