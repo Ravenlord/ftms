@@ -66,6 +66,10 @@ header a,
     z-index: 1;
   }
 
+  header.row {
+    margin: 0;
+  }
+
   header.expanded {
     height: 100%;
   }

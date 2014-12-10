@@ -16,9 +16,8 @@
     background-color: #000;
   }
 
-  #content {
-    margin-top: 70px;
-    padding-bottom: 20px;
+  #content-wrapper {
+    margin-top: 50px;
   }
 }
 
@@ -82,11 +81,6 @@
   #content-wrapper {
     padding-bottom: 80px;
     padding-top: 80px;
-  }
-
-  #content {
-    padding-bottom: 50px;
-    padding-top: 50px;
   }
 
   #content-wrapper > .row {
