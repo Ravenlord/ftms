@@ -67,7 +67,7 @@ header a,
   }
 
   header.expanded {
-    height: 100vh;
+    height: 100%;
   }
 
   #logo .img-responsive {
@@ -227,7 +227,7 @@ header a,
   .main-nav-first:hover .main-nav-second-wrapper,
   .main-nav-first:focus .main-nav-second-wrapper,
   .main-nav-first:active .main-nav-second-wrapper {
-    left: 0px;
+    left: 0;
     top: 33px;
     width: auto;
     height: auto;
