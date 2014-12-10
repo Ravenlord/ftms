@@ -303,7 +303,7 @@ module.exports = function(grunt) {
 
     // Include stylesheet with the same name as page if it exists.
     if (grunt.file.isFile(cssDir, pageName.toLowerCase() + '.css')) {
-      stylesheets.push(pageName);
+      stylesheets.push(pageName.toLowerCase());
     }
 
     // Construct the includes.
@@ -399,7 +399,7 @@ module.exports = function(grunt) {
 
     // Include script with the same name as page if it exists.
     if (grunt.file.isFile(jsDir, pageName.toLowerCase() + '.js')) {
-      scripts.push(pageName);
+      scripts.push(pageName.toLowerCase());
     }
 
     // Construct the includes.
