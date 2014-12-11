@@ -32,6 +32,10 @@ header ul {
 }
 
 .main-nav-first {
+  cursor: default;
+}
+
+.main-nav-first a {
   cursor: pointer;
 }
 

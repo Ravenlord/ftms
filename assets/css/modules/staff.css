@@ -76,16 +76,14 @@
     opacity: 1;
   }
 
-  .crew-member img {
+  .crew-member .img-grayscale {
     border: 1px solid #333;
-    filter: grayscale(100%);
-    transition: border-color 0.4s ease-in-out, filter 0.4s ease-in-out;
+    transition-property: border-color, filter;
   }
 
-  .crew-member:hover img,
-  .crew-member:focus img,
-  .crew-member:active img {
+  .crew-member:hover .img-grayscale,
+  .crew-member:focus .img-grayscale,
+  .crew-member:active .img-grayscale {
     border-color: #999;
-    filter: grayscale(0%);
   }
 }
