@@ -586,10 +586,16 @@ module.exports = function(grunt) {
   grunt.registerTask('default', [ 'deploy-prod' ]);
 
   // Deploy in development mode.
-  grunt.registerTask('deploy-dev', [ 'clean:dist', 'css-dev', 'js-dev', 'imagemin', 'html-dev', 'copy:apache', 'ftp-deploy:easyname' ]);
+  grunt.registerTask('deploy-dev', [ 'deploy-local-dev', 'ftp-deploy:easyname' ]);
+
+  // Deploy locally in development mode without uploading anything.
+  grunt.registerTask('deploy-local-dev', [ 'clean:dist', 'css-dev', 'js-dev', 'imagemin', 'html-dev', 'copy:apache' ]);
+
+  // Deploy locally in production mode without uploading anything.
+  grunt.registerTask('deploy-local-prod', [ 'clean:dist', 'css-prod', 'js-prod', 'imagemin', 'html-prod', 'copy:apache' ]);
 
   // Deploy in production mode.
-  grunt.registerTask('deploy-prod', [ 'clean:dist', 'css-prod', 'js-prod', 'imagemin', 'html-prod', 'copy:apache', 'ftp-deploy:easyname' ]);
+  grunt.registerTask('deploy-prod', [ 'deploy-local-prod', 'ftp-deploy:easyname' ]);
 
   // Build HTML, validate and prettify it.
   grunt.registerTask('html-dev', [ 'ftmsHTML:development', 'validation', 'prettify' ]);
