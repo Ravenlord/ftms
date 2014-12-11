@@ -459,7 +459,7 @@ module.exports = function(grunt) {
             firstClassString += ' active';
             href = '#';
           }
-          menu += '<li><a class="' + firstClassString + '" href="' + href + '">' + menuTree[firstLevel].name + '</a></li>';
+          menu += '<li class="' + firstClassString + '"><a href="' + href + '">' + menuTree[firstLevel].name + '</a></li>';
         }
         // Process second level and set parent active as well.
         else {
