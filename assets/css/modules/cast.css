@@ -1,0 +1,31 @@
+.actor-description {
+  float: none;
+}
+
+@media (min-width: 768px) {
+  .table {
+    display: table;
+    width: 100%;
+  }
+
+  .table-row {
+    display: table-row;
+  }
+
+  .actor-cell {
+    color: #666;
+    display: table-cell;
+    transition: color 0.4s ease-in-out;
+    width: 47.916666%;
+  }
+
+  .actor-cell:hover,
+  .actor-cell:focus,
+  .actor-cell:active {
+    color: inherit;
+  }
+
+  .actor-cell-gap {
+    width: 4.166666%;
+  }
+}
