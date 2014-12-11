@@ -432,7 +432,7 @@ module.exports = function(grunt) {
    *   The source content with the menu.
    */
   function insertMenu(source, menuTree, file, production, isIndex) {
-    var menu = '';
+    var menu = '<ul>';
     if (isIndex === true) {
       return source;
     }
@@ -459,7 +459,7 @@ module.exports = function(grunt) {
             firstClassString += ' active';
             href = '#';
           }
-          menu += '<a class="' + firstClassString + '" href="' + href + '">' + menuTree[firstLevel].name + '</a>';
+          menu += '<li><a class="' + firstClassString + '" href="' + href + '">' + menuTree[firstLevel].name + '</a></li>';
         }
         // Process second level and set parent active as well.
         else {
@@ -478,26 +478,22 @@ module.exports = function(grunt) {
                 secondClassString += ' active';
                 href    = '#';
               }
-              secondaryLinks += '<a class="' + secondClassString + '" href="' + href + '">'
-                + menuTree[firstLevel].children[secondLevel].name + '</a>';
+              secondaryLinks += '<li class="' + secondClassString + '"><a href="' + href + '">'
+                + menuTree[firstLevel].children[secondLevel].name + '</a></li>';
             }
           }
           // Secondary items processed, add the first level menu point.
-          menu += '<div class="' + firstClassString + '">' + menuTree[firstLevel].name
-            + '<div class="main-nav-second-wrapper">'
-              + '<div class="hidden-xs main-nav-second-wrapper-nw"></div>'
-              + '<div class="hidden-xs main-nav-second-wrapper-ne"></div>'
-              + '<div class="hidden-xs main-nav-second-wrapper-sw"></div>'
-              + '<div class="hidden-xs main-nav-second-wrapper-se"></div>'
-              + secondaryLinks
-              + '</div>'
-            + '</div>'
+          menu += '<li class="' + firstClassString + '">' + menuTree[firstLevel].name
+              + '<ul class="main-nav-second-wrapper">'
+                + secondaryLinks
+              + '</ul>'
+            + '</li>'
           ;
         }
       }
     }
 
-    return source.replace('##MENU##', menu);
+    return source.replace('##MENU##', menu + '</ul>');
   }
 
   /**

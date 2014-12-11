@@ -7,6 +7,10 @@
   height: 100%;
 }
 
+.content-bg {
+  background-color: #000;
+}
+
 
 /* ==== MOBILE RULES ================================================================================================ */
 
@@ -17,7 +21,8 @@
   }
 
   #content-wrapper {
-    margin-top: 50px;
+    margin-bottom: 50px;
+    margin-top: 100px;
   }
 }
 
@@ -79,12 +84,11 @@
   }
 
   #content-wrapper {
+    margin-top: 80px;
     padding-bottom: 80px;
-    padding-top: 80px;
   }
 
-  #content-wrapper > .row {
-    background-color: #000;
+  .content-bg {
     background-color: rgba(0,0,0,0.8);
   }
 }
