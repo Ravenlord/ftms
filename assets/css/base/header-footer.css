@@ -207,6 +207,12 @@ header ul {
     position: relative;
   }
 
+  .main-nav-first > a,
+  .main-nav-first > span {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
   .main-nav-second-wrapper,
   .main-nav-second-wrapper:before {
     position: absolute;
@@ -235,7 +241,8 @@ header ul {
 
   .main-nav-first:hover .main-nav-second-wrapper,
   .main-nav-first:focus .main-nav-second-wrapper,
-  .main-nav-first:active .main-nav-second-wrapper {
+  .main-nav-first:active .main-nav-second-wrapper,
+  .main-nav-second-wrapper.expanded {
     opacity: 1;
     z-index: 2;
   }
@@ -282,11 +289,11 @@ header ul {
   }
 
   #social {
-    margin-top: 3.75%
+    margin-top: 1.75%
   }
 
   #social a {
-    padding: 0;
+    padding: 15px 0;
     width: 40%;
   }
 
@@ -306,6 +313,6 @@ header ul {
   }
 
   #social {
-    margin-top: 3.75%;
+    margin-top: 2.25%;
   }
 }

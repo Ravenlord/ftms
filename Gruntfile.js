@@ -488,7 +488,7 @@ module.exports = function(grunt) {
             }
           }
           // Secondary items processed, add the first level menu point.
-          menu += '<li class="' + firstClassString + '">' + menuTree[firstLevel].name
+          menu += '<li class="' + firstClassString + '" tabindex="0"><span>' + menuTree[firstLevel].name + '</span>'
               + '<ul class="main-nav-second-wrapper">'
                 + secondaryLinks
               + '</ul>'
