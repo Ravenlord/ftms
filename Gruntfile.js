@@ -38,6 +38,11 @@ module.exports = function(grunt) {
       }
     },
 
+    // Bootstrap linter.
+    bootlint: {
+      files: [ 'dist/**/*.html' ]
+    },
+
     // Concatenate source files and move them to the output directory.
     concat: {
       options: {
