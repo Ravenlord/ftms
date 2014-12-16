@@ -112,22 +112,6 @@ header ul {
     margin-top: 10px;
   }
 
-  .main-nav-first,
-  .main-nav-second {
-    transition: background-color 0.4s ease-in-out;
-  }
-
-  a.main-nav-first:hover,
-  a.main-nav-first:focus,
-  a.main-nav-first:active,
-  a.main-nav-first.active,
-  .main-nav-second:hover,
-  .main-nav-second:focus,
-  .main-nav-second:active,
-  .main-nav-second.active {
-    background-color: #333;
-  }
-
   .main-nav-first {
     cursor: pointer;
     display: block;
@@ -140,6 +124,11 @@ header ul {
     margin-top: 5px;
     padding-left: 20px;
     padding-right: 20px;
+  }
+
+  .main-nav-first.active > a,
+  .main-nav-second.active {
+    color: #999;
   }
 
   #social {
