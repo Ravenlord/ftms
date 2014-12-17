@@ -10,10 +10,23 @@ $(document).ready(function (){
   });
 
   // Toggle crew members.
+  // Set the right margin first.
+  var $crewMembers = $('#crew-members');
+  $crewMembers.css('margin-top', '-' + ($crewMembers.height() + parseInt($crewMembers.css('padding-bottom'), 10)) + 'px');
   $('#crew-members-expander').click(function (ev) {
     ev.preventDefault();
-    $('#crew-members').toggleClass('expanded');
-    $('#crew-members-expander').toggleClass('expanded');
+    var $this = $(this);
+
+    if ($this.hasClass('expanded')) {
+      $crewMembers.css('margin-top', '-' + ($crewMembers.height() + parseInt($crewMembers.css('padding-bottom'), 10)) + 'px');
+      $crewMembers.removeClass('expanded');
+      $this.removeClass('expanded');
+    }
+    else {
+      $crewMembers.css('margin-top', 0);
+      $crewMembers.addClass('expanded');
+      $this.addClass('expanded')
+    }
     return false;
   });
 });
