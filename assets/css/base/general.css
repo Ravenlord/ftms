@@ -1,5 +1,9 @@
 /* ==== GENERIC RULES =============================================================================================== */
 
+.no-transition,
+.no-transition * {
+  transition: none !important;
+}
 
 html,
 body {

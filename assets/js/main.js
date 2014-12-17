@@ -1,6 +1,9 @@
 $(document).ready(function (){
   'use strict';
 
+  // Re-enable CSS transitions.
+  $('body').removeClass('no-transition');
+
   // Toggle mobile menu.
   $('#mobile-menu').click(function (ev) {
     ev.preventDefault();
