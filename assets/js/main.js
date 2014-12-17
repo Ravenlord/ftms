@@ -1,8 +1,19 @@
 $(document).ready(function (){
   'use strict';
-
-  // Re-enable CSS transitions.
   $('body').removeClass('no-transition');
+
+  // Load iframe elements in background.
+  // Hide all iframes from sight and display loading animation.
+  $('.embed-responsive').addClass('loading');
+  $('.embed-responsive-item').each(function (index, element) {
+    // Bind handler for load completion.
+    $(element).load(function () {
+      // Hide loading animation and show actual content.
+      $(this.parentNode).removeClass('loading');
+    });
+    // Specify the source of the iframe to start loading.
+    element.src = element.dataset.src;
+  });
 
   // Toggle mobile menu.
   $('#mobile-menu').click(function (ev) {
