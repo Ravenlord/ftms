@@ -50,7 +50,13 @@ module.exports = function(grunt) {
       },
       css: {
         dest:   'dist/assets/css/main.css',
-        src:    [ 'assets/css/base/general.css', 'assets/css/base/header-footer.css', 'assets/css/base/content.css' ]
+        src:    [
+                  'dist/temp/bootstrap.css',
+                  'assets/css/base/general.css',
+                  'assets/css/base/header-footer.css',
+                  'assets/css/base/content.css',
+                  'assets/css/modules/*.css'
+                ]
       },
       jsBottom: {
         dest: 'dist/assets/js/main.js',
@@ -79,12 +85,6 @@ module.exports = function(grunt) {
         dest:   'dist/temp/bootstrap/',
         expand: true,
         src:    '*.less'
-      },
-      css: {
-        cwd:    'assets/css/modules/',
-        dest:   'dist/assets/css',
-        expand: true,
-        src:    '*.css'
       }
     },
 
@@ -194,7 +194,7 @@ module.exports = function(grunt) {
     // Compile less files.
     less: {
       bootstrap: {
-        dest: 'dist/assets/css/bootstrap.css',
+        dest: 'dist/temp/bootstrap.css',
         options: {
           strictMath: true
         },
@@ -247,16 +247,12 @@ module.exports = function(grunt) {
       // Recompile bootstrap on less changes.
       bootstrap: {
         files:  'config/bootstrap/**/*.less',
-        tasks:  [ 'css-bootstrap', 'autoprefixer:dist', 'csscomb:dist' ]
+        tasks:  [ 'css-dev' ]
       },
       // Reprocess CSS files on changes.
-      cssBase: {
-        files:  'assets/css/base/**/*.css',
-        tasks:  [ 'csslint:css', 'concat:css', 'autoprefixer:dist', 'csscomb:dist' ]
-      },
-      cssModules: {
-        files:  'assets/css/modules/**/*.css',
-        tasks:  [ 'csslint:css', 'copy:css', 'autoprefixer:dist', 'csscomb:dist' ]
+      css: {
+        files:  'assets/css/**/*.css',
+        tasks:  [ 'csslint:css', 'concat:css', 'autoprefixer:dist', 'csscomb:dist', 'clean:temp' ]
       },
       // Lint Gruntfile on changes.
       grunt: {
@@ -276,7 +272,7 @@ module.exports = function(grunt) {
       // Copy JS files on changes.
       js: {
         files:  'assets/js/**/*.js',
-        tasks:  [ 'jshint:js', 'concat:jsTop', 'concat:jsBottom' ]
+        tasks:  [ 'js-dev' ]
       }
     }
   });
@@ -301,13 +297,8 @@ module.exports = function(grunt) {
    */
   function insertCSS(source, pageName, cssDir, production) {
     var includes = '';
-    // Bootstrap and main CSS files will always be included.
-    var stylesheets = [ 'bootstrap', 'main' ];
-
-    // Include stylesheet with the same name as page if it exists.
-    if (grunt.file.isFile(cssDir, pageName.toLowerCase() + '.css')) {
-      stylesheets.push(pageName.toLowerCase());
-    }
+    // Main CSS file will always be included.
+    var stylesheets = [ 'main' ];
 
     // Construct the includes.
     stylesheets.forEach(function (stylesheet) {
@@ -390,11 +381,6 @@ module.exports = function(grunt) {
     var includes = '';
     // Main JS file will always be included.
     var scripts = [ 'main' ];
-
-    // Include script with the same name as page if it exists.
-    if (grunt.file.isFile(jsDir, pageName.toLowerCase() + '.js')) {
-      scripts.push(pageName.toLowerCase());
-    }
 
     // Construct the includes.
     scripts.forEach(function (script) {
@@ -560,10 +546,10 @@ module.exports = function(grunt) {
   require('load-grunt-tasks')(grunt, { scope: 'devDependencies' });
 
   // Compile bootstrap CSS and copy it to the output directory.
-  grunt.registerTask('css-bootstrap', [ 'copy:bootstrap', 'copy:bootstrapConfig', 'less', 'clean:temp' ]);
+  grunt.registerTask('css-bootstrap', [ 'copy:bootstrap', 'copy:bootstrapConfig', 'less' ]);
 
   // Compile bootstrap CSS, copy all CSS to the output directory, prefix and prettify CSS.
-  grunt.registerTask('css-dev', [ 'csslint:css', 'concat:css', 'copy:css', 'css-bootstrap', 'autoprefixer:dist', 'csscomb:dist' ]);
+  grunt.registerTask('css-dev', [ 'csslint:css', 'css-bootstrap', 'concat:css', 'autoprefixer:dist', 'csscomb:dist', 'clean:temp' ]);
 
   // Compile bootstrap CSS, copy all CSS to the output directory, prefix and minify CSS.
   grunt.registerTask('css-prod', [ 'css-dev', 'cssmin', 'clean:prodCSS' ]);
