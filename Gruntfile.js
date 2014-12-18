@@ -96,8 +96,8 @@ module.exports = function(grunt) {
     // Delete directories.
     clean: {
       dist:     [ 'dist/' ],
-      prodCSS:  [ 'dist/*.css', '!dist/*.min.css' ],
-      prodJS:  [ 'dist/*.js', '!dist/*.min.js' ],
+      prodCSS:  [ 'dist/assets/css/*.css', '!dist/assets/css/*.min.css' ],
+      prodJS:  [ 'dist/assets/js/*.js', '!dist/assets/js/*.min.js' ],
       temp:     [ 'dist/temp/' ]
     },
 
@@ -251,7 +251,7 @@ module.exports = function(grunt) {
       // Target for main.js.
       main:     {
         dest: 'dist/assets/js/main.min.js',
-        src:  'assets/js/main.js'
+        src:  'dist/assets/js/main.js'
       }
     },
 

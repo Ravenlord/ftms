@@ -1,3 +1,4 @@
 RewriteEngine On
+RewriteRule ^$  base.html [L,NC]
 RewriteRule ^([a-z0-9\-]+)$  $1.html [L,NC]
 RewriteRule ^([a-z0-9\-]+\/)([a-z0-9\-]+)$  $1/$2.html [L,NC]
