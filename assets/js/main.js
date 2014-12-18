@@ -31,6 +31,13 @@ $(document).ready(function (){
     }
     else {
       $.cookie('ftms', true, { expires: 1 });
+      $slider.click(function (ev) {
+        ev.preventDefault();
+        $slider.animate({ top: '-100vh', bottom: '0' }, 1000, function () {
+          $slider.remove();
+        });
+        return false;
+      });
       $slider.one('webkitAnimationEnd oanimationend msAnimationEnd animationend', function () { $slider.remove(); });
     }
   }
