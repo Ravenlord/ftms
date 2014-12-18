@@ -6,6 +6,8 @@
 node_modules/
 # Deployment files
 dist/
+# External JS dependencies
+assets/js/lib/
 
 # HTML validator
 validation-report.json

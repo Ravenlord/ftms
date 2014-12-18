@@ -51,6 +51,14 @@ module.exports = function(grunt) {
       css: {
         dest:   'dist/assets/css/main.css',
         src:    [ 'assets/css/base/general.css', 'assets/css/base/header-footer.css', 'assets/css/base/content.css' ]
+      },
+      jsBottom: {
+        dest: 'dist/assets/js/main.js',
+        src:  [ 'assets/js/lib/jquery.min.js', 'assets/js/lib/jquery.cookie.js', 'assets/js/main.js' ]
+      },
+      jsTop:  {
+        dest: 'dist/assets/js/shim.min.js',
+        src:  [ 'assets/js/lib/html5shiv.min.js', 'assets/js/lib/respond.min.js' ]
       }
     },
 
@@ -72,21 +80,11 @@ module.exports = function(grunt) {
         expand: true,
         src:    '*.less'
       },
-      bootstrapJs: {
-        cwd:    'node_modules/bootstrap/dist/js/',
-        dest:   'dist/assets/js/',
-        expand: true,
-        src:    [ '*.js', '!npm.js' ]
-      },
       css: {
         cwd:    'assets/css/modules/',
         dest:   'dist/assets/css',
         expand: true,
         src:    '*.css'
-      },
-      js: {
-        dest:   'dist/',
-        src:    'assets/js/*.js'
       }
     },
 
@@ -189,7 +187,7 @@ module.exports = function(grunt) {
         src:  'Gruntfile.js'
       },
       js: {
-        src:  'assets/js/**/*.js'
+        src:  'assets/js/*.js'
       }
     },
 
@@ -278,7 +276,7 @@ module.exports = function(grunt) {
       // Copy JS files on changes.
       js: {
         files:  'assets/js/**/*.js',
-        tasks:  [ 'jshint:js', 'copy:js' ]
+        tasks:  [ 'jshint:js', 'concat:jsTop', 'concat:jsBottom' ]
       }
     }
   });
@@ -331,8 +329,6 @@ module.exports = function(grunt) {
    *   The source content which needs the header.
    * @param file string
    *   The file which reflects the current page.
-   * @param isIndex boolean
-   *   Flag that determines if it's an index page or not.
    * @param footer string
    *   The footer template.
    * @param footerLinks object
@@ -342,12 +338,7 @@ module.exports = function(grunt) {
    * @return string
    *   The page with the inserted footer.
    */
-  function insertFooter(source, file, isIndex, footer, footerLinks, production) {
-    // Don't output the footer if it's an index page.
-    if (isIndex === true) {
-      return source.replace('##FOOTER##', '');
-    }
-
+  function insertFooter(source, file, footer, footerLinks, production) {
     var html = source.replace('##FOOTER##', footer);
     var regex;
     for (var page in footerLinks) {
@@ -371,16 +362,14 @@ module.exports = function(grunt) {
    *
    * @param source string
    *   The source content which needs the header.
-   * @param isIndex boolean
-   *   Flag that determines if it's an index page or not.
    * @param header string
    *   The header template.
    * @return string
    *   The page with the inserted header.
    */
-  function insertHeader(source, isIndex, header) {
+  function insertHeader(source, header) {
     // Don't output the header if it's an index page.
-    return isIndex === true ? source.replace('##HEADER##', '') : source.replace('##HEADER##', header);
+    return source.replace('##HEADER##', header);
   }
 
   /**
@@ -399,8 +388,8 @@ module.exports = function(grunt) {
    */
   function insertJS(source, pageName, jsDir, production) {
     var includes = '';
-    // Bootstrap and main CSS files will always be included.
-    var scripts = [ 'bootstrap', 'main' ];
+    // Main JS file will always be included.
+    var scripts = [ 'main' ];
 
     // Include script with the same name as page if it exists.
     if (grunt.file.isFile(jsDir, pageName.toLowerCase() + '.js')) {
@@ -431,16 +420,11 @@ module.exports = function(grunt) {
    *   The file which reflects the current page.
    * @param production boolean
    *   Determines if the routes are generated in production mode or not.
-   * @param isIndex boolean
-   *   Output different menu, if it's an index page.
    * @return string
    *   The source content with the menu.
    */
-  function insertMenu(source, menuTree, file, production, isIndex) {
+  function insertMenu(source, menuTree, file, production) {
     var menu = '<ul>';
-    if (isIndex === true) {
-      return source;
-    }
 
     // Class strings for links.
     var firstLevelClass   = 'main-nav-first';
@@ -459,6 +443,11 @@ module.exports = function(grunt) {
         }
         // Only a first level page, just add it.
         if (menuTree[firstLevel].children === false) {
+          // Set the correct route for the index page.
+          if (menuTree[firstLevel].name.toLowerCase() === 'base') {
+            href = '/';
+          }
+
           // Set menu point active.
           if (firstLevel === file) {
             firstClassString += ' active';
@@ -510,29 +499,25 @@ module.exports = function(grunt) {
    *   The name of the current page.
    * @param content string
    *   The page's content.
-   * @param isIndex boolean
-   *   Flag determining if it's an index page or not.
    * @return string
    *   The page with page contents, title and page name inserted..
    */
-  function insertPageContent(source, pageName, content, isIndex) {
+  function insertPageContent(source, pageName, content) {
     // Replace page content.
     var html = source.replace(
       '##CONTENT##',
       content
     );
 
-    // Just delete title if it's the index page.
-    if (isIndex === true) {
-      html = html.replace('##TITLE##', '');
+    // Replace the page title.
+    if (pageName.indexOf('footer') > -1) {
+      // Strip footer directory from name.
+      pageName = pageName.toLowerCase().replace('footer/', '');
     }
-    // Replace it properly otherwise.
-    else {
-      html = html.replace('##TITLE##', pageName.toUpperCase() + ' — ');
-    }
+    html = html.replace('##TITLE##', pageName.toUpperCase() + ' — ');
 
     // Replace the page name.
-    html = html.replace('##PAGENAME##', nameToURL(pageName));
+    html = html.replace(/##PAGENAME##/g, nameToURL(pageName));
 
     return html;
   }
@@ -605,7 +590,7 @@ module.exports = function(grunt) {
   grunt.registerTask('html-prod', [ 'ftmsHTML', 'validation', 'htmlmin' ]);
 
   // Copy all JS to the output directory.
-  grunt.registerTask('js-dev', [ 'jshint:js', 'copy:js', 'copy:bootstrapJs' ]);
+  grunt.registerTask('js-dev', [ 'jshint:js', 'concat:jsTop', 'concat:jsBottom' ]);
 
   // Copy all JS to the output directory and uglify it.
   grunt.registerTask('js-prod', [ 'js-dev', 'uglify', 'clean:prodJS' ]);
@@ -679,24 +664,20 @@ module.exports = function(grunt) {
         // We have a first level page.
         if (menuTree[firstLevel].children === false) {
           fileContents = template;
-          // Determine if it's the index page.
-          var isIndex = firstLevel === 'index.html';
           fileContents = insertPageContent(
             fileContents,
             menuTree[firstLevel].name,
-            grunt.file.read(contentDirectory + firstLevel, fileOptions),
-            isIndex
+            grunt.file.read(contentDirectory + firstLevel, fileOptions)
           );
-          fileContents = insertHeader(fileContents, isIndex, header);
+          fileContents = insertHeader(fileContents, header);
           fileContents = insertFooter(
             fileContents,
             firstLevel,
-            isIndex,
             footer,
             menuTree.footer.children,
             production
           );
-          fileContents = insertMenu(fileContents, menuTree, firstLevel, production, isIndex);
+          fileContents = insertMenu(fileContents, menuTree, firstLevel, production);
           fileContents = insertCSS(fileContents, menuTree[firstLevel].name, cssDirectory, production);
           fileContents = insertJS(fileContents, menuTree[firstLevel].name, jsDirectory, production);
 
@@ -715,19 +696,17 @@ module.exports = function(grunt) {
               fileContents = insertPageContent(
                 fileContents,
                 menuTree[firstLevel].name + '/' + menuTree[firstLevel].children[secondLevel].name,
-                grunt.file.read(contentDirectory + menuTree[firstLevel].children[secondLevel].path, fileOptions),
-                false
+                grunt.file.read(contentDirectory + menuTree[firstLevel].children[secondLevel].path, fileOptions)
               );
-              fileContents = insertHeader(fileContents, false, header);
+              fileContents = insertHeader(fileContents, header);
               fileContents = insertFooter(
                 fileContents,
                 secondLevel,
-                false,
                 footer,
                 menuTree.footer.children,
                 production
               );
-              fileContents = insertMenu(fileContents, menuTree, secondLevel, production, false);
+              fileContents = insertMenu(fileContents, menuTree, secondLevel, production);
               fileContents = insertCSS(fileContents, menuTree[firstLevel].children[secondLevel].name, cssDirectory, production);
               fileContents = insertJS(fileContents, menuTree[firstLevel].children[secondLevel].name, jsDirectory, production);
 

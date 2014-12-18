@@ -1,8 +1,8 @@
 /* ==== GENERIC RULES =============================================================================================== */
 
 
-#upper-wrapper-outer,
-#upper-wrapper-inner {
+.backdrop,
+.backdrop-overlay {
   width: 100%;
   height: 100%;
 }
@@ -16,7 +16,7 @@
 
 
 @media (max-width: 767px) {
-  #upper-wrapper-outer {
+  .backdrop {
     background-color: #000;
   }
 
@@ -31,11 +31,11 @@
 
 
 @media (min-width: 768px) {
-  #upper-wrapper-inner {
+  .backdrop-overlay {
     background: url(../img/spacer.png) repeat -3px top;
   }
 
-  #upper-wrapper-outer {
+  .backdrop {
     background-attachment: fixed;
     background-position: center center;
     background-repeat: no-repeat;
@@ -43,43 +43,44 @@
   }
 
   /* TODO: Insert actual FTMS images. */
-  #upper-wrapper-outer.bg-index {
+  .backdrop.bg-slider {
+    background-attachment: scroll;
     background-image: url(http://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-2437.jpg);
   }
 
-  #upper-wrapper-outer.bg-base {
+  .backdrop.bg-base {
     background-image: url(http://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-2437.jpg);
   }
 
-  #upper-wrapper-outer.bg-project {
+  .backdrop.bg-project {
     background-image: url(http://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-2437.jpg);
   }
 
-  #upper-wrapper-outer.bg-crew-about {
+  .backdrop.bg-crew-about {
     background-image: url(http://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-2437.jpg);
   }
 
-  #upper-wrapper-outer.bg-crew-staff {
+  .backdrop.bg-crew-staff {
     background-image: url(http://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-2437.jpg);
   }
 
-  #upper-wrapper-outer.bg-cast {
+  .backdrop.bg-cast {
     background-image: url(http://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-2437.jpg);
   }
 
-  #upper-wrapper-outer.bg-media-gallery {
+  .backdrop.bg-media-gallery {
     background-image: url(http://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-2437.jpg);
   }
 
-  #upper-wrapper-outer.bg-media-video {
+  .backdrop.bg-media-video {
     background-image: url(http://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-2437.jpg);
   }
 
-  #upper-wrapper-outer.bg-footer-legal-notice {
+  .backdrop.bg-footer-legal-notice {
     background-image: url(http://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-2437.jpg);
   }
 
-  #upper-wrapper-outer.bg-footer-contact {
+  .backdrop.bg-footer-contact {
     background-image: url(http://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-2437.jpg);
   }
 

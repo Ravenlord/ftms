@@ -86,7 +86,7 @@ header ul {
     height: 100%;
   }
 
-  #logo .img-responsive {
+  .logo .img-responsive {
     max-height: 45px;
   }
 
@@ -158,7 +158,7 @@ header ul {
     display: inline-block;
   }
 
-  #logo,
+  .logo,
   #social a,
   #footer-logos a,
   #footer-lower a img {
@@ -166,9 +166,9 @@ header ul {
     transition: opacity 0.4s ease-in-out;
   }
 
-  #logo:hover,
-  #logo:focus,
-  #logo:active,
+  .logo:hover,
+  .logo:focus,
+  .logo:active,
   #social a:hover,
   #social a:focus,
   #social a:active,

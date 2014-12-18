@@ -14,17 +14,16 @@
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <script src="/assets/js/shim.min.js"></script>
   <![endif]-->
 </head>
-<body class="no-transition">
+<body class="##PAGENAME##">
 <script type="text/javascript">
-  document.body.className = 'no-transition';
+  document.body.className += ' no-transition';
 </script>
 
-<div class="bg-##PAGENAME##" id="upper-wrapper-outer">
-  <div id="upper-wrapper-inner">
+<div class="backdrop bg-##PAGENAME##">
+  <div class="backdrop-overlay">
     ##HEADER##
     <div class="container" id="content-wrapper">
       ##CONTENT##
@@ -34,8 +33,6 @@
 
 ##FOOTER##
 
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 ##JS##
 </body>
 </html>

@@ -23,6 +23,18 @@ $(document).ready(function (){
     return false;
   });
 
+  // Remove slider from index page.
+  var $slider = $('#slider');
+  if ($slider.length > 0) {
+    if ($.cookie('ftms')) {
+      $slider.remove();
+    }
+    else {
+      $.cookie('ftms', true, { expires: 1 });
+      $slider.one('webkitAnimationEnd oanimationend msAnimationEnd animationend', function () { $slider.remove(); });
+    }
+  }
+
   // Toggle crew members.
   // Set the right margin first.
   var $crewMembers = $('#crew-members');
