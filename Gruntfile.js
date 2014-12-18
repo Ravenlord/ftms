@@ -60,7 +60,7 @@ module.exports = function(grunt) {
       },
       jsBottom: {
         dest: 'dist/assets/js/main.js',
-        src:  [ 'assets/js/lib/jquery.min.js', 'assets/js/lib/jquery.cookie.js', 'assets/js/main.js' ]
+        src:  [ 'assets/js/lib/jquery.min.js', 'assets/js/lib/jquery.cookie.min.js', 'assets/js/main.js' ]
       },
       jsTop:  {
         dest: 'dist/assets/js/shim.min.js',
@@ -127,6 +127,32 @@ module.exports = function(grunt) {
         keepSpecialComments: 0,
         src:                 'dist/assets/css/*.css'
       }
+    },
+
+    // Download external dependencies.
+    downloadfile: {
+      files: [
+        {
+          dest: 'assets/js/lib/',
+          name: 'html5shiv.min.js',
+          url:  'https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js'
+        },
+        {
+          dest: 'assets/js/lib/',
+          name: 'jquery.min.js',
+          url:  'https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'
+        },
+        {
+          dest: 'assets/js/lib/',
+          name: 'jquery.cookie.min.js',
+          url:  'https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.3.1/jquery.cookie.min.js'
+        },
+        {
+          dest: 'assets/js/lib/',
+          name: 'respond.min.js',
+          url:  'https://oss.maxcdn.com/respond/1.4.2/respond.min.js'
+        }
+      ]
     },
 
     // Upload source files with FTP.
@@ -556,6 +582,9 @@ module.exports = function(grunt) {
 
   // The default task.
   grunt.registerTask('default', [ 'deploy-prod' ]);
+
+  // Download all external dependencies.
+  grunt.registerTask('dependencies', [ 'downloadfile' ]);
 
   // Deploy in development mode.
   grunt.registerTask('deploy-dev', [ 'deploy-local-dev', 'ftp-deploy:easyname' ]);
