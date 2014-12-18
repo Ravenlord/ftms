@@ -8,6 +8,8 @@ node_modules/
 dist/
 # External JS dependencies
 assets/js/lib/
+# The font due to licensing
+assets/font/
 
 # HTML validator
 validation-report.json

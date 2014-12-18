@@ -52,6 +52,7 @@ module.exports = function(grunt) {
         dest:   'dist/assets/css/main.css',
         src:    [
                   'dist/temp/bootstrap.css',
+                  'assets/css/base/font.css',
                   'assets/css/base/general.css',
                   'assets/css/base/header-footer.css',
                   'assets/css/base/content.css',
@@ -85,6 +86,10 @@ module.exports = function(grunt) {
         dest:   'dist/temp/bootstrap/',
         expand: true,
         src:    '*.less'
+      },
+      font: {
+        dest: 'dist/',
+        src:  'assets/font/*'
       }
     },
 
@@ -590,10 +595,10 @@ module.exports = function(grunt) {
   grunt.registerTask('deploy-dev', [ 'deploy-local-dev', 'ftp-deploy:easyname' ]);
 
   // Deploy locally in development mode without uploading anything.
-  grunt.registerTask('deploy-local-dev', [ 'clean:dist', 'css-dev', 'js-dev', 'imagemin', 'html-dev', 'copy:apache' ]);
+  grunt.registerTask('deploy-local-dev', [ 'clean:dist', 'css-dev', 'js-dev', 'imagemin', 'html-dev', 'copy:font', 'copy:apache' ]);
 
   // Deploy locally in production mode without uploading anything.
-  grunt.registerTask('deploy-local-prod', [ 'clean:dist', 'css-prod', 'js-prod', 'imagemin', 'html-prod', 'copy:apache' ]);
+  grunt.registerTask('deploy-local-prod', [ 'clean:dist', 'css-prod', 'js-prod', 'imagemin', 'html-prod', 'copy:font', 'copy:apache' ]);
 
   // Deploy in production mode.
   grunt.registerTask('deploy-prod', [ 'deploy-local-prod', 'ftp-deploy:easyname' ]);
