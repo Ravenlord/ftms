@@ -51,7 +51,7 @@ module.exports = function(grunt) {
       css: {
         dest:   'dist/assets/css/main.css',
         src:    [
-                  'dist/temp/bootstrap.css',
+                  'assets/css/bootstrap.css',
                   'assets/css/base/font.css',
                   'assets/css/base/general.css',
                   'assets/css/base/header-footer.css',
@@ -225,7 +225,7 @@ module.exports = function(grunt) {
     // Compile less files.
     less: {
       bootstrap: {
-        dest: 'dist/temp/bootstrap.css',
+        dest: 'assets/css/bootstrap.css',
         options: {
           strictMath: true
         },

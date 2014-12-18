@@ -16,3 +16,5 @@ validation-report.json
 validation-status.json
 # FTP credentials
 .ftppass
+# Compiled bootstrap CSS
+assets/css/bootstrap.css
