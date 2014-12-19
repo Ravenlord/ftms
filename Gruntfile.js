@@ -121,7 +121,7 @@ module.exports = function(grunt) {
         csslintrc:  'node_modules/bootstrap/less/.csslintrc',
         ids:        false
       },
-      css: [ 'assets/css/**/*.css' ]
+      css: [ 'assets/css/**/*.css', '!assets/css/bootstrap.css' ]
     },
 
     // Minify CSS.
