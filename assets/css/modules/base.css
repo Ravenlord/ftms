@@ -20,7 +20,7 @@
 }
 
 #slider {
-  animation: slideup 1s ease-in-out 5s 1 forwards;
+  animation: slideup 1s ease-in-out 30s 1 forwards;
   background-color: #000;
   cursor: pointer;
   display: table;
@@ -109,6 +109,10 @@
 
 
 @media (min-width: 768px) {
+  #slider .backdrop-loader {
+    z-index: -1;
+  }
+
   #slider-logo {
     top: 30px;
   }
