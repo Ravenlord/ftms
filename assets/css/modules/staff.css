@@ -33,21 +33,21 @@
   cursor: pointer;
 }
 
-#crew-members-expander:before,
-#crew-members-expander:after {
+#crew-members-expander.expander:before,
+#crew-members-expander.expander:after {
   content: '▼';
 }
 
-#crew-members-expander:before {
+#crew-members-expander.expander:before {
   margin-right: 25px;
 }
 
-#crew-members-expander:after {
+#crew-members-expander.expander:after {
   margin-left: 25px;
 }
 
-#crew-members-expander.expanded:before,
-#crew-members-expander.expanded:after {
+#crew-members-expander.expander.expanded:before,
+#crew-members-expander.expander.expanded:after {
   content: '▲';
 }
 

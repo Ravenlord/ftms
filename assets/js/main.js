@@ -1,8 +1,28 @@
 $(document).ready(function (){
   'use strict';
 
-  // Re-enable CSS transitions.
-  $('body').removeClass('no-transition');
+  // Toggle crew members.
+  // Set the right margin first.
+  var $crewMembers = $('#crew-members');
+  $crewMembers.removeClass('expanded');
+  $('#crew-members-expander').addClass('expander');
+  $crewMembers.css('margin-top', '-' + ($crewMembers.height() + parseInt($crewMembers.css('padding-bottom'), 10)) + 'px');
+  $('#crew-members-expander').click(function (ev) {
+    ev.preventDefault();
+    var $this = $(this);
+
+    if ($this.hasClass('expanded')) {
+      $crewMembers.css('margin-top', '-' + ($crewMembers.height() + parseInt($crewMembers.css('padding-bottom'), 10)) + 'px');
+      $crewMembers.removeClass('expanded');
+      $this.removeClass('expanded');
+    }
+    else {
+      $crewMembers.css('margin-top', 0);
+      $crewMembers.addClass('expanded');
+      $this.addClass('expanded')
+    }
+    return false;
+  });
 
   // Preload background images.
   $('.backdrop').each(function (index, element) {
@@ -20,6 +40,9 @@ $(document).ready(function (){
       $image.attr('src', url.replace(/url\(['"]?([^'"]*)['"]?\)/, '$1'));
     }
   });
+
+  // Re-enable CSS transitions.
+  $('body').removeClass('no-transition');
 
   // Load iframe elements in background.
   // Hide all iframes from sight and display loading animation.
@@ -60,25 +83,4 @@ $(document).ready(function (){
       $slider.one('webkitAnimationEnd oanimationend msAnimationEnd animationend', function () { $slider.remove(); });
     }
   }
-
-  // Toggle crew members.
-  // Set the right margin first.
-  var $crewMembers = $('#crew-members');
-  $crewMembers.css('margin-top', '-' + ($crewMembers.height() + parseInt($crewMembers.css('padding-bottom'), 10)) + 'px');
-  $('#crew-members-expander').click(function (ev) {
-    ev.preventDefault();
-    var $this = $(this);
-
-    if ($this.hasClass('expanded')) {
-      $crewMembers.css('margin-top', '-' + ($crewMembers.height() + parseInt($crewMembers.css('padding-bottom'), 10)) + 'px');
-      $crewMembers.removeClass('expanded');
-      $this.removeClass('expanded');
-    }
-    else {
-      $crewMembers.css('margin-top', 0);
-      $crewMembers.addClass('expanded');
-      $this.addClass('expanded')
-    }
-    return false;
-  });
 });
