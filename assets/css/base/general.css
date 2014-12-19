@@ -138,6 +138,7 @@ p:last-of-type {
     transition: filter 0.4s ease-in-out;
   }
 
+  .active > .img-grayscale,
   *:hover > .img-grayscale,
   *:focus > .img-grayscale,
   *:active > .img-grayscale {
