@@ -1,6 +1,25 @@
 $(document).ready(function (){
   'use strict';
+
+  // Re-enable CSS transitions.
   $('body').removeClass('no-transition');
+
+  // Preload background images.
+  $('.backdrop').each(function (index, element) {
+    var $element = $(element);
+    var url = $element.css('background-image');
+    if (url !== 'none') {
+      $element.css('background-image', 'none');
+      var $loader = $('<div class="backdrop-loader"></div>');
+      $element.prepend($loader);
+      var $image = $('<img>');
+      $image.load(function () {
+        $element.css('background-image', url);
+        $loader.css('background-color', 'transparent');
+      });
+      $image.attr('src', url.replace(/url\(['"]?([^'"]*)['"]?\)/, '$1'));
+    }
+  });
 
   // Load iframe elements in background.
   // Hide all iframes from sight and display loading animation.
