@@ -151,6 +151,7 @@ header ul {
 
   header {
     margin-top: 20px;
+    height: 72px;
   }
 
   header ul,
@@ -308,6 +309,10 @@ header ul {
 
 
 @media (min-width: 992px) {
+  header {
+    height: 97px;
+  }
+
   #main-navigation {
     margin-top: 4.25%;
   }
