@@ -4,7 +4,10 @@ AddType application/x-font-ttf           .ttf
 AddType application/font-woff            .woff
 AddType application/font-woff2           .woff2
 
+DirectoryIndex base.html
+DirectorySlash Off
+
 RewriteEngine On
-RewriteRule ^$  base.html [L,NC]
-RewriteRule ^([a-z0-9\-]+)$  $1.html [L,NC]
-RewriteRule ^([a-z0-9\-]+\/)([a-z0-9\-]+)$  $1/$2.html [L,NC]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([^\.]+)$  $1.html [L,NC]
