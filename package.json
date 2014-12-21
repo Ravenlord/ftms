@@ -29,6 +29,7 @@
     "grunt-exec":             "~0.4.6",
     "grunt-ftp-deploy":       "~0.1.9",
     "grunt-html-validation":  "~0.1.18",
+    "grunt-image-resize":     "~0.4.0",
     "grunt-prettify":         "~0.4.0",
     "imagemin-mozjpeg":       "~4.0.0",
     "imagemin-pngquant":      "~4.0.0",

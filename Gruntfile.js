@@ -90,6 +90,10 @@ module.exports = function(grunt) {
       font: {
         dest: 'dist/',
         src:  'assets/font/*'
+      },
+      img: {
+        dest: 'dist/',
+        src:  'assets/img/**/*.{png,jpg,gif,svg}'
       }
     },
 
@@ -198,9 +202,21 @@ module.exports = function(grunt) {
           use:  [ mozjpeg(), pngquant() ]
         },
         files:  [{
-          dest:   'dist/',
+          dest:   '',
           expand: true,
-          src:    'assets/img/**/*.{png,jpg,gif,svg}'
+          src:    'dist/assets/img/**/*.{png,jpg,gif,svg}'
+        }]
+      }
+    },
+
+    // Resize images.
+    image_resize: {
+      castCrew: {
+        options:  { width: 460 },
+        files: [{
+          dest:     '',
+          expand:   true,
+          src:      [ 'dist/assets/img/cast/*.{png,jpg,gif}', 'dist/assets/img/crew/**/*.{png,jpg,gif}' ]
         }]
       }
     },
@@ -298,7 +314,7 @@ module.exports = function(grunt) {
       // Optimize images on changes.
       img: {
         files:  'assets/img/**/*.{png,jpg,gif,svg}',
-        tasks:  'imagemin'
+        tasks:  [ 'images' ]
       },
       // Copy JS files on changes.
       js: {
@@ -595,10 +611,10 @@ module.exports = function(grunt) {
   grunt.registerTask('deploy-dev', [ 'deploy-local-dev', 'ftp-deploy:easyname' ]);
 
   // Deploy locally in development mode without uploading anything.
-  grunt.registerTask('deploy-local-dev', [ 'clean:dist', 'css-dev', 'js-dev', 'imagemin', 'html-dev', 'copy:font', 'copy:apache' ]);
+  grunt.registerTask('deploy-local-dev', [ 'clean:dist', 'css-dev', 'js-dev', 'images', 'html-dev', 'copy:font', 'copy:apache' ]);
 
   // Deploy locally in production mode without uploading anything.
-  grunt.registerTask('deploy-local-prod', [ 'clean:dist', 'css-prod', 'js-prod', 'imagemin', 'html-prod', 'copy:font', 'copy:apache' ]);
+  grunt.registerTask('deploy-local-prod', [ 'clean:dist', 'css-prod', 'js-prod', 'images', 'html-prod', 'copy:font', 'copy:apache' ]);
 
   // Deploy in production mode.
   grunt.registerTask('deploy-prod', [ 'deploy-local-prod', 'ftp-deploy:easyname' ]);
@@ -608,6 +624,8 @@ module.exports = function(grunt) {
 
   // Build HTML, validate and minify it.
   grunt.registerTask('html-prod', [ 'ftmsHTML', 'validation', 'htmlmin' ]);
+
+  grunt.registerTask('images', [ 'copy:img', 'image_resize', 'imagemin' ]);
 
   // Copy all JS to the output directory.
   grunt.registerTask('js-dev', [ 'jshint:js', 'concat:jsTop', 'concat:jsBottom' ]);
