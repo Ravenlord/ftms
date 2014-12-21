@@ -1,3 +1,9 @@
+AddType application/vnd.ms-fontobject    .eot
+AddType image/svg+xml                    .svg
+AddType application/x-font-ttf           .ttf
+AddType application/font-woff            .woff
+AddType application/font-woff2           .woff2
+
 RewriteEngine On
 RewriteRule ^$  base.html [L,NC]
 RewriteRule ^([a-z0-9\-]+)$  $1.html [L,NC]
