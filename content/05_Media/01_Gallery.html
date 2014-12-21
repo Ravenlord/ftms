@@ -1,27 +1,13 @@
+<script id="config" type="application/json">##CONFIG##</script>
 <div class="content-bg row">
   <article class="col-xs-12" id="content">
     <h1>4000 mile stare Story Shots</h1>
-    <div class="row"><div class="col-sm-offset-1 col-sm-10" id="gallery-active">
-      <img class="img-responsive" src="http://wallpaperpixel.com/thumbnail/64/08/fat-brown-cat-eating-with-beer-preview.jpg" alt="placeholder">
-    </div></div>
-    <div class="hidden-xs row">
-      <div class="col-sm-1" id="gallery-left"><img class="img-responsive" src="/assets/img/chevron_left.svg" alt="Leftwards Chevron"></div>
-      <div class="col-sm-10" id="gallery-preview">
-        <div class="table-row">
-          <div class="gallery-preview-image active">
-            <img class="img-responsive img-grayscale" src="http://wallpaperpixel.com/thumbnail/64/08/fat-brown-cat-eating-with-beer-preview.jpg" alt="placeholder">
-          </div>
-          <div class="gallery-preview-spacer"></div>
-          <div class="gallery-preview-image">
-            <img class="img-responsive img-grayscale" src="http://i.huffpost.com/gen/1735626/thumbs/o-GRUMPY-PHARRELL-facebook.jpg" alt="placeholder">
-          </div>
-          <div class="gallery-preview-spacer"></div>
-          <div class="gallery-preview-image">
-            <img class="img-responsive img-grayscale" src="http://i.huffpost.com/gen/1043009/thumbs/o-LIL-BUB-AND-FRIENDZ-TRAILER-facebook.jpg" alt="placeholder">
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-1" id="gallery-right"><img class="img-responsive" src="/assets/img/chevron_right.svg" alt="Rightwards Chevron"></div>
+    <div class="row">
+      <a class="col-xs-12 col-sm-offset-1 col-sm-10" data-id="##GALLERY_ACTIVE_ID##" id="gallery-active" href="##GALLERY_ACTIVE_HREF##"><img class="img-responsive" src="##GALLERY_ACTIVE_SRC##" alt="placeholder"></a>
+      <a class="col-xs-2" id="gallery-grid"><img class="img-responsive" src="/assets/img/gallery.svg" alt="Grid"></a>
+      <a class="col-xs-4##GALLERY_PREVIOUS_ACTIVE##" id="gallery-previous"##GALLERY_PREVIOUS_HREF##><img class="img-responsive" src="/assets/img/chevron_left.svg" alt="Leftwards Chevron"></a>
+      <a class="col-xs-4##GALLERY_NEXT_ACTIVE##" id="gallery-next"##GALLERY_NEXT_HREF##><img class="img-responsive" src="/assets/img/chevron_right.svg" alt="Rightwards Chevron"></a>
+      <a class="col-xs-2" id="gallery-fullscreen"><img class="img-responsive" src="/assets/img/popout.svg" alt="Fullscreen"></a>
     </div>
   </article>
 </div>

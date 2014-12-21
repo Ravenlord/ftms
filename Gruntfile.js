@@ -218,6 +218,24 @@ module.exports = function(grunt) {
           expand:   true,
           src:      [ 'dist/assets/img/cast/*.{png,jpg,gif}', 'dist/assets/img/crew/**/*.{png,jpg,gif}' ]
         }]
+      },
+      mediaGalleryPreview: {
+        options:  { width: 780 },
+        files: [{
+                  dest:     'dist/assets/img/media/gallery/previews/',
+                  expand:   true,
+                  flatten:  true,
+                  src:      [ 'media/gallery/*.{png,jpg,gif}' ]
+        }]
+      },
+      mediaGalleryThumb: {
+        options:  { width: 300 },
+        files: [{
+                  dest:     'dist/assets/img/media/gallery/thumbs/',
+                  expand:   true,
+                  flatten:  true,
+                  src:      [ 'media/gallery/*.{png,jpg,gif}' ]
+                }]
       }
     },
 
@@ -555,6 +573,67 @@ module.exports = function(grunt) {
     return html;
   }
 
+
+  function makeGallery(template, fileOptions, production) {
+    var galleryTemplate = template.replace('<head>', '<head><link rel="canonical" href="/media/gallery">');
+    var result;
+    var config = [];
+    grunt.file.expand({ cwd: 'media/gallery', filter: 'isFile' }, '**/*.{jpg,png,gif}').forEach(function (element, index) {
+      config.push({
+                    id:       index,
+                    preview:  '/assets/img/media/gallery/previews/' + element,
+                    url:      '/assets/img/media/gallery/' + element,
+                    thumb:    '/assets/img/media/gallery/thumbs/' + element
+                  });
+    });
+    galleryTemplate = galleryTemplate.replace('##CONFIG##', JSON.stringify(config));
+    config.forEach(function (element, index) {
+      var galleryPageContents = galleryTemplate
+            .replace('##GALLERY_ACTIVE_ID##', element.id)
+            .replace('##GALLERY_ACTIVE_HREF##', element.url)
+            .replace('##GALLERY_ACTIVE_SRC##', element.preview)
+        ;
+
+      if (index === 0) {
+        galleryPageContents = galleryPageContents
+          .replace('##GALLERY_PREVIOUS_ACTIVE##', ' active')
+          .replace('##GALLERY_PREVIOUS_HREF##', '')
+        ;
+      }
+      else {
+        galleryPageContents = galleryPageContents.replace('##GALLERY_PREVIOUS_ACTIVE##', '');
+        if (index === 1) {
+          galleryPageContents = galleryPageContents.replace('##GALLERY_PREVIOUS_HREF##', ' href="/media/gallery.html"');
+        }
+        else {
+          galleryPageContents = galleryPageContents.replace('##GALLERY_PREVIOUS_HREF##', ' href="/media/gallery-nojs/' + (index - 1) + '.html"');
+        }
+      }
+
+      if (index === config.length - 1) {
+        galleryPageContents = galleryPageContents
+          .replace('##GALLERY_NEXT_ACTIVE##', ' active')
+          .replace('##GALLERY_NEXT_HREF##', '')
+        ;
+      }
+      else {
+        galleryPageContents = galleryPageContents
+          .replace('##GALLERY_NEXT_ACTIVE##', '')
+          .replace('##GALLERY_NEXT_HREF##', ' href="/media/gallery-nojs/' + (index + 1) + '.html"')
+        ;
+      }
+
+      if (index === 0) {
+        result = galleryPageContents;
+      }
+      else {
+        grunt.file.write('dist/media/gallery-nojs/' + index + '.html', stripDevLinks(galleryPageContents, production), fileOptions);
+      }
+    });
+
+    return result;
+  }
+
   /**
    * Convert a name to a proper URL.
    *
@@ -747,6 +826,16 @@ module.exports = function(grunt) {
               fileContents = insertMenu(fileContents, menuTree, secondLevel, production);
               fileContents = insertCSS(fileContents, menuTree[firstLevel].children[secondLevel].name, cssDirectory, production);
               fileContents = insertJS(fileContents, menuTree[firstLevel].children[secondLevel].name, jsDirectory, production);
+
+              if (menuTree[firstLevel].name.toLowerCase() === 'media') {
+                var galleryTemplate = fileContents;
+                if (menuTree[firstLevel].children[secondLevel].name.toLowerCase() === 'gallery') {
+                  fileContents = makeGallery(galleryTemplate, fileOptions, production);
+                }
+                else if (menuTree[firstLevel].children[secondLevel].name.toLowerCase() === 'video') {
+                  galleryTemplate = galleryTemplate.replace('<head>', '<head><link rel="canonical" href="/media/video">');
+                }
+              }
 
               var path = distributionDirectory;
               // Write footer pages on the first level.
