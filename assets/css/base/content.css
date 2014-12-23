@@ -44,7 +44,7 @@
   }
 
   .backdrop-overlay {
-    background: url(../img/spacer.png) repeat -3px top;
+    background: url(../img/spacer.png) repeat fixed -3px top;
   }
 
   .backdrop {
