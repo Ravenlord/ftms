@@ -91,6 +91,10 @@ module.exports = function(grunt) {
         dest: 'dist/',
         src:  'assets/font/*'
       },
+      gallery: {
+        dest: 'dist/assets/img/',
+        src:  'media/**/*.{png,jpg,gif,svg}'
+      },
       img: {
         dest: 'dist/',
         src:  'assets/img/**/*.{png,jpg,gif,svg}'
@@ -580,6 +584,7 @@ module.exports = function(grunt) {
     var config = [];
     grunt.file.expand({ cwd: 'media/gallery', filter: 'isFile' }, '**/*.{jpg,png,gif}').forEach(function (element, index) {
       config.push({
+                    alt:      '4000 mile stare story shot ' + (index + 1),
                     id:       index,
                     preview:  '/assets/img/media/gallery/previews/' + element,
                     url:      '/assets/img/media/gallery/' + element,
@@ -592,6 +597,7 @@ module.exports = function(grunt) {
             .replace('##GALLERY_ACTIVE_ID##', element.id)
             .replace('##GALLERY_ACTIVE_HREF##', element.url)
             .replace('##GALLERY_ACTIVE_SRC##', element.preview)
+            .replace('##GALLERY_ACTIVE_ALT##', element.alt)
         ;
 
       if (index === 0) {
@@ -704,7 +710,7 @@ module.exports = function(grunt) {
   // Build HTML, validate and minify it.
   grunt.registerTask('html-prod', [ 'ftmsHTML', 'validation', 'htmlmin' ]);
 
-  grunt.registerTask('images', [ 'copy:img', 'image_resize', 'imagemin' ]);
+  grunt.registerTask('images', [ 'copy:img', 'copy:gallery', 'image_resize', 'imagemin' ]);
 
   // Copy all JS to the output directory.
   grunt.registerTask('js-dev', [ 'jshint:js', 'concat:jsTop', 'concat:jsBottom' ]);
