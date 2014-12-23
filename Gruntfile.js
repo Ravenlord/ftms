@@ -594,7 +594,7 @@ module.exports = function(grunt) {
       var galleryPageContents = galleryTemplate
             .replace('##GALLERY_ACTIVE_ID##', element.id)
             .replace('##GALLERY_ACTIVE_HREF##', element.url)
-            .replace('##GALLERY_ACTIVE_SRC##', element.preview)
+            .replace(/##GALLERY_ACTIVE_SRC##/g, element.preview)
             .replace('##GALLERY_ACTIVE_ALT##', element.alt)
         ;
 
@@ -693,8 +693,9 @@ module.exports = function(grunt) {
 
   // Replace downloadfile config completely with video thumbnails for second run.
   grunt.registerTask('addVideoThumbnailDownloadConfig', 'add video download configuration', function () {
-    var files = grunt.file.expand({ filter: 'isFile' }, 'dist/temp/videos/*.json');
+    var files = grunt.file.expand({ filter: 'isFile' }, 'media/video/api/*.json');
     var downloadConfig = [];
+    var videoGalleryConfig = [];
     files.forEach(function (path, index) {
       var videoConfig = grunt.file.readJSON(path, { encoding: 'utf-8' });
       downloadConfig.push({
@@ -702,9 +703,17 @@ module.exports = function(grunt) {
         name: index + '.jpg',
         url:  videoConfig[0].thumbnail_large
       });
+      videoGalleryConfig.push({
+        alt:      videoConfig[0].title,
+        id:       index,
+        preview:  'https://player.vimeo.com/video/' + videoConfig[0].id,
+        url:      'https://player.vimeo.com/video/' + videoConfig[0].id,
+        thumb:    '/assets/img/media/video/thumbs/' + index + '.jpg'
+      });
     });
 
     grunt.config.set('downloadfile.files', downloadConfig);
+    grunt.file.write('media/video/config/config.json', JSON.stringify(videoGalleryConfig),{ encoding: 'utf-8' });
   });
 
   // Compile bootstrap CSS and copy it to the output directory.
@@ -740,7 +749,7 @@ module.exports = function(grunt) {
   // Build HTML, validate and minify it.
   grunt.registerTask('html-prod', [ 'ftmsHTML', 'validation', 'htmlmin' ]);
 
-  grunt.registerTask('images', [ 'copy:img', 'copy:gallery', 'image_resize', 'imagemin' ]);
+  grunt.registerTask('images', [ 'copy:img', 'copy:gallery', 'image_resize', /*'imagemin'*/ ]);
 
   // Copy all JS to the output directory.
   grunt.registerTask('js-dev', [ 'jshint:js', 'concat:jsTop', 'concat:jsBottom' ]);
@@ -811,15 +820,15 @@ module.exports = function(grunt) {
     var galleryConfig = [];
     grunt.file.expand({ cwd: 'media/gallery', filter: 'isFile' }, '**/*.{svg,jpg,png,gif}').forEach(function (element, index) {
       galleryConfig.push({
-                    alt:      '4000 mile stare story shot ' + (index + 1),
-                    id:       index,
-                    preview:  '/assets/img/media/gallery/previews/' + element,
-                    url:      '/assets/img/media/gallery/' + element,
-                    thumb:    '/assets/img/media/gallery/thumbs/' + element
-                  });
+        alt:      '4000 mile stare story shot ' + (index + 1),
+        id:       index,
+        preview:  '/assets/img/media/gallery/previews/' + element,
+        url:      '/assets/img/media/gallery/' + element,
+        thumb:    '/assets/img/media/gallery/thumbs/' + element
+      });
     });
 
-    var videoConfig = [];
+    var videoGalleryConfig = grunt.file.readJSON('media/video/config/config.json', fileOptions);
 
     // Build and concatenate the HTML files from the templates.
     for (var firstLevel in menuTree) {
@@ -881,7 +890,7 @@ module.exports = function(grunt) {
                   fileContents = makeGallery(galleryTemplate, galleryConfig, distributionDirectory, '/media/gallery', fileOptions, production);
                 }
                 else if (menuTree[firstLevel].children[secondLevel].name.toLowerCase() === 'video') {
-                  fileContents = makeGallery(galleryTemplate, galleryConfig, distributionDirectory, '/media/video', fileOptions, production);
+                  fileContents = makeGallery(galleryTemplate, videoGalleryConfig, distributionDirectory, '/media/video', fileOptions, production);
                 }
               }
 
