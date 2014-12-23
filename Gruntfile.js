@@ -749,7 +749,7 @@ module.exports = function(grunt) {
   // Build HTML, validate and minify it.
   grunt.registerTask('html-prod', [ 'ftmsHTML', 'validation', 'htmlmin' ]);
 
-  grunt.registerTask('images', [ 'copy:img', 'copy:gallery', 'image_resize', /*'imagemin'*/ ]);
+  grunt.registerTask('images', [ 'copy:img', 'copy:gallery', 'image_resize', 'imagemin' ]);
 
   // Copy all JS to the output directory.
   grunt.registerTask('js-dev', [ 'jshint:js', 'concat:jsTop', 'concat:jsBottom' ]);
