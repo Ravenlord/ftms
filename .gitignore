@@ -10,6 +10,9 @@ dist/
 assets/js/lib/
 # The font due to licensing
 assets/font/
+# Video config and thumbnails
+media/video/api
+media/video/thumbs
 
 # HTML validator
 validation-report.json

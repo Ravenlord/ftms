@@ -240,6 +240,15 @@ module.exports = function(grunt) {
                   flatten:  true,
                   src:      [ 'media/gallery/*.{png,jpg,gif}' ]
                 }]
+      },
+      videoGalleryThumb: {
+        options:  { width: 300 },
+        files: [{
+                  dest:     'dist/assets/img/media/video/thumbs/',
+                  expand:   true,
+                  flatten:  true,
+                  src:      [ 'media/video/thumbs/*.{png,jpg,gif}' ]
+                }]
       }
     },
 
@@ -321,7 +330,7 @@ module.exports = function(grunt) {
       // Reprocess CSS files on changes.
       css: {
         files:  'assets/css/**/*.css',
-        tasks:  [ 'csslint:css', 'concat:css', 'autoprefixer:dist', 'csscomb:dist', 'clean:temp' ]
+        tasks:  [ 'csslint:css', 'concat:css', 'autoprefixer:dist', 'csscomb:dist' ]
       },
       // Lint Gruntfile on changes.
       grunt: {
@@ -578,20 +587,9 @@ module.exports = function(grunt) {
   }
 
 
-  function makeGallery(template, fileOptions, production) {
-    var galleryTemplate = template.replace('<head>', '<head><link rel="canonical" href="/media/gallery">');
+  function makeGallery(template, config, distributionDirectory, baseURL, fileOptions, production) {
     var result;
-    var config = [];
-    grunt.file.expand({ cwd: 'media/gallery', filter: 'isFile' }, '**/*.{jpg,png,gif}').forEach(function (element, index) {
-      config.push({
-                    alt:      '4000 mile stare story shot ' + (index + 1),
-                    id:       index,
-                    preview:  '/assets/img/media/gallery/previews/' + element,
-                    url:      '/assets/img/media/gallery/' + element,
-                    thumb:    '/assets/img/media/gallery/thumbs/' + element
-                  });
-    });
-    galleryTemplate = galleryTemplate.replace('##CONFIG##', JSON.stringify(config));
+    var galleryTemplate = template.replace('##CONFIG##', JSON.stringify(config));
     config.forEach(function (element, index) {
       var galleryPageContents = galleryTemplate
             .replace('##GALLERY_ACTIVE_ID##', element.id)
@@ -609,10 +607,10 @@ module.exports = function(grunt) {
       else {
         galleryPageContents = galleryPageContents.replace('##GALLERY_PREVIOUS_ACTIVE##', '');
         if (index === 1) {
-          galleryPageContents = galleryPageContents.replace('##GALLERY_PREVIOUS_HREF##', ' href="/media/gallery.html"');
+          galleryPageContents = galleryPageContents.replace('##GALLERY_PREVIOUS_HREF##', ' href="' + baseURL +'.html"');
         }
         else {
-          galleryPageContents = galleryPageContents.replace('##GALLERY_PREVIOUS_HREF##', ' href="/media/gallery-nojs/' + (index - 1) + '.html"');
+          galleryPageContents = galleryPageContents.replace('##GALLERY_PREVIOUS_HREF##', ' href="' + baseURL + '-nojs/' + (index - 1) + '.html"');
         }
       }
 
@@ -625,7 +623,7 @@ module.exports = function(grunt) {
       else {
         galleryPageContents = galleryPageContents
           .replace('##GALLERY_NEXT_ACTIVE##', '')
-          .replace('##GALLERY_NEXT_HREF##', ' href="/media/gallery-nojs/' + (index + 1) + '.html"')
+          .replace('##GALLERY_NEXT_HREF##', ' href="' + baseURL + '-nojs/' + (index + 1) + '.html"')
         ;
       }
 
@@ -633,7 +631,10 @@ module.exports = function(grunt) {
         result = galleryPageContents;
       }
       else {
-        grunt.file.write('dist/media/gallery-nojs/' + index + '.html', stripDevLinks(galleryPageContents, production), fileOptions);
+        grunt.file.write(distributionDirectory + baseURL + '-nojs/' + index + '.html',
+          stripDevLinks(galleryPageContents.replace('<head>', '<head><link rel="canonical" href="' + baseURL + '">'), production),
+          fileOptions
+        );
       }
     });
 
@@ -677,11 +678,40 @@ module.exports = function(grunt) {
   // Load all external tasks at once.
   require('load-grunt-tasks')(grunt, { scope: 'devDependencies' });
 
+  // Add Vimeo API calls to the downloadfile config dynamically.
+  grunt.registerTask('addVideoDownloadConfig', 'add video download configuration', function () {
+    var downloadConfig = grunt.config.get('downloadfile.files');
+    grunt.file.readJSON('media/video/videos.json').forEach(function (element, index) {
+      downloadConfig.push({
+        dest: 'media/video/api',
+        name: index + '.json',
+        url:  'http://vimeo.com/api/v2/video/' + element + '.json'
+      });
+    });
+    grunt.config.set('downloadfile.files', downloadConfig);
+  });
+
+  // Replace downloadfile config completely with video thumbnails for second run.
+  grunt.registerTask('addVideoThumbnailDownloadConfig', 'add video download configuration', function () {
+    var files = grunt.file.expand({ filter: 'isFile' }, 'dist/temp/videos/*.json');
+    var downloadConfig = [];
+    files.forEach(function (path, index) {
+      var videoConfig = grunt.file.readJSON(path, { encoding: 'utf-8' });
+      downloadConfig.push({
+        dest: 'media/video/thumbs',
+        name: index + '.jpg',
+        url:  videoConfig[0].thumbnail_large
+      });
+    });
+
+    grunt.config.set('downloadfile.files', downloadConfig);
+  });
+
   // Compile bootstrap CSS and copy it to the output directory.
   grunt.registerTask('css-bootstrap', [ 'copy:bootstrap', 'copy:bootstrapConfig', 'less' ]);
 
   // Compile bootstrap CSS, copy all CSS to the output directory, prefix and prettify CSS.
-  grunt.registerTask('css-dev', [ 'csslint:css', 'css-bootstrap', 'concat:css', 'autoprefixer:dist', 'csscomb:dist', 'clean:temp' ]);
+  grunt.registerTask('css-dev', [ 'csslint:css', 'css-bootstrap', 'concat:css', 'autoprefixer:dist', 'csscomb:dist' ]);
 
   // Compile bootstrap CSS, copy all CSS to the output directory, prefix and minify CSS.
   grunt.registerTask('css-prod', [ 'css-dev', 'cssmin', 'clean:prodCSS' ]);
@@ -690,16 +720,16 @@ module.exports = function(grunt) {
   grunt.registerTask('default', [ 'deploy-prod' ]);
 
   // Download all external dependencies.
-  grunt.registerTask('dependencies', [ 'downloadfile' ]);
+  grunt.registerTask('dependencies', [ 'addVideoDownloadConfig', 'downloadfile', 'addVideoThumbnailDownloadConfig', 'downloadfile' ]);
 
   // Deploy in development mode.
   grunt.registerTask('deploy-dev', [ 'deploy-local-dev', 'ftp-deploy:easyname' ]);
 
   // Deploy locally in development mode without uploading anything.
-  grunt.registerTask('deploy-local-dev', [ 'clean:dist', 'css-dev', 'js-dev', 'images', 'html-dev', 'copy:font', 'copy:apache' ]);
+  grunt.registerTask('deploy-local-dev', [ 'clean:dist', 'dependencies', 'css-dev', 'js-dev', 'images', 'html-dev', 'copy:font', 'copy:apache', 'clean:temp' ]);
 
   // Deploy locally in production mode without uploading anything.
-  grunt.registerTask('deploy-local-prod', [ 'clean:dist', 'css-prod', 'js-prod', 'images', 'html-prod', 'copy:font', 'copy:apache' ]);
+  grunt.registerTask('deploy-local-prod', [ 'clean:dist', 'dependencies', 'css-prod', 'js-prod', 'images', 'html-prod', 'copy:font', 'copy:apache', 'clean:temp' ]);
 
   // Deploy in production mode.
   grunt.registerTask('deploy-prod', [ 'deploy-local-prod', 'ftp-deploy:easyname' ]);
@@ -747,7 +777,6 @@ module.exports = function(grunt) {
     // All files in the content directory, globbed by grunt.
     var files = grunt.file.expand({ cwd: contentDirectory, filter: 'isFile' }, '**/*.html');
 
-
     // The hierarchical menu structure for easier menu building.
     var menuTree  = {};
 
@@ -778,6 +807,19 @@ module.exports = function(grunt) {
         }
       }
     });
+
+    var galleryConfig = [];
+    grunt.file.expand({ cwd: 'media/gallery', filter: 'isFile' }, '**/*.{svg,jpg,png,gif}').forEach(function (element, index) {
+      galleryConfig.push({
+                    alt:      '4000 mile stare story shot ' + (index + 1),
+                    id:       index,
+                    preview:  '/assets/img/media/gallery/previews/' + element,
+                    url:      '/assets/img/media/gallery/' + element,
+                    thumb:    '/assets/img/media/gallery/thumbs/' + element
+                  });
+    });
+
+    var videoConfig = [];
 
     // Build and concatenate the HTML files from the templates.
     for (var firstLevel in menuTree) {
@@ -836,10 +878,10 @@ module.exports = function(grunt) {
               if (menuTree[firstLevel].name.toLowerCase() === 'media') {
                 var galleryTemplate = fileContents;
                 if (menuTree[firstLevel].children[secondLevel].name.toLowerCase() === 'gallery') {
-                  fileContents = makeGallery(galleryTemplate, fileOptions, production);
+                  fileContents = makeGallery(galleryTemplate, galleryConfig, distributionDirectory, '/media/gallery', fileOptions, production);
                 }
                 else if (menuTree[firstLevel].children[secondLevel].name.toLowerCase() === 'video') {
-                  galleryTemplate = galleryTemplate.replace('<head>', '<head><link rel="canonical" href="/media/video">');
+                  fileContents = makeGallery(galleryTemplate, galleryConfig, distributionDirectory, '/media/video', fileOptions, production);
                 }
               }
 
