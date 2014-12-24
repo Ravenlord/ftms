@@ -29,6 +29,10 @@
   margin-top: 0;
 }
 
+#crew-members h2 {
+  color: #999;
+}
+
 #crew-members-expander {
   cursor: pointer;
 }
