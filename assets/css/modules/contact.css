@@ -1,0 +1,23 @@
+#contact-success {
+  color: #518f40;
+}
+
+#contact-success.error {
+  color: #e81d30;
+}
+
+@media (max-width: 767px) {
+  #contact-success {
+    text-align: center;
+  }
+}
+
+@media (min-width: 768px) {
+  .contact #content {
+    padding-bottom: 50px;
+  }
+
+  #contact-success {
+    text-align: right;
+  }
+}
