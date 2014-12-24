@@ -187,17 +187,17 @@
 
 // TODO: Rename `@input-border-radius` to `@input-border-radius-base` in v4
 //** Default `.form-control` border radius
-@input-border-radius:            @border-radius-base;
+@input-border-radius:            0; // Override
 //** Large `.form-control` border radius
-@input-border-radius-large:      @border-radius-large;
+@input-border-radius-large:      0; // Override
 //** Small `.form-control` border radius
-@input-border-radius-small:      @border-radius-small;
+@input-border-radius-small:      0; // Override
 
 //** Border color for inputs on focus
-@input-border-focus:             #66afe9;
+@input-border-focus:             #ccc; // Override
 
 //** Placeholder text color
-@input-color-placeholder:        #999;
+@input-color-placeholder:        #666; // Override
 
 //** Default `.form-control` height
 @input-height-base:              (@line-height-computed + (@padding-base-vertical * 2) + 2);

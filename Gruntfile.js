@@ -91,6 +91,12 @@ module.exports = function(grunt) {
         dest: 'dist/',
         src:  'assets/font/*'
       },
+      form: {
+        dest:     'dist/',
+        expand:   true,
+        flatten:  true,
+        src:      'config/form/submit.php'
+      },
       gallery: {
         dest: 'dist/assets/img/',
         src:  'media/**/*.{png,jpg,gif,svg}'
@@ -331,6 +337,10 @@ module.exports = function(grunt) {
       css: {
         files:  'assets/css/**/*.css',
         tasks:  [ 'csslint:css', 'concat:css', 'autoprefixer:dist', 'csscomb:dist' ]
+      },
+      form: {
+        files:  'config/form/**/*.php',
+        tasks:  'copy:form'
       },
       // Lint Gruntfile on changes.
       grunt: {
@@ -586,6 +596,19 @@ module.exports = function(grunt) {
     return html;
   }
 
+  function makeContactPages(contactPage, distributionDirectory, fileOptions) {
+    grunt.file.write(
+      distributionDirectory + 'contact-nojs-success.html',
+      contactPage.replace(/<form[\s\S]*<\/form>/, '<div class="col-xs-12 col-md-offset-1 col-md-8 text-center" id="contact-success">Your message has been successfully sent to us.</div>'),
+      fileOptions
+    );
+    grunt.file.write(
+      distributionDirectory + 'contact-nojs-error.html',
+      contactPage.replace(/<form[\s\S]*<\/form>/, '<div class="col-xs-12 col-md-offset-1 col-md-8 error text-center" id="contact-success">There was an error. Please go back, check your input and try again.</div>'),
+      fileOptions
+    );
+  }
+
 
   function makeGallery(template, config, distributionDirectory, baseURL, fileOptions, production) {
     var result;
@@ -735,10 +758,10 @@ module.exports = function(grunt) {
   grunt.registerTask('deploy-dev', [ 'deploy-local-dev', 'ftp-deploy:easyname' ]);
 
   // Deploy locally in development mode without uploading anything.
-  grunt.registerTask('deploy-local-dev', [ 'clean:dist', 'dependencies', 'css-dev', 'js-dev', 'images', 'html-dev', 'copy:font', 'copy:apache', 'clean:temp' ]);
+  grunt.registerTask('deploy-local-dev', [ 'clean:dist', 'dependencies', 'css-dev', 'js-dev', 'images', 'html-dev', 'copy:font', 'copy:form', 'copy:apache', 'clean:temp' ]);
 
   // Deploy locally in production mode without uploading anything.
-  grunt.registerTask('deploy-local-prod', [ 'clean:dist', 'dependencies', 'css-prod', 'js-prod', 'images', 'html-prod', 'copy:font', 'copy:apache', 'clean:temp' ]);
+  grunt.registerTask('deploy-local-prod', [ 'clean:dist', 'dependencies', 'css-prod', 'js-prod', 'images', 'html-prod', 'copy:font', 'copy:form', 'copy:apache', 'clean:temp' ]);
 
   // Deploy in production mode.
   grunt.registerTask('deploy-prod', [ 'deploy-local-prod', 'ftp-deploy:easyname' ]);
@@ -885,13 +908,15 @@ module.exports = function(grunt) {
               fileContents = insertJS(fileContents, menuTree[firstLevel].children[secondLevel].name, jsDirectory, production);
 
               if (menuTree[firstLevel].name.toLowerCase() === 'media') {
-                var galleryTemplate = fileContents;
                 if (menuTree[firstLevel].children[secondLevel].name.toLowerCase() === 'gallery') {
-                  fileContents = makeGallery(galleryTemplate, galleryConfig, distributionDirectory, '/media/gallery', fileOptions, production);
+                  fileContents = makeGallery(fileContents, galleryConfig, distributionDirectory, '/media/gallery', fileOptions, production);
                 }
                 else if (menuTree[firstLevel].children[secondLevel].name.toLowerCase() === 'video') {
-                  fileContents = makeGallery(galleryTemplate, videoGalleryConfig, distributionDirectory, '/media/video', fileOptions, production);
+                  fileContents = makeGallery(fileContents, videoGalleryConfig, distributionDirectory, '/media/video', fileOptions, production);
                 }
+              }
+              else if (menuTree[firstLevel].name.toLowerCase() === 'footer' && menuTree[firstLevel].children[secondLevel].name.toLowerCase() === 'contact') {
+                makeContactPages(fileContents, distributionDirectory, fileOptions);
               }
 
               var path = distributionDirectory;

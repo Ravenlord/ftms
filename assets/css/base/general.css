@@ -122,6 +122,40 @@ p:last-of-type {
   opacity: 0;
 }
 
+form {
+  display: inline-block;
+  width: 100%;
+}
+
+button,
+.form-control {
+  font-size: 12px;
+}
+
+textarea {
+  resize: vertical;
+}
+
+button {
+  background-color: #666;
+  border: 0 none;
+  color: #fff;
+  font-weight: 700;
+  min-width: 100px;
+  padding: 5px;
+  text-align: center;
+}
+
+
+/* ==== MOBILE RULES ================================================================================================ */
+
+
+@media (max-width: 767px) {
+  textarea {
+    min-height: 100px;
+  }
+}
+
 
 /* ==== SMALL SCREEN RULES ========================================================================================== */
 
@@ -161,5 +195,9 @@ p:last-of-type {
   .col-sm-height {
     display: table-cell;
     float: none;
+  }
+
+  textarea {
+    min-height: 210px;
   }
 }

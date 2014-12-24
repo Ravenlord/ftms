@@ -90,4 +90,40 @@ $(document).ready(function (){
       $slider.one('webkitAnimationEnd oanimationend msAnimationEnd animationend', function () { $slider.remove(); });
     }
   }
+
+  // Contact form submission.
+  var $form = $('#contact-form');
+  $form.submit(function (ev) {
+    ev.preventDefault();
+    $.post(
+      $form.attr('action'),
+      {
+        first_name: $('#contact-fn').val(),
+        last_name:  $('#contact-ln').val(),
+        email:      $('#contact-email').val(),
+        message:    $('#contact-msg').val(),
+        js:         true
+      },
+      function (data) {
+        var $formMessage = $('#contact-success');
+        if (data.success === true) {
+          $formMessage.hide('slow', function () {
+            $formMessage.removeClass('error');
+            $formMessage.text('Your message has been successfully sent to us.');
+            $formMessage.show('slow');
+            $form[0].reset();
+          });
+        }
+        else {
+          $formMessage.hide('slow', function () {
+            $formMessage.addClass('error');
+            $formMessage.text('There was an error. Please check your input and try again.');
+            $formMessage.show('slow');
+          });
+        }
+      },
+      "json"
+    );
+    return false;
+  });
 });

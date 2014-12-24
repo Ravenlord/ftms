@@ -134,7 +134,7 @@ header ul {
     text-align: center;
   }
 
-  #social .img-responsive {
+  .social .img-responsive {
     max-height: 24px;
   }
 }
@@ -160,7 +160,7 @@ header ul {
   }
 
   .logo,
-  #social a,
+  .social a,
   #footer-logos a,
   #footer-lower a img {
     opacity: 0.5;
@@ -170,9 +170,9 @@ header ul {
   .logo:hover,
   .logo:focus,
   .logo:active,
-  #social a:hover,
-  #social a:focus,
-  #social a:active,
+  .social a:hover,
+  .social a:focus,
+  .social a:active,
   #footer-logos a:hover,
   #footer-logos a:focus,
   #footer-logos a:active,
@@ -295,10 +295,14 @@ header ul {
 
   #social a {
     padding: 15px 0;
-    width: 40%;
   }
 
-  #social a:last-child {
+  .social a {
+    width: 40%;
+    padding: 0;
+  }
+
+  .social a:last-child {
     text-align: right;
     margin-left: 20%;
   }
