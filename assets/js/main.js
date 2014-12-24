@@ -29,12 +29,19 @@ $(document).ready(function (){
     var $element = $(element);
     var url = $element.css('background-image');
     if (url !== 'none') {
-      $element.css('background-image', 'none');
+      // Retrieve background class name.
+      var bgClass = '';
+      element.className.split(/\s+/).forEach(function (className) {
+        if (className.indexOf('bg-') !== -1) {
+          bgClass = className;
+        }
+      });
+      $element.removeClass(bgClass);
       var $loader = $('<div class="backdrop-loader"></div>');
       $element.prepend($loader);
       var $image = $('<img>');
       $image.load(function () {
-        $element.css('background-image', url);
+        $element.addClass(bgClass);
         $loader.css('background-color', 'transparent');
       });
       $image.attr('src', url.replace(/url\(['"]?([^'"]*)['"]?\)/, '$1'));
