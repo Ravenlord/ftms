@@ -413,7 +413,7 @@ module.exports = function(grunt) {
     for (var page in footerLinks) {
       // Add html suffix to footer links if we are in dev mode.
       if (production === false) {
-        regex = new RegExp('(<a class=".*" href=".*)(">' + footerLinks[page].name + '</a>)');
+        regex = new RegExp('(<a class=".*" href=".*)(">' + footerLinks[page].name + '</a>)', 'i');
         html = html.replace(regex, '$1.html$2');
       }
       if (page === file) {
