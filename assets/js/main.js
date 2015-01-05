@@ -146,14 +146,36 @@ $(document).ready(function (){
 
   var $galleryActive = $('#gallery-active');
   var $galleryActiveElement = $galleryActive.children().first();
+  var $galleryPrev = $('#gallery-previous');
+  var $galleryNext = $('#gallery-next');
   var loadGalleryElement = function (id, fullscreen) {
+    // Out of bounds.
+    if (id < 0 || id >= galleryConfig.length) {
+      return false;
+    }
+
+    $galleryPrev.removeClass('active');
+    $galleryNext.removeClass('active');
+
+    // First element.
+    if (id === 0) {
+      $galleryPrev.addClass('active');
+    }
+
+    // Last element.
+    if (id === galleryConfig.length - 1) {
+      $galleryNext.addClass('active');
+    }
+
     $galleryActive.addClass('loading');
     $galleryActiveElement.load(function () {
       $galleryActive.removeClass('loading');
     });
     $galleryActiveElement.attr('alt', galleryConfig[id].alt);
+    $galleryActive.attr('data-id', id);
+    var src = '';
     if (fullscreen === true) {
-      var src = galleryConfig[id].url;
+      src = galleryConfig[id].url;
     }
     else {
       src = galleryConfig[id].preview;
@@ -187,6 +209,20 @@ $(document).ready(function (){
       });
       $galleryGridView.addClass('loaded');
     }
+    return false;
+  });
+
+  // Go to previous gallery element.
+  $galleryPrev.click(function (ev) {
+    ev.preventDefault();
+    loadGalleryElement(parseInt($galleryActive.attr('data-id'), 10) - 1, fullscreen);
+    return false;
+  });
+
+  // Go to next gallery element.
+  $galleryNext.click(function (ev) {
+    ev.preventDefault();
+    loadGalleryElement(parseInt($galleryActive.attr('data-id'), 10) + 1, fullscreen);
     return false;
   });
 });

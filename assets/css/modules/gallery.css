@@ -17,7 +17,7 @@
   bottom: 0;
   background-color: #000;
   opacity: 0;
-  transition: opacity 1s ease-in-out;
+  transition: opacity 0.7s ease-in-out;
   z-index: -1;
 }
 
@@ -58,6 +58,10 @@
     padding-bottom: 50px;
   }
 
+  #gallery-active {
+    min-height: 314px;
+  }
+
   #gallery-previous,
   #gallery-next,
   #gallery-grid,
@@ -94,4 +98,7 @@
 
 
 @media (min-width: 992px) {
+  #gallery-active {
+    min-height: 410px;
+  }
 }
