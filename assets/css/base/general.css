@@ -108,17 +108,19 @@ p:last-of-type {
   width: 40px;
 }
 
-.loading .loader {
+.preload.loading .loader {
   display: block;
 }
 
-.embed-responsive-item {
+.preload .embed-responsive-item,
+.preload img {
   opacity: 1;
   transition: opacity 0.4s ease-in-out;
 }
 
-.loading .embed-responsive-item {
-  display: none;
+.preload.loading .embed-responsive-item,
+.preload.loading img {
+  /*display: none;*/
   opacity: 0;
 }
 
@@ -208,6 +210,18 @@ button {
 
   .img-grayscale.img-framed {
     transition-property: border-color, filter;
+  }
+
+  .preload .img-grayscale {
+    transition-property: filter, opacity;
+  }
+
+  .preload .img-framed {
+    transition-property: border-color, opacity;
+  }
+
+  .preload .img-grayscale.img-framed {
+    transition-property: border-color, filter, opacity;
   }
 
   .img-responsive {

@@ -56,8 +56,8 @@ $(document).ready(function (){
 
   // Load iframe elements in background.
   // Hide all iframes from sight and display loading animation.
-  $('.embed-responsive').addClass('loading');
-  $('.embed-responsive-item').each(function (index, element) {
+  $('.preload').addClass('loading');
+  $('.preload > .embed-responsive-item, .preload > img').each(function (index, element) {
     // Bind handler for load completion.
     $(element).load(function () {
       // Hide loading animation and show actual content.
