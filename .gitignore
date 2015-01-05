@@ -8,12 +8,10 @@ node_modules/
 dist/
 # External JS dependencies
 assets/js/lib/
-# The font due to licensing
-assets/font/
 # Video config and thumbnails
-media/video/api
-media/video/config
-media/video/thumbs
+media/video/api/
+media/video/config/
+media/video/thumbs/
 
 # HTML validator
 validation-report.json
