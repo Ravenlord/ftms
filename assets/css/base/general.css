@@ -146,6 +146,10 @@ button {
   text-align: center;
 }
 
+.nojs-hidden {
+  visibility: hidden;
+}
+
 
 /* ==== MOBILE RULES ================================================================================================ */
 
@@ -153,6 +157,10 @@ button {
 @media (max-width: 767px) {
   textarea {
     min-height: 100px;
+  }
+
+  .img-framed {
+    border: 1px solid #999;
   }
 }
 
@@ -174,8 +182,32 @@ button {
   .active > .img-grayscale,
   *:hover > .img-grayscale,
   *:focus > .img-grayscale,
-  *:active > .img-grayscale {
+  *:active > .img-grayscale,
+  .img-grayscale.active,
+  .img-grayscale:hover,
+  .img-grayscale:focus,
+  .img-grayscale:active {
     filter: grayscale(0%);
+  }
+
+  .img-framed {
+    border: 1px solid #333;
+    transition: border-color 0.4s ease-in-out;
+  }
+
+  .active > .img-framed,
+  *:hover > .img-framed,
+  *:focus > .img-framed,
+  *:active > .img-framed,
+  .img-framed.active,
+  .img-framed:hover,
+  .img-framed:focus,
+  .img-framed:active {
+    border-color: #999;
+  }
+
+  .img-grayscale.img-framed {
+    transition-property: border-color, filter;
   }
 
   .img-responsive {
