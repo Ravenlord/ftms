@@ -9,6 +9,45 @@
   max-height: 20px;
 }
 
+#gallery-grid-view {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #000;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  z-index: -1;
+}
+
+#gallery-grid-view.hide,
+#gallery-grid-view.show {
+  z-index: 100;
+}
+
+#gallery-grid-view.hide {
+  opacity: 0!important;
+}
+
+#gallery-grid-view.show {
+  opacity: 1;
+}
+
+#gallery-grid-view-content > div {
+  margin-bottom: 20px;
+}
+
+
+/* ==== MOBILE RULES ================================================================================================ */
+
+
+@media (max-width: 767px) {
+  #gallery-active .img-responsive {
+    max-height: 300px;
+  }
+}
+
 
 /* ==== SMALL SCREEN RULES ========================================================================================== */
 

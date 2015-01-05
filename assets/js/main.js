@@ -48,6 +48,9 @@ $(document).ready(function (){
     }
   });
 
+  // Show elements which are hidden without JS.
+  $('.nojs-hidden').removeClass('nojs-hidden');
+
   // Re-enable CSS transitions.
   $('body').removeClass('no-transition');
 
@@ -124,6 +127,66 @@ $(document).ready(function (){
       },
       "json"
     );
+    return false;
+  });
+
+  // Load gallery configuration.
+  var galleryConfig = $('#config').text();
+  if (galleryConfig) {
+    galleryConfig = JSON.parse(galleryConfig);
+  }
+
+  var fullscreen = false;
+  var $galleryGridView = $('#gallery-grid-view');
+  var closeGalleryGrid = function () {
+    $galleryGridView.addClass('hide');
+    $galleryGridView.removeClass('show');
+    setTimeout(function () { $galleryGridView.removeClass('hide') }, 400);
+  };
+
+  var $galleryActive = $('#gallery-active');
+  var $galleryActiveElement = $galleryActive.children().first();
+  var loadGalleryElement = function (id, fullscreen) {
+    $galleryActive.addClass('loading');
+    $galleryActiveElement.load(function () {
+      $galleryActive.removeClass('loading');
+    });
+    $galleryActiveElement.attr('alt', galleryConfig[id].alt);
+    if (fullscreen === true) {
+      var src = galleryConfig[id].url;
+    }
+    else {
+      src = galleryConfig[id].preview;
+    }
+    $galleryActiveElement.attr('src', src);
+  };
+
+  // Toggle gallery grid view.
+  $('#gallery-grid').click(function (ev) {
+    ev.preventDefault();
+    $galleryGridView.addClass('hide');
+    $galleryGridView.addClass('show');
+    $galleryGridView.removeClass('hide');
+    // Only append images if they haven't been loaded yet.
+    if (!$galleryGridView.hasClass('loaded')) {
+      var $content = $('#gallery-grid-view-content');
+      galleryConfig.forEach(function (element) {
+        $('<img>', {
+          alt:      element.alt,
+          'class':  'img-responsive img-framed img-grayscale',
+          on:       {
+            click:  function (ev) {
+              ev.preventDefault();
+              loadGalleryElement(element.id, fullscreen);
+              closeGalleryGrid();
+              return false;
+            }
+          },
+          src:      element.thumb
+        }).appendTo($('<div class="col-xs-6 col-sm-4"></div>').appendTo($content));
+      });
+      $galleryGridView.addClass('loaded');
+    }
     return false;
   });
 });
