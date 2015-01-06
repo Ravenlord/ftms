@@ -1,7 +1,13 @@
 <script id="config" type="application/json">##CONFIG##</script>
 <div class="content-bg row">
   <article class="col-xs-12" id="content">
-    <h1>4000 mile stare Story Shots</h1>
+    <div id="gallery-grid-view">
+      <div class="container">
+        <h1>All Images</h1>
+        <div class="row" id="gallery-grid-view-content"></div>
+      </div>
+    </div>
+    <h1 class="hide-fs">4000 mile stare Story Shots</h1>
     <div class="row">
       <a class="col-xs-12 col-sm-offset-1 col-sm-10 preload" data-id="##GALLERY_ACTIVE_ID##" id="gallery-active" href="##GALLERY_ACTIVE_HREF##">
         <img class="img-responsive" data-src="##GALLERY_ACTIVE_SRC##" src="##GALLERY_ACTIVE_SRC##" alt="##GALLERY_ACTIVE_ALT##">
@@ -14,11 +20,5 @@
       <a class="col-xs-4##GALLERY_NEXT_ACTIVE##" id="gallery-next"##GALLERY_NEXT_HREF##><img class="img-responsive" src="/assets/img/chevron_right.svg" alt="Rightwards Chevron"></a>
       <a class="col-xs-2 nojs-hidden" id="gallery-fullscreen" title="Show image in fullscreen mode"><img class="img-responsive" src="/assets/img/popout.svg" alt="Fullscreen"></a>
     </div>
-  </article>
-</div>
-<div id="gallery-grid-view">
-  <article class="container">
-    <h1>All Images</h1>
-    <div class="row" id="gallery-grid-view-content"></div>
   </article>
 </div>

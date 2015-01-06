@@ -183,16 +183,18 @@ $(document).ready(function (){
   }
 
   var $galleryGridView = $('#gallery-grid-view');
-  var closeGalleryGrid = function () {
-    $galleryGridView.addClass('hide');
-    $galleryGridView.removeClass('show');
-    setTimeout(function () { $galleryGridView.removeClass('hide') }, 400);
-  };
 
+  var galleryFullscreen = false;
+  var galleryFullscreenElement = document.getElementById('content');
   var $galleryActive = $('#gallery-active');
   var $galleryActiveElement = $galleryActive.children().first();
   var $galleryPrev = $('#gallery-previous');
   var $galleryNext = $('#gallery-next');
+
+  // Remove link targets from gallery controls.
+  $(galleryFullscreenElement).find('a').removeAttr('href');
+
+  // Load a gallery element.
   var loadGalleryElement = function (id, fullscreen) {
     // Out of bounds.
     if (id < 0 || id >= galleryConfig.length) {
@@ -233,9 +235,6 @@ $(document).ready(function (){
   // Toggle gallery grid view.
   $('#gallery-grid').click(function (ev) {
     ev.preventDefault();
-    $galleryGridView.addClass('hide');
-    $galleryGridView.addClass('show');
-    $galleryGridView.removeClass('hide');
     // Only append images if they haven't been loaded yet.
     if (!$galleryGridView.hasClass('loaded')) {
       var $content = $('#gallery-grid-view-content');
@@ -246,8 +245,11 @@ $(document).ready(function (){
           on:       {
             click:  function (ev) {
               ev.preventDefault();
-              loadGalleryElement(element.id, fullscreenEnabled());
-              closeGalleryGrid();
+              loadGalleryElement(element.id, galleryFullscreen);
+              $galleryGridView.removeClass('show');
+              if (galleryFullscreen === false) {
+                exitFullscreen();
+              }
               return false;
             }
           },
@@ -255,6 +257,11 @@ $(document).ready(function (){
         }).appendTo($('<div class="col-xs-6 col-sm-4"></div>').appendTo($content));
       });
       $galleryGridView.addClass('loaded');
+    }
+
+    $galleryGridView.addClass('show');
+    if (galleryFullscreen === false) {
+      launchFullscreen($galleryGridView[0]);
     }
     return false;
   });
@@ -267,10 +274,10 @@ $(document).ready(function (){
   });
 
   // Enable swiping.
-  $galleryActiveElement.on('swipeleft', function () {loadGalleryElement(parseInt($galleryActive.attr('data-id'), 10) + 1, fullscreenEnabled());});
-  $galleryActiveElement.on('swiperight', function () {loadGalleryElement(parseInt($galleryActive.attr('data-id'), 10) - 1, fullscreenEnabled());});
+  $galleryActive.on('swipeleft', function () {loadGalleryElement(parseInt($galleryActive.attr('data-id'), 10) + 1, fullscreenEnabled());});
+  $galleryActive.on('swiperight', function () {loadGalleryElement(parseInt($galleryActive.attr('data-id'), 10) - 1, fullscreenEnabled());});
   // Re-enable vertical scrolling.
-  $galleryActiveElement.on('movestart', function (ev) {
+  $galleryActive.on('movestart', function (ev) {
     if ((ev.distX > ev.distY && ev.distX < -ev.distY) ||
         (ev.distX < ev.distY && ev.distX > -ev.distY)) {
       ev.preventDefault();
@@ -288,25 +295,28 @@ $(document).ready(function (){
   // Open image in fullscreen mode.
   $('#gallery-fullscreen').click(function (ev) {
     ev.preventDefault();
-    if (fullscreenEnabled() === false) {
+    if (galleryFullscreen === false) {
       loadGalleryElement(parseInt($galleryActive.attr('data-id'), 10), true);
-      launchFullscreen($('#content')[0]);
+      launchFullscreen(galleryFullscreenElement);
+      galleryFullscreen = true;
     }
     else {
       exitFullscreen();
+      galleryFullscreen = false;
     }
     return false;
   });
 
   // Open image in fullscreen mode.
-  $('#gallery-active img').click(function (ev) {
+  $('#gallery-active').click(function (ev) {
     ev.preventDefault();
-    if (fullscreenEnabled() === false) {
+    if (galleryFullscreen === false) {
       loadGalleryElement(parseInt($galleryActive.attr('data-id'), 10), true);
-      launchFullscreen($('#content')[0]);
+      launchFullscreen(galleryFullscreenElement);
+      galleryFullscreen = true;
     }
     else {
-      loadGalleryElement(parseInt($galleryActive.attr('data-id'), 10) + 1, fullscreenEnabled());
+      loadGalleryElement(parseInt($galleryActive.attr('data-id'), 10) + 1, galleryFullscreen);
     }
     return false;
   });
@@ -318,6 +328,8 @@ $(document).ready(function (){
     }
     else {
       galleryFullscreenImage.src = '/assets/img/popout.svg';
+      $galleryGridView.removeClass('show');
+      galleryFullscreen = false;
     }
     return event;
   });

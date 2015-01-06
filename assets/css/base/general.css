@@ -152,6 +152,10 @@ button {
   visibility: hidden;
 }
 
+:fullscreen .hide-fs {
+  display: none;
+}
+
 
 /* ==== MOBILE RULES ================================================================================================ */
 
