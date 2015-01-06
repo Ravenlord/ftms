@@ -264,6 +264,18 @@ $(document).ready(function (){
     return false;
   });
 
+  // Enable swiping.
+  $galleryActiveElement.on('swipeleft', function () {loadGalleryElement(parseInt($galleryActive.attr('data-id'), 10) + 1, fullscreenEnabled());});
+  $galleryActiveElement.on('swiperight', function () {loadGalleryElement(parseInt($galleryActive.attr('data-id'), 10) - 1, fullscreenEnabled());});
+  // Re-enable vertical scrolling.
+  $galleryActiveElement.on('movestart', function (ev) {
+    if ((ev.distX > ev.distY && ev.distX < -ev.distY) ||
+        (ev.distX < ev.distY && ev.distX > -ev.distY)) {
+      ev.preventDefault();
+      return false;
+    }
+  });
+
   // Go to next gallery element.
   $galleryNext.click(function (ev) {
     ev.preventDefault();

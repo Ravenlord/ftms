@@ -61,7 +61,7 @@ module.exports = function(grunt) {
       },
       jsBottom: {
         dest: 'dist/assets/js/main.js',
-        src:  [ 'assets/js/lib/jquery.min.js', 'assets/js/lib/jquery.cookie.min.js', 'assets/js/main.js' ]
+        src:  [ 'assets/js/lib/jquery.min.js', 'assets/js/lib/jquery.cookie.min.js', 'assets/js/lib/jquery.event.move.min.js', 'assets/js/lib/jquery.event.swipe.min.js', 'assets/js/main.js' ]
       },
       jsTop:  {
         dest: 'dist/assets/js/shim.min.js',
@@ -165,6 +165,16 @@ module.exports = function(grunt) {
           dest: 'assets/js/lib/',
           name: 'jquery.cookie.min.js',
           url:  'https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.3.1/jquery.cookie.min.js'
+        },
+        {
+          dest: 'assets/js/lib/',
+          name: 'jquery.event.move.min.js',
+          url:  'http://cdn.jsdelivr.net/jquery.event.move/1.3.5/jquery.event.move.min.js'
+        },
+        {
+          dest: 'assets/js/lib/',
+          name: 'jquery.event.swipe.min.js',
+          url:  'http://cdn.jsdelivr.net/jquery.event.swipe/0.5.2/jquery.event.swipe.min.js'
         },
         {
           dest: 'assets/js/lib/',
