@@ -38,6 +38,40 @@
   margin-bottom: 20px;
 }
 
+#content:fullscreen {
+  background-color: #000;
+  position: static;
+  margin: 0;
+  padding: 0;
+}
+
+#content:fullscreen h1 {
+  display: none;
+}
+
+:fullscreen #gallery-active {
+  width: 100%;
+  height: calc(100vh - 25px);
+  margin: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+:fullscreen #gallery-controls {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 5px;
+}
+
+::backdrop {
+  background-color: #000;
+}
+
 
 /* ==== MOBILE RULES ================================================================================================ */
 
@@ -85,11 +119,6 @@
   #gallery-fullscreen:focus,
   #gallery-fullscreen:active {
     opacity: 1;
-  }
-
-  #gallery-previous .img-responsive,
-  #gallery-next .img-responsive {
-    margin: 0;
   }
 }
 
