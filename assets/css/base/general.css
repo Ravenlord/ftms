@@ -224,10 +224,6 @@ button {
     transition-property: border-color, filter, opacity;
   }
 
-  .img-responsive {
-    width: 100%;
-  }
-
   .container-sm-height {
     display: table;
     padding-left: 0;
