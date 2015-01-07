@@ -84,6 +84,10 @@ $(document).ready(function (){
       });
       $element.removeClass(bgClass);
       var $loader = $('<div class="backdrop-loader"></div>');
+      // Remove loader after the transition.
+      $loader.one('transitionend oTrantitionEnd webkitTransitionEnd msTransitionEnd mozTransitionEnd', function () {
+        $loader.remove();
+      });
       $element.prepend($loader);
       var $image = $('<img>');
       $image.load(function () {
