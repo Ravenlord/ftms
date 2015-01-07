@@ -51,8 +51,12 @@
   top: 0;
   left: 0;
   right: 0;
-  display: table-cell;
-  vertical-align: middle;
+}
+
+:fullscreen #gallery-active img {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 :fullscreen #gallery-controls {
