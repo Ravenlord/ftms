@@ -29,6 +29,7 @@ header ul {
 .main-nav-second {
   background-color: inherit;
   font-weight: 700;
+  outline: 0 none;
 }
 
 .main-nav-first {
