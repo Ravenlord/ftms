@@ -4,8 +4,6 @@
 .backdrop,
 .backdrop-overlay {
   width: 100%;
-  height: 100%;
-  min-height: calc(100vh - 154px);
 }
 
 .backdrop {
@@ -30,6 +28,12 @@
     margin-bottom: 50px;
     margin-top: 100px;
   }
+
+  .backdrop,
+  .backdrop-overlay {
+    height: 100%;
+    min-height: calc(100vh - 154px);
+  }
 }
 
 
@@ -45,6 +49,12 @@
     right: 0;
     bottom: 0;
     transition: background-color 1s ease-in-out;
+  }
+
+  .backdrop,
+  .backdrop-overlay {
+    height: calc(100vh - 154px);
+    overflow-y: auto;
   }
 
   .backdrop-overlay {
