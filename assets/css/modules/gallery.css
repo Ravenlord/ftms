@@ -1,3 +1,9 @@
+#content.grid {
+  position: static;
+  height: 0;
+  overflow: hidden;
+}
+
 #gallery-active {
   margin-bottom: 50px;
 }
@@ -26,8 +32,7 @@
   z-index: 1;
 }
 
-#gallery-grid-view.show,
-#gallery-grid-view:fullscreen {
+#content.grid #gallery-grid-view {
   display: block;
 }
 

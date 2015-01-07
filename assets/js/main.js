@@ -186,7 +186,7 @@ $(document).ready(function (){
   var $galleryGridView = $('#gallery-grid-view');
 
   var galleryFullscreen = false;
-  var galleryFullscreenElement = document.getElementById('content');
+  var $galleryFullscreenElement = $('#content');
   var $galleryActive = $('#gallery-active');
   var $galleryActiveElement = $galleryActive.children().first();
   var $galleryPrev = $('#gallery-previous');
@@ -244,7 +244,7 @@ $(document).ready(function (){
             click:  function (ev) {
               ev.preventDefault();
               loadGalleryElement(element.id, galleryFullscreen);
-              $galleryGridView.removeClass('show');
+              $galleryFullscreenElement.removeClass('grid');
               if (galleryFullscreen === false) {
                 exitFullscreen();
               }
@@ -257,10 +257,7 @@ $(document).ready(function (){
       $galleryGridView.addClass('loaded');
     }
 
-    $galleryGridView.addClass('show');
-    if (galleryFullscreen === false) {
-      launchFullscreen($galleryGridView[0]);
-    }
+    $galleryFullscreenElement.addClass('grid');
     return false;
   });
 
@@ -295,7 +292,7 @@ $(document).ready(function (){
     ev.preventDefault();
     if (galleryFullscreen === false) {
       loadGalleryElement(parseInt($galleryActive.attr('data-id'), 10), true);
-      launchFullscreen(galleryFullscreenElement);
+      launchFullscreen($galleryFullscreenElement[0]);
       galleryFullscreen = true;
     }
     else {
@@ -310,7 +307,7 @@ $(document).ready(function (){
     ev.preventDefault();
     if (galleryFullscreen === false) {
       loadGalleryElement(parseInt($galleryActive.attr('data-id'), 10), true);
-      launchFullscreen(galleryFullscreenElement);
+      launchFullscreen($galleryFullscreenElement[0]);
       galleryFullscreen = true;
     }
     else {
@@ -326,7 +323,7 @@ $(document).ready(function (){
     }
     else {
       galleryFullscreenImage.src = '/assets/img/popout.svg';
-      $galleryGridView.removeClass('show');
+      $galleryFullscreenElement.removeClass('grid');
       galleryFullscreen = false;
     }
     return event;
