@@ -131,20 +131,14 @@ $(document).ready(function (){
   // Remove slider from index page.
   var $slider = $('#slider');
   if ($slider.length > 0) {
-    if ($.cookie('ftms')) {
-      $slider.remove();
-    }
-    else {
-      $.cookie('ftms', true, { expires: 1 });
-      $slider.click(function (ev) {
-        ev.preventDefault();
-        $slider.animate({ top: '-100vh', bottom: '0' }, 1000, function () {
-          $slider.remove();
-        });
-        return false;
+    $slider.click(function (ev) {
+      ev.preventDefault();
+      $slider.animate({ top: '-100vh', bottom: '0' }, 1000, function () {
+        location.hash = '#body';
       });
-      $slider.one('webkitAnimationEnd oanimationend msAnimationEnd animationend', function () { $slider.remove(); });
-    }
+      return false;
+    });
+    $slider.one('webkitAnimationEnd oanimationend msAnimationEnd animationend', function () { location.hash = '#body'; });
   }
 
   // Contact form submission.

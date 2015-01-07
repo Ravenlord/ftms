@@ -22,6 +22,7 @@
 #slider {
   animation: slideup 1s ease-in-out 30s 1 forwards;
   background-color: #000;
+  color: #999;
   cursor: pointer;
   display: table;
   margin: 0;
@@ -32,6 +33,10 @@
   bottom: 0;
   text-align: center;
   z-index: 10;
+}
+
+#body:target #slider{
+  display: none;
 }
 
 #slider .backdrop-overlay {
@@ -109,6 +114,10 @@
 
 
 @media (min-width: 768px) {
+  #slider {
+    height: 100vh;
+  }
+
   #slider .backdrop-loader {
     z-index: -1;
   }

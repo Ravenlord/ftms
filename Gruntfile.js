@@ -61,7 +61,7 @@ module.exports = function(grunt) {
       },
       jsBottom: {
         dest: 'dist/assets/js/main.js',
-        src:  [ 'assets/js/lib/jquery.min.js', 'assets/js/lib/jquery.cookie.min.js', 'assets/js/lib/jquery.event.move.min.js', 'assets/js/lib/jquery.event.swipe.min.js', 'assets/js/main.js' ]
+        src:  [ 'assets/js/lib/jquery.min.js', 'assets/js/lib/jquery.event.move.min.js', 'assets/js/lib/jquery.event.swipe.min.js', 'assets/js/main.js' ]
       },
       jsTop:  {
         dest: 'dist/assets/js/shim.min.js',
@@ -160,11 +160,6 @@ module.exports = function(grunt) {
           dest: 'assets/js/lib/',
           name: 'jquery.min.js',
           url:  'https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'
-        },
-        {
-          dest: 'assets/js/lib/',
-          name: 'jquery.cookie.min.js',
-          url:  'https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.3.1/jquery.cookie.min.js'
         },
         {
           dest: 'assets/js/lib/',
@@ -517,7 +512,7 @@ module.exports = function(grunt) {
     for (var firstLevel in menuTree) {
       if (menuTree.hasOwnProperty(firstLevel)) {
         // Skip index page and footer altogether.
-        if (firstLevel === 'index.html' || firstLevel === 'footer') {
+        if (firstLevel === 'footer') {
           continue;
         }
         var firstClassString  = firstLevelClass;
@@ -529,7 +524,7 @@ module.exports = function(grunt) {
         if (menuTree[firstLevel].children === false) {
           // Set the correct route for the index page.
           if (menuTree[firstLevel].name.toLowerCase() === 'base') {
-            href = '/';
+            href = '/#body';
           }
 
           // Set menu point active.
@@ -795,9 +790,6 @@ module.exports = function(grunt) {
     var production = true;
     if (mode === 'development') {
       production = false;
-    }
-
-    if (production !== true) {
       grunt.log.error('Building HTML in development mode.');
     }
 
