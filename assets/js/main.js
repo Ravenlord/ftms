@@ -97,6 +97,9 @@ $(document).ready(function (){
   // Show elements which are hidden without JS.
   $('.nojs-hidden').removeClass('nojs-hidden');
 
+  // Remove link targets from elements that don't need it.
+  $('.remove-href').removeAttr('href');
+
   // Re-enable CSS transitions.
   $('body').removeClass('no-transition');
 
@@ -190,9 +193,6 @@ $(document).ready(function (){
   var $galleryActiveElement = $galleryActive.children().first();
   var $galleryPrev = $('#gallery-previous');
   var $galleryNext = $('#gallery-next');
-
-  // Remove link targets from gallery controls.
-  $(galleryFullscreenElement).find('a').removeAttr('href');
 
   // Load a gallery element.
   var loadGalleryElement = function (id, fullscreen) {
