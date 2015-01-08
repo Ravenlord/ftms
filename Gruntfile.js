@@ -569,6 +569,26 @@ module.exports = function(grunt) {
     return source.replace('##MENU##', menu + '</ul>');
   }
 
+  function insertMeta(source, page, production) {
+    var html  = source.replace('##FB_TITLE##', page.name.toUpperCase());
+    var baseUrl   = 'http://4000milestare.com/';
+    if (production === false) {
+      baseUrl = 'http://test.4000milestare.com/';
+    }
+    html = html.replace(/##BASE_URL##/g, baseUrl);
+
+    var fbUrl = '';
+    if (page.name.toLowerCase() !== 'base') {
+      if (page.hasOwnProperty('path')) {
+        fbUrl += page.path.toLowerCase().replace(/[0-9]+_/g, '').replace('.html', '');
+      }
+      else {
+        fbUrl += page.name.toLowerCase();
+      }
+    }
+    return html.replace('##FB_URL##', fbUrl);
+  }
+
   /**
    * Inserts the content, title and page name into a page.
    *
@@ -863,6 +883,7 @@ module.exports = function(grunt) {
         // We have a first level page.
         if (menuTree[firstLevel].children === false) {
           fileContents = template;
+          fileContents = insertMeta(fileContents, menuTree[firstLevel], production);
           fileContents = insertPageContent(
             fileContents,
             menuTree[firstLevel].name,
@@ -892,6 +913,7 @@ module.exports = function(grunt) {
           for (var secondLevel in menuTree[firstLevel].children) {
             fileContents = template;
             if (menuTree[firstLevel].children.hasOwnProperty(secondLevel)) {
+              fileContents = insertMeta(fileContents, menuTree[firstLevel].children[secondLevel], production);
               fileContents = insertPageContent(
                 fileContents,
                 menuTree[firstLevel].name + '/' + menuTree[firstLevel].children[secondLevel].name,
