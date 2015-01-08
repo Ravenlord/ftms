@@ -261,6 +261,13 @@ $(document).ready(function (){
     return false;
   });
 
+  // Close gallery grid.
+  $('#gallery-grid-close').click(function (ev) {
+    ev.preventDefault();
+    $galleryFullscreenElement.removeClass('grid');
+    return false;
+  });
+
   // Go to previous gallery element.
   $galleryPrev.click(function (ev) {
     ev.preventDefault();
