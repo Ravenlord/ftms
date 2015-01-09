@@ -50,9 +50,9 @@ $(document).ready(function (){
   // Toggle crew members.
   // Set the right margin first.
   var $crewMembers = $('#crew-members');
+  $crewMembers.css('margin-top', '-' + ($crewMembers.height() + parseInt($crewMembers.css('padding-bottom'), 10)) + 'px');
   $crewMembers.removeClass('expanded');
   $('#crew-members-expander').addClass('expander');
-  $crewMembers.css('margin-top', '-' + ($crewMembers.height() + parseInt($crewMembers.css('padding-bottom'), 10)) + 'px');
   $('#crew-members-expander').click(function (ev) {
     ev.preventDefault();
     var $this = $(this);

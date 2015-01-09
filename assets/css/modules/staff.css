@@ -23,10 +23,12 @@
   overflow: hidden;
   padding-bottom: 50px;
   transition: margin-top 0.4s;
+  visibility: hidden;
 }
 
 #crew-members.expanded {
   margin-top: 0;
+  visibility: visible;
 }
 
 #crew-members h2 {
