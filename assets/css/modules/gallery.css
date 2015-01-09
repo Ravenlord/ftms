@@ -44,7 +44,6 @@
 #gallery-grid-close {
   cursor: pointer;
   position: absolute;
-  top: 50px;
   right: 10px;
 }
 
@@ -95,6 +94,10 @@
   #gallery-active .img-responsive {
     max-height: 300px;
   }
+
+  #gallery-grid-close {
+    top: 20px;
+  }
 }
 
 
@@ -136,6 +139,10 @@
   #gallery-fullscreen:focus,
   #gallery-fullscreen:active {
     opacity: 1;
+  }
+
+  #gallery-grid-close {
+    top: 50px;
   }
 }
 
