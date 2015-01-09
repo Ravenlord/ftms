@@ -315,6 +315,18 @@ header ul {
     text-align: right;
     margin-left: 20%;
   }
+
+  #footer-logos {
+    margin-bottom: 54px;
+  }
+
+  #footer-lower {
+    background-color: #000;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
 }
 
 

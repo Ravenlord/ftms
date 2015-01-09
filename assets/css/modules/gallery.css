@@ -23,6 +23,7 @@
 #gallery-grid-view {
   background-color: #000;
   display: none;
+  min-height: 100vh;
   overflow: auto;
   position: absolute;
   top: 0;
