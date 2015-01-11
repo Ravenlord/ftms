@@ -132,9 +132,15 @@ $(document).ready(function (){
   $('#back-to-top').click(function (ev) {
     ev.preventDefault();
     var $html = $(document.documentElement);
+    var $body = $(document.body);
+    var $animationElement = null;
     if ($html.scrollTop() !== 0) {
-      $html.animate({ scrollTop: 0 }, 'slow');
+      $animationElement = $html;
     }
+    else {
+      $animationElement = $body;
+    }
+    $animationElement.animate({ scrollTop: 0 }, 'slow');
     return false;
   });
 
