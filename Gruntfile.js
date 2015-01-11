@@ -226,6 +226,78 @@ module.exports = function(grunt) {
 
     // Resize images.
     image_resize: {
+      backdrops800: {
+        options:  { width: 800 },
+        files: [{
+                  dest:     'dist/assets/img/backdrops/800/',
+                  expand:   true,
+                  flatten:  true,
+                  src:      [ 'dist/assets/img/backdrops/*.{png,jpg,gif}' ]
+                }]
+      },
+      backdrops1024: {
+        options:  { width: 1024 },
+        files: [{
+          dest:     'dist/assets/img/backdrops/1024/',
+          expand:   true,
+          flatten:  true,
+          src:      [ 'dist/assets/img/backdrops/*.{png,jpg,gif}' ]
+        }]
+      },
+      backdrops1280: {
+        options:  { width: 1280 },
+        files: [{
+                  dest:     'dist/assets/img/backdrops/1280/',
+                  expand:   true,
+                  flatten:  true,
+                  src:      [ 'dist/assets/img/backdrops/*.{png,jpg,gif}' ]
+                }]
+      },
+      backdrops1600: {
+        options:  { width: 1600 },
+        files: [{
+                  dest:     'dist/assets/img/backdrops/1600/',
+                  expand:   true,
+                  flatten:  true,
+                  src:      [ 'dist/assets/img/backdrops/*.{png,jpg,gif}' ]
+                }]
+      },
+      backdrops1920: {
+        options:  { width: 1920 },
+        files: [{
+                  dest:     'dist/assets/img/backdrops/1920/',
+                  expand:   true,
+                  flatten:  true,
+                  src:      [ 'dist/assets/img/backdrops/*.{png,jpg,gif}' ]
+                }]
+      },
+      backdrops2048: {
+        options:  { width: 2048 },
+        files: [{
+                  dest:     'dist/assets/img/backdrops/2048/',
+                  expand:   true,
+                  flatten:  true,
+                  src:      [ 'dist/assets/img/backdrops/*.{png,jpg,gif}' ]
+                }]
+      },
+      backdrops2560: {
+        options:  { width: 2560 },
+        files: [{
+                  dest:     'dist/assets/img/backdrops/2560/',
+                  expand:   true,
+                  flatten:  true,
+                  src:      [ 'dist/assets/img/backdrops/*.{png,jpg,gif}' ]
+                }]
+      },
+      backdrops3200: {
+        options:  { width: 3200 },
+        files: [{
+                  dest:     'dist/assets/img/backdrops/3200/',
+                  expand:   true,
+                  flatten:  true,
+                  src:      [ 'dist/assets/img/backdrops/*.{png,jpg,gif}' ]
+                }]
+      },
       castCrew: {
         options:  { width: 460 },
         files: [{

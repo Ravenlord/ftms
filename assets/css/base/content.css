@@ -60,43 +60,43 @@
   /* TODO: Insert actual FTMS images. */
   .backdrop.bg-slider {
     background-attachment: scroll;
-    background-image: url(http://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-2437.jpg);
+    background-image: url(../img/backdrops/800/base.jpg);
   }
 
   .backdrop.bg-base {
-    background-image: url(http://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-2437.jpg);
+    background-image: url(../img/backdrops/800/base.jpg);
   }
 
   .backdrop.bg-project {
-    background-image: url(http://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-2437.jpg);
+    background-image: url(../img/backdrops/800/base.jpg);
   }
 
   .backdrop.bg-crew-about {
-    background-image: url(http://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-2437.jpg);
+    background-image: url(../img/backdrops/800/base.jpg);
   }
 
   .backdrop.bg-crew-staff {
-    background-image: url(http://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-2437.jpg);
+    background-image: url(../img/backdrops/800/base.jpg);
   }
 
   .backdrop.bg-cast {
-    background-image: url(http://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-2437.jpg);
+    background-image: url(../img/backdrops/800/base.jpg);
   }
 
   .backdrop.bg-media-gallery {
-    background-image: url(http://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-2437.jpg);
+    background-image: url(../img/backdrops/800/base.jpg);
   }
 
   .backdrop.bg-media-video {
-    background-image: url(http://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-2437.jpg);
+    background-image: url(../img/backdrops/800/base.jpg);
   }
 
   .backdrop.bg-impressum {
-    background-image: url(http://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-2437.jpg);
+    background-image: url(../img/backdrops/800/base.jpg);
   }
 
   .backdrop.bg-contact {
-    background-image: url(http://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-2437.jpg);
+    background-image: url(../img/backdrops/800/base.jpg);
   }
 
   #content-wrapper {
@@ -106,5 +106,353 @@
 
   .content-bg {
     background-color: rgba(0,0,0,0.8);
+  }
+}
+
+
+/* ==== LARGER SCREEN BACKDROPS ===================================================================================== */
+
+
+@media (min-width: 801px) {
+  .backdrop.bg-slider {
+    background-attachment: scroll;
+    background-image: url(../img/backdrops/1024/base.jpg);
+  }
+
+  .backdrop.bg-base {
+    background-image: url(../img/backdrops/1024/base.jpg);
+  }
+
+  .backdrop.bg-project {
+    background-image: url(../img/backdrops/1024/base.jpg);
+  }
+
+  .backdrop.bg-crew-about {
+    background-image: url(../img/backdrops/1024/base.jpg);
+  }
+
+  .backdrop.bg-crew-staff {
+    background-image: url(../img/backdrops/1024/base.jpg);
+  }
+
+  .backdrop.bg-cast {
+    background-image: url(../img/backdrops/1024/base.jpg);
+  }
+
+  .backdrop.bg-media-gallery {
+    background-image: url(../img/backdrops/1024/base.jpg);
+  }
+
+  .backdrop.bg-media-video {
+    background-image: url(../img/backdrops/1024/base.jpg);
+  }
+
+  .backdrop.bg-impressum {
+    background-image: url(../img/backdrops/1024/base.jpg);
+  }
+
+  .backdrop.bg-contact {
+    background-image: url(../img/backdrops/1024/base.jpg);
+  }
+}
+
+@media (min-width: 1025px) {
+  .backdrop.bg-slider {
+    background-attachment: scroll;
+    background-image: url(../img/backdrops/1280/base.jpg);
+  }
+
+  .backdrop.bg-base {
+    background-image: url(../img/backdrops/1280/base.jpg);
+  }
+
+  .backdrop.bg-project {
+    background-image: url(../img/backdrops/1280/base.jpg);
+  }
+
+  .backdrop.bg-crew-about {
+    background-image: url(../img/backdrops/1280/base.jpg);
+  }
+
+  .backdrop.bg-crew-staff {
+    background-image: url(../img/backdrops/1280/base.jpg);
+  }
+
+  .backdrop.bg-cast {
+    background-image: url(../img/backdrops/1280/base.jpg);
+  }
+
+  .backdrop.bg-media-gallery {
+    background-image: url(../img/backdrops/1280/base.jpg);
+  }
+
+  .backdrop.bg-media-video {
+    background-image: url(../img/backdrops/1280/base.jpg);
+  }
+
+  .backdrop.bg-impressum {
+    background-image: url(../img/backdrops/1280/base.jpg);
+  }
+
+  .backdrop.bg-contact {
+    background-image: url(../img/backdrops/1280/base.jpg);
+  }
+}
+
+@media (min-width: 1281px) {
+  .backdrop.bg-slider {
+    background-attachment: scroll;
+    background-image: url(../img/backdrops/1600/base.jpg);
+  }
+
+  .backdrop.bg-base {
+    background-image: url(../img/backdrops/1600/base.jpg);
+  }
+
+  .backdrop.bg-project {
+    background-image: url(../img/backdrops/1600/base.jpg);
+  }
+
+  .backdrop.bg-crew-about {
+    background-image: url(../img/backdrops/1600/base.jpg);
+  }
+
+  .backdrop.bg-crew-staff {
+    background-image: url(../img/backdrops/1600/base.jpg);
+  }
+
+  .backdrop.bg-cast {
+    background-image: url(../img/backdrops/1600/base.jpg);
+  }
+
+  .backdrop.bg-media-gallery {
+    background-image: url(../img/backdrops/1600/base.jpg);
+  }
+
+  .backdrop.bg-media-video {
+    background-image: url(../img/backdrops/1600/base.jpg);
+  }
+
+  .backdrop.bg-impressum {
+    background-image: url(../img/backdrops/1600/base.jpg);
+  }
+
+  .backdrop.bg-contact {
+    background-image: url(../img/backdrops/1600/base.jpg);
+  }
+}
+
+@media (min-width: 1601px) {
+  .backdrop.bg-slider {
+    background-attachment: scroll;
+    background-image: url(../img/backdrops/1920/base.jpg);
+  }
+
+  .backdrop.bg-base {
+    background-image: url(../img/backdrops/1920/base.jpg);
+  }
+
+  .backdrop.bg-project {
+    background-image: url(../img/backdrops/1920/base.jpg);
+  }
+
+  .backdrop.bg-crew-about {
+    background-image: url(../img/backdrops/1920/base.jpg);
+  }
+
+  .backdrop.bg-crew-staff {
+    background-image: url(../img/backdrops/1920/base.jpg);
+  }
+
+  .backdrop.bg-cast {
+    background-image: url(../img/backdrops/1920/base.jpg);
+  }
+
+  .backdrop.bg-media-gallery {
+    background-image: url(../img/backdrops/1920/base.jpg);
+  }
+
+  .backdrop.bg-media-video {
+    background-image: url(../img/backdrops/1920/base.jpg);
+  }
+
+  .backdrop.bg-impressum {
+    background-image: url(../img/backdrops/1920/base.jpg);
+  }
+
+  .backdrop.bg-contact {
+    background-image: url(../img/backdrops/1920/base.jpg);
+  }
+}
+
+@media (min-width: 1921px) {
+  .backdrop.bg-slider {
+    background-attachment: scroll;
+    background-image: url(../img/backdrops/2048/base.jpg);
+  }
+
+  .backdrop.bg-base {
+    background-image: url(../img/backdrops/2048/base.jpg);
+  }
+
+  .backdrop.bg-project {
+    background-image: url(../img/backdrops/2048/base.jpg);
+  }
+
+  .backdrop.bg-crew-about {
+    background-image: url(../img/backdrops/2048/base.jpg);
+  }
+
+  .backdrop.bg-crew-staff {
+    background-image: url(../img/backdrops/2048/base.jpg);
+  }
+
+  .backdrop.bg-cast {
+    background-image: url(../img/backdrops/2048/base.jpg);
+  }
+
+  .backdrop.bg-media-gallery {
+    background-image: url(../img/backdrops/2048/base.jpg);
+  }
+
+  .backdrop.bg-media-video {
+    background-image: url(../img/backdrops/2048/base.jpg);
+  }
+
+  .backdrop.bg-impressum {
+    background-image: url(../img/backdrops/2048/base.jpg);
+  }
+
+  .backdrop.bg-contact {
+    background-image: url(../img/backdrops/2048/base.jpg);
+  }
+}
+
+@media (min-width: 2049px) {
+  .backdrop.bg-slider {
+    background-attachment: scroll;
+    background-image: url(../img/backdrops/2560/base.jpg);
+  }
+
+  .backdrop.bg-base {
+    background-image: url(../img/backdrops/2560/base.jpg);
+  }
+
+  .backdrop.bg-project {
+    background-image: url(../img/backdrops/2560/base.jpg);
+  }
+
+  .backdrop.bg-crew-about {
+    background-image: url(../img/backdrops/2560/base.jpg);
+  }
+
+  .backdrop.bg-crew-staff {
+    background-image: url(../img/backdrops/2560/base.jpg);
+  }
+
+  .backdrop.bg-cast {
+    background-image: url(../img/backdrops/2560/base.jpg);
+  }
+
+  .backdrop.bg-media-gallery {
+    background-image: url(../img/backdrops/2560/base.jpg);
+  }
+
+  .backdrop.bg-media-video {
+    background-image: url(../img/backdrops/2560/base.jpg);
+  }
+
+  .backdrop.bg-impressum {
+    background-image: url(../img/backdrops/2560/base.jpg);
+  }
+
+  .backdrop.bg-contact {
+    background-image: url(../img/backdrops/2560/base.jpg);
+  }
+}
+
+@media (min-width: 2561px) {
+  .backdrop.bg-slider {
+    background-attachment: scroll;
+    background-image: url(../img/backdrops/3200/base.jpg);
+  }
+
+  .backdrop.bg-base {
+    background-image: url(../img/backdrops/3200/base.jpg);
+  }
+
+  .backdrop.bg-project {
+    background-image: url(../img/backdrops/3200/base.jpg);
+  }
+
+  .backdrop.bg-crew-about {
+    background-image: url(../img/backdrops/3200/base.jpg);
+  }
+
+  .backdrop.bg-crew-staff {
+    background-image: url(../img/backdrops/3200/base.jpg);
+  }
+
+  .backdrop.bg-cast {
+    background-image: url(../img/backdrops/3200/base.jpg);
+  }
+
+  .backdrop.bg-media-gallery {
+    background-image: url(../img/backdrops/3200/base.jpg);
+  }
+
+  .backdrop.bg-media-video {
+    background-image: url(../img/backdrops/3200/base.jpg);
+  }
+
+  .backdrop.bg-impressum {
+    background-image: url(../img/backdrops/3200/base.jpg);
+  }
+
+  .backdrop.bg-contact {
+    background-image: url(../img/backdrops/3200/base.jpg);
+  }
+}
+
+@media (min-width: 3201px) {
+  .backdrop.bg-slider {
+    background-attachment: scroll;
+    background-image: url(../img/backdrops/base.jpg);
+  }
+
+  .backdrop.bg-base {
+    background-image: url(../img/backdrops/base.jpg);
+  }
+
+  .backdrop.bg-project {
+    background-image: url(../img/backdrops/base.jpg);
+  }
+
+  .backdrop.bg-crew-about {
+    background-image: url(../img/backdrops/base.jpg);
+  }
+
+  .backdrop.bg-crew-staff {
+    background-image: url(../img/backdrops/base.jpg);
+  }
+
+  .backdrop.bg-cast {
+    background-image: url(../img/backdrops/base.jpg);
+  }
+
+  .backdrop.bg-media-gallery {
+    background-image: url(../img/backdrops/base.jpg);
+  }
+
+  .backdrop.bg-media-video {
+    background-image: url(../img/backdrops/base.jpg);
+  }
+
+  .backdrop.bg-impressum {
+    background-image: url(../img/backdrops/base.jpg);
+  }
+
+  .backdrop.bg-contact {
+    background-image: url(../img/backdrops/base.jpg);
   }
 }
