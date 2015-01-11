@@ -128,6 +128,16 @@ $(document).ready(function (){
     return false;
   });
 
+  // Smooth scrolling for back to top link.
+  $('#back-to-top').click(function (ev) {
+    ev.preventDefault();
+    var $html = $(document.documentElement);
+    if ($html.scrollTop() !== 0) {
+      $html.animate({ scrollTop: 0 }, 'slow');
+    }
+    return false;
+  });
+
   // Remove slider from index page.
   var $slider = $('#slider');
   if ($slider.length > 0) {
@@ -181,158 +191,158 @@ $(document).ready(function (){
   var galleryConfig = $('#config').text();
   if (galleryConfig) {
     galleryConfig = JSON.parse(galleryConfig);
-  }
 
-  var $galleryGridView = $('#gallery-grid-view');
+    var $galleryGridView = $('#gallery-grid-view');
 
-  var galleryFullscreen = false;
-  var $galleryFullscreenElement = $('#content');
-  var $galleryActive = $('#gallery-active');
-  var $galleryActiveElement = $galleryActive.children().first();
-  var $galleryPrev = $('#gallery-previous');
-  var $galleryNext = $('#gallery-next');
+    var galleryFullscreen = false;
+    var $galleryFullscreenElement = $('#content');
+    var $galleryActive = $('#gallery-active');
+    var $galleryActiveElement = $galleryActive.children().first();
+    var $galleryPrev = $('#gallery-previous');
+    var $galleryNext = $('#gallery-next');
 
-  // Load a gallery element.
-  var loadGalleryElement = function (id, fullscreen) {
-    // Out of bounds.
-    if (id < 0 || id >= galleryConfig.length) {
-      return false;
-    }
+    // Load a gallery element.
+    var loadGalleryElement = function (id, fullscreen) {
+      // Out of bounds.
+      if (id < 0 || id >= galleryConfig.length) {
+        return false;
+      }
 
-    $galleryPrev.removeClass('active');
-    $galleryNext.removeClass('active');
+      $galleryPrev.removeClass('active');
+      $galleryNext.removeClass('active');
 
-    // First element.
-    if (id === 0) {
-      $galleryPrev.addClass('active');
-    }
+      // First element.
+      if (id === 0) {
+        $galleryPrev.addClass('active');
+      }
 
-    // Last element.
-    if (id === galleryConfig.length - 1) {
-      $galleryNext.addClass('active');
-    }
+      // Last element.
+      if (id === galleryConfig.length - 1) {
+        $galleryNext.addClass('active');
+      }
 
-    var src = '';
-    if (fullscreen === true) {
-      src = galleryConfig[id].url;
-    }
-    else {
-      src = galleryConfig[id].preview;
-    }
-    if ($galleryActiveElement.attr('src') !== src) {
-      $galleryActive.addClass('loading');
-      $galleryActiveElement.load(function () {
-        $galleryActive.removeClass('loading');
-      });
-      $galleryActiveElement.attr('alt', galleryConfig[id].alt);
-      $galleryActive.attr('data-id', id);
-      $galleryActiveElement.attr('src', src);
-    }
-  };
+      var src = '';
+      if (fullscreen === true) {
+        src = galleryConfig[id].url;
+      }
+      else {
+        src = galleryConfig[id].preview;
+      }
+      if ($galleryActiveElement.attr('src') !== src) {
+        $galleryActive.addClass('loading');
+        $galleryActiveElement.load(function () {
+          $galleryActive.removeClass('loading');
+        });
+        $galleryActiveElement.attr('alt', galleryConfig[id].alt);
+        $galleryActive.attr('data-id', id);
+        $galleryActiveElement.attr('src', src);
+      }
+    };
 
-  // Toggle gallery grid view.
-  $('#gallery-grid').click(function (ev) {
-    ev.preventDefault();
-    // Only append images if they haven't been loaded yet.
-    if (!$galleryGridView.hasClass('loaded')) {
-      var $content = $('#gallery-grid-view-content');
-      galleryConfig.forEach(function (element) {
-        $('<img>', {
-          alt:      element.alt,
-          'class':  'img-responsive img-framed img-grayscale',
-          on:       {
-            click:  function (ev) {
-              ev.preventDefault();
-              loadGalleryElement(element.id, galleryFullscreen);
-              $galleryFullscreenElement.removeClass('grid');
-              if (galleryFullscreen === false) {
-                exitFullscreen();
-              }
-              return false;
-            }
-          },
-          src:      element.thumb
-        }).appendTo($('<div class="col-xs-6 col-sm-4"></div>').appendTo($content));
-      });
-      $galleryGridView.addClass('loaded');
-    }
-
-    $galleryFullscreenElement.addClass('grid');
-    return false;
-  });
-
-  // Close gallery grid.
-  $('#gallery-grid-close').click(function (ev) {
-    ev.preventDefault();
-    $galleryFullscreenElement.removeClass('grid');
-    return false;
-  });
-
-  // Go to previous gallery element.
-  $galleryPrev.click(function (ev) {
-    ev.preventDefault();
-    loadGalleryElement(parseInt($galleryActive.attr('data-id'), 10) - 1, fullscreenEnabled());
-    return false;
-  });
-
-  // Enable swiping.
-  $galleryActive.on('swipeleft', function () {loadGalleryElement(parseInt($galleryActive.attr('data-id'), 10) + 1, fullscreenEnabled());});
-  $galleryActive.on('swiperight', function () {loadGalleryElement(parseInt($galleryActive.attr('data-id'), 10) - 1, fullscreenEnabled());});
-  // Re-enable vertical scrolling.
-  $galleryActive.on('movestart', function (ev) {
-    if ((ev.distX > ev.distY && ev.distX < -ev.distY) ||
-        (ev.distX < ev.distY && ev.distX > -ev.distY)) {
+    // Toggle gallery grid view.
+    $('#gallery-grid').click(function (ev) {
       ev.preventDefault();
+      // Only append images if they haven't been loaded yet.
+      if (!$galleryGridView.hasClass('loaded')) {
+        var $content = $('#gallery-grid-view-content');
+        galleryConfig.forEach(function (element) {
+          $('<img>', {
+            alt:      element.alt,
+            'class':  'img-responsive img-framed img-grayscale',
+            on:       {
+              click:  function (ev) {
+                ev.preventDefault();
+                loadGalleryElement(element.id, galleryFullscreen);
+                $galleryFullscreenElement.removeClass('grid');
+                if (galleryFullscreen === false) {
+                  exitFullscreen();
+                }
+                return false;
+              }
+            },
+            src:      element.thumb
+          }).appendTo($('<div class="col-xs-6 col-sm-4"></div>').appendTo($content));
+        });
+        $galleryGridView.addClass('loaded');
+      }
+
+      $galleryFullscreenElement.addClass('grid');
       return false;
-    }
-  });
+    });
 
-  // Go to next gallery element.
-  $galleryNext.click(function (ev) {
-    ev.preventDefault();
-    loadGalleryElement(parseInt($galleryActive.attr('data-id'), 10) + 1, fullscreenEnabled());
-    return false;
-  });
-
-  // Open image in fullscreen mode.
-  $('#gallery-fullscreen').click(function (ev) {
-    ev.preventDefault();
-    if (galleryFullscreen === false) {
-      loadGalleryElement(parseInt($galleryActive.attr('data-id'), 10), true);
-      launchFullscreen($galleryFullscreenElement[0]);
-      galleryFullscreen = true;
-    }
-    else {
-      exitFullscreen();
-      galleryFullscreen = false;
-    }
-    return false;
-  });
-
-  // Open image in fullscreen mode.
-  $('#gallery-active').click(function (ev) {
-    ev.preventDefault();
-    if (galleryFullscreen === false) {
-      loadGalleryElement(parseInt($galleryActive.attr('data-id'), 10), true);
-      launchFullscreen($galleryFullscreenElement[0]);
-      galleryFullscreen = true;
-    }
-    else {
-      loadGalleryElement(parseInt($galleryActive.attr('data-id'), 10) + 1, galleryFullscreen);
-    }
-    return false;
-  });
-
-  var galleryFullscreenImage = $('#gallery-fullscreen')[0].firstChild;
-  $(document).on('webkitfullscreenchange mozfullscreenchange fullscreenchange MSFullscreenChange', function (event) {
-    if (fullscreenEnabled() === true) {
-      galleryFullscreenImage.src = '/assets/img/popin.svg';
-    }
-    else {
-      galleryFullscreenImage.src = '/assets/img/popout.svg';
+    // Close gallery grid.
+    $('#gallery-grid-close').click(function (ev) {
+      ev.preventDefault();
       $galleryFullscreenElement.removeClass('grid');
-      galleryFullscreen = false;
-    }
-    return event;
-  });
+      return false;
+    });
+
+    // Go to previous gallery element.
+    $galleryPrev.click(function (ev) {
+      ev.preventDefault();
+      loadGalleryElement(parseInt($galleryActive.attr('data-id'), 10) - 1, fullscreenEnabled());
+      return false;
+    });
+
+    // Enable swiping.
+    $galleryActive.on('swipeleft', function () {loadGalleryElement(parseInt($galleryActive.attr('data-id'), 10) + 1, fullscreenEnabled());});
+    $galleryActive.on('swiperight', function () {loadGalleryElement(parseInt($galleryActive.attr('data-id'), 10) - 1, fullscreenEnabled());});
+    // Re-enable vertical scrolling.
+    $galleryActive.on('movestart', function (ev) {
+      if ((ev.distX > ev.distY && ev.distX < -ev.distY) ||
+          (ev.distX < ev.distY && ev.distX > -ev.distY)) {
+        ev.preventDefault();
+        return false;
+      }
+    });
+
+    // Go to next gallery element.
+    $galleryNext.click(function (ev) {
+      ev.preventDefault();
+      loadGalleryElement(parseInt($galleryActive.attr('data-id'), 10) + 1, fullscreenEnabled());
+      return false;
+    });
+
+    // Open image in fullscreen mode.
+    $('#gallery-fullscreen').click(function (ev) {
+      ev.preventDefault();
+      if (galleryFullscreen === false) {
+        loadGalleryElement(parseInt($galleryActive.attr('data-id'), 10), true);
+        launchFullscreen($galleryFullscreenElement[0]);
+        galleryFullscreen = true;
+      }
+      else {
+        exitFullscreen();
+        galleryFullscreen = false;
+      }
+      return false;
+    });
+
+    // Open image in fullscreen mode.
+    $('#gallery-active').click(function (ev) {
+      ev.preventDefault();
+      if (galleryFullscreen === false) {
+        loadGalleryElement(parseInt($galleryActive.attr('data-id'), 10), true);
+        launchFullscreen($galleryFullscreenElement[0]);
+        galleryFullscreen = true;
+      }
+      else {
+        loadGalleryElement(parseInt($galleryActive.attr('data-id'), 10) + 1, galleryFullscreen);
+      }
+      return false;
+    });
+
+    var galleryFullscreenImage = $('#gallery-fullscreen')[0].firstChild;
+    $(document).on('webkitfullscreenchange mozfullscreenchange fullscreenchange MSFullscreenChange', function (event) {
+      if (fullscreenEnabled() === true) {
+        galleryFullscreenImage.src = '/assets/img/popin.svg';
+      }
+      else {
+        galleryFullscreenImage.src = '/assets/img/popout.svg';
+        $galleryFullscreenElement.removeClass('grid');
+        galleryFullscreen = false;
+      }
+      return event;
+    });
+  }
 });
