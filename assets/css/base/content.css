@@ -57,10 +57,9 @@
     background-size: cover;
   }
 
-  /* TODO: Insert actual FTMS images. */
   .backdrop.bg-slider {
     background-attachment: scroll;
-    background-image: url(../img/backdrops/800/base.jpg);
+    background-image: url(../img/backdrops/800/slider.jpg);
   }
 
   .backdrop.bg-base {
@@ -68,35 +67,35 @@
   }
 
   .backdrop.bg-project {
-    background-image: url(../img/backdrops/800/base.jpg);
+    background-image: url(../img/backdrops/800/project.jpg);
   }
 
   .backdrop.bg-crew-about {
-    background-image: url(../img/backdrops/800/base.jpg);
+    background-image: url(../img/backdrops/800/about.jpg);
   }
 
   .backdrop.bg-crew-staff {
-    background-image: url(../img/backdrops/800/base.jpg);
+    background-image: url(../img/backdrops/800/staff.jpg);
   }
 
   .backdrop.bg-cast {
-    background-image: url(../img/backdrops/800/base.jpg);
+    background-image: url(../img/backdrops/800/cast.jpg);
   }
 
   .backdrop.bg-media-gallery {
-    background-image: url(../img/backdrops/800/base.jpg);
+    background-image: url(../img/backdrops/800/gallery.jpg);
   }
 
   .backdrop.bg-media-video {
-    background-image: url(../img/backdrops/800/base.jpg);
+    background-image: url(../img/backdrops/800/video.jpg);
   }
 
   .backdrop.bg-impressum {
-    background-image: url(../img/backdrops/800/base.jpg);
+    background-image: url(../img/backdrops/800/impressum.jpg);
   }
 
   .backdrop.bg-contact {
-    background-image: url(../img/backdrops/800/base.jpg);
+    background-image: url(../img/backdrops/800/contact.jpg);
   }
 
   #content-wrapper {
@@ -116,7 +115,7 @@
 @media (min-width: 801px) {
   .backdrop.bg-slider {
     background-attachment: scroll;
-    background-image: url(../img/backdrops/1024/base.jpg);
+    background-image: url(../img/backdrops/1024/slider.jpg);
   }
 
   .backdrop.bg-base {
@@ -124,42 +123,42 @@
   }
 
   .backdrop.bg-project {
-    background-image: url(../img/backdrops/1024/base.jpg);
+    background-image: url(../img/backdrops/1024/project.jpg);
   }
 
   .backdrop.bg-crew-about {
-    background-image: url(../img/backdrops/1024/base.jpg);
+    background-image: url(../img/backdrops/1024/about.jpg);
   }
 
   .backdrop.bg-crew-staff {
-    background-image: url(../img/backdrops/1024/base.jpg);
+    background-image: url(../img/backdrops/1024/staff.jpg);
   }
 
   .backdrop.bg-cast {
-    background-image: url(../img/backdrops/1024/base.jpg);
+    background-image: url(../img/backdrops/1024/cast.jpg);
   }
 
   .backdrop.bg-media-gallery {
-    background-image: url(../img/backdrops/1024/base.jpg);
+    background-image: url(../img/backdrops/1024/gallery.jpg);
   }
 
   .backdrop.bg-media-video {
-    background-image: url(../img/backdrops/1024/base.jpg);
+    background-image: url(../img/backdrops/1024/video.jpg);
   }
 
   .backdrop.bg-impressum {
-    background-image: url(../img/backdrops/1024/base.jpg);
+    background-image: url(../img/backdrops/1024/impressum.jpg);
   }
 
   .backdrop.bg-contact {
-    background-image: url(../img/backdrops/1024/base.jpg);
+    background-image: url(../img/backdrops/1024/contact.jpg);
   }
 }
 
 @media (min-width: 1025px) {
   .backdrop.bg-slider {
     background-attachment: scroll;
-    background-image: url(../img/backdrops/1280/base.jpg);
+    background-image: url(../img/backdrops/1280/slider.jpg);
   }
 
   .backdrop.bg-base {
@@ -167,42 +166,42 @@
   }
 
   .backdrop.bg-project {
-    background-image: url(../img/backdrops/1280/base.jpg);
+    background-image: url(../img/backdrops/1280/project.jpg);
   }
 
   .backdrop.bg-crew-about {
-    background-image: url(../img/backdrops/1280/base.jpg);
+    background-image: url(../img/backdrops/1280/about.jpg);
   }
 
   .backdrop.bg-crew-staff {
-    background-image: url(../img/backdrops/1280/base.jpg);
+    background-image: url(../img/backdrops/1280/staff.jpg);
   }
 
   .backdrop.bg-cast {
-    background-image: url(../img/backdrops/1280/base.jpg);
+    background-image: url(../img/backdrops/1280/cast.jpg);
   }
 
   .backdrop.bg-media-gallery {
-    background-image: url(../img/backdrops/1280/base.jpg);
+    background-image: url(../img/backdrops/1280/gallery.jpg);
   }
 
   .backdrop.bg-media-video {
-    background-image: url(../img/backdrops/1280/base.jpg);
+    background-image: url(../img/backdrops/1280/video.jpg);
   }
 
   .backdrop.bg-impressum {
-    background-image: url(../img/backdrops/1280/base.jpg);
+    background-image: url(../img/backdrops/1280/impressum.jpg);
   }
 
   .backdrop.bg-contact {
-    background-image: url(../img/backdrops/1280/base.jpg);
+    background-image: url(../img/backdrops/1280/contact.jpg);
   }
 }
 
 @media (min-width: 1281px) {
   .backdrop.bg-slider {
     background-attachment: scroll;
-    background-image: url(../img/backdrops/1600/base.jpg);
+    background-image: url(../img/backdrops/1600/slider.jpg);
   }
 
   .backdrop.bg-base {
@@ -210,42 +209,42 @@
   }
 
   .backdrop.bg-project {
-    background-image: url(../img/backdrops/1600/base.jpg);
+    background-image: url(../img/backdrops/1600/project.jpg);
   }
 
   .backdrop.bg-crew-about {
-    background-image: url(../img/backdrops/1600/base.jpg);
+    background-image: url(../img/backdrops/1600/about.jpg);
   }
 
   .backdrop.bg-crew-staff {
-    background-image: url(../img/backdrops/1600/base.jpg);
+    background-image: url(../img/backdrops/1600/staff.jpg);
   }
 
   .backdrop.bg-cast {
-    background-image: url(../img/backdrops/1600/base.jpg);
+    background-image: url(../img/backdrops/1600/cast.jpg);
   }
 
   .backdrop.bg-media-gallery {
-    background-image: url(../img/backdrops/1600/base.jpg);
+    background-image: url(../img/backdrops/1600/gallery.jpg);
   }
 
   .backdrop.bg-media-video {
-    background-image: url(../img/backdrops/1600/base.jpg);
+    background-image: url(../img/backdrops/1600/video.jpg);
   }
 
   .backdrop.bg-impressum {
-    background-image: url(../img/backdrops/1600/base.jpg);
+    background-image: url(../img/backdrops/1600/impressum.jpg);
   }
 
   .backdrop.bg-contact {
-    background-image: url(../img/backdrops/1600/base.jpg);
+    background-image: url(../img/backdrops/1600/contact.jpg);
   }
 }
 
 @media (min-width: 1601px) {
   .backdrop.bg-slider {
     background-attachment: scroll;
-    background-image: url(../img/backdrops/1920/base.jpg);
+    background-image: url(../img/backdrops/1920/slider.jpg);
   }
 
   .backdrop.bg-base {
@@ -253,42 +252,42 @@
   }
 
   .backdrop.bg-project {
-    background-image: url(../img/backdrops/1920/base.jpg);
+    background-image: url(../img/backdrops/1920/project.jpg);
   }
 
   .backdrop.bg-crew-about {
-    background-image: url(../img/backdrops/1920/base.jpg);
+    background-image: url(../img/backdrops/1920/about.jpg);
   }
 
   .backdrop.bg-crew-staff {
-    background-image: url(../img/backdrops/1920/base.jpg);
+    background-image: url(../img/backdrops/1920/staff.jpg);
   }
 
   .backdrop.bg-cast {
-    background-image: url(../img/backdrops/1920/base.jpg);
+    background-image: url(../img/backdrops/1920/cast.jpg);
   }
 
   .backdrop.bg-media-gallery {
-    background-image: url(../img/backdrops/1920/base.jpg);
+    background-image: url(../img/backdrops/1920/gallery.jpg);
   }
 
   .backdrop.bg-media-video {
-    background-image: url(../img/backdrops/1920/base.jpg);
+    background-image: url(../img/backdrops/1920/video.jpg);
   }
 
   .backdrop.bg-impressum {
-    background-image: url(../img/backdrops/1920/base.jpg);
+    background-image: url(../img/backdrops/1920/impressum.jpg);
   }
 
   .backdrop.bg-contact {
-    background-image: url(../img/backdrops/1920/base.jpg);
+    background-image: url(../img/backdrops/1920/contact.jpg);
   }
 }
 
 @media (min-width: 1921px) {
   .backdrop.bg-slider {
     background-attachment: scroll;
-    background-image: url(../img/backdrops/2048/base.jpg);
+    background-image: url(../img/backdrops/2048/slider.jpg);
   }
 
   .backdrop.bg-base {
@@ -296,42 +295,42 @@
   }
 
   .backdrop.bg-project {
-    background-image: url(../img/backdrops/2048/base.jpg);
+    background-image: url(../img/backdrops/2048/project.jpg);
   }
 
   .backdrop.bg-crew-about {
-    background-image: url(../img/backdrops/2048/base.jpg);
+    background-image: url(../img/backdrops/2048/about.jpg);
   }
 
   .backdrop.bg-crew-staff {
-    background-image: url(../img/backdrops/2048/base.jpg);
+    background-image: url(../img/backdrops/2048/staff.jpg);
   }
 
   .backdrop.bg-cast {
-    background-image: url(../img/backdrops/2048/base.jpg);
+    background-image: url(../img/backdrops/2048/cast.jpg);
   }
 
   .backdrop.bg-media-gallery {
-    background-image: url(../img/backdrops/2048/base.jpg);
+    background-image: url(../img/backdrops/2048/gallery.jpg);
   }
 
   .backdrop.bg-media-video {
-    background-image: url(../img/backdrops/2048/base.jpg);
+    background-image: url(../img/backdrops/2048/video.jpg);
   }
 
   .backdrop.bg-impressum {
-    background-image: url(../img/backdrops/2048/base.jpg);
+    background-image: url(../img/backdrops/2048/impressum.jpg);
   }
 
   .backdrop.bg-contact {
-    background-image: url(../img/backdrops/2048/base.jpg);
+    background-image: url(../img/backdrops/2048/contact.jpg);
   }
 }
 
 @media (min-width: 2049px) {
   .backdrop.bg-slider {
     background-attachment: scroll;
-    background-image: url(../img/backdrops/2560/base.jpg);
+    background-image: url(../img/backdrops/2560/slider.jpg);
   }
 
   .backdrop.bg-base {
@@ -339,42 +338,42 @@
   }
 
   .backdrop.bg-project {
-    background-image: url(../img/backdrops/2560/base.jpg);
+    background-image: url(../img/backdrops/2560/project.jpg);
   }
 
   .backdrop.bg-crew-about {
-    background-image: url(../img/backdrops/2560/base.jpg);
+    background-image: url(../img/backdrops/2560/about.jpg);
   }
 
   .backdrop.bg-crew-staff {
-    background-image: url(../img/backdrops/2560/base.jpg);
+    background-image: url(../img/backdrops/2560/staff.jpg);
   }
 
   .backdrop.bg-cast {
-    background-image: url(../img/backdrops/2560/base.jpg);
+    background-image: url(../img/backdrops/2560/cast.jpg);
   }
 
   .backdrop.bg-media-gallery {
-    background-image: url(../img/backdrops/2560/base.jpg);
+    background-image: url(../img/backdrops/2560/gallery.jpg);
   }
 
   .backdrop.bg-media-video {
-    background-image: url(../img/backdrops/2560/base.jpg);
+    background-image: url(../img/backdrops/2560/video.jpg);
   }
 
   .backdrop.bg-impressum {
-    background-image: url(../img/backdrops/2560/base.jpg);
+    background-image: url(../img/backdrops/2560/impressum.jpg);
   }
 
   .backdrop.bg-contact {
-    background-image: url(../img/backdrops/2560/base.jpg);
+    background-image: url(../img/backdrops/2560/contact.jpg);
   }
 }
 
 @media (min-width: 2561px) {
   .backdrop.bg-slider {
     background-attachment: scroll;
-    background-image: url(../img/backdrops/3200/base.jpg);
+    background-image: url(../img/backdrops/3200/slider.jpg);
   }
 
   .backdrop.bg-base {
@@ -382,42 +381,42 @@
   }
 
   .backdrop.bg-project {
-    background-image: url(../img/backdrops/3200/base.jpg);
+    background-image: url(../img/backdrops/3200/project.jpg);
   }
 
   .backdrop.bg-crew-about {
-    background-image: url(../img/backdrops/3200/base.jpg);
+    background-image: url(../img/backdrops/3200/about.jpg);
   }
 
   .backdrop.bg-crew-staff {
-    background-image: url(../img/backdrops/3200/base.jpg);
+    background-image: url(../img/backdrops/3200/staff.jpg);
   }
 
   .backdrop.bg-cast {
-    background-image: url(../img/backdrops/3200/base.jpg);
+    background-image: url(../img/backdrops/3200/cast.jpg);
   }
 
   .backdrop.bg-media-gallery {
-    background-image: url(../img/backdrops/3200/base.jpg);
+    background-image: url(../img/backdrops/3200/gallery.jpg);
   }
 
   .backdrop.bg-media-video {
-    background-image: url(../img/backdrops/3200/base.jpg);
+    background-image: url(../img/backdrops/3200/video.jpg);
   }
 
   .backdrop.bg-impressum {
-    background-image: url(../img/backdrops/3200/base.jpg);
+    background-image: url(../img/backdrops/3200/impressum.jpg);
   }
 
   .backdrop.bg-contact {
-    background-image: url(../img/backdrops/3200/base.jpg);
+    background-image: url(../img/backdrops/3200/contact.jpg);
   }
 }
 
 @media (min-width: 3201px) {
   .backdrop.bg-slider {
     background-attachment: scroll;
-    background-image: url(../img/backdrops/base.jpg);
+    background-image: url(../img/backdrops/slider.jpg);
   }
 
   .backdrop.bg-base {
@@ -425,34 +424,34 @@
   }
 
   .backdrop.bg-project {
-    background-image: url(../img/backdrops/base.jpg);
+    background-image: url(../img/backdrops/project.jpg);
   }
 
   .backdrop.bg-crew-about {
-    background-image: url(../img/backdrops/base.jpg);
+    background-image: url(../img/backdrops/about.jpg);
   }
 
   .backdrop.bg-crew-staff {
-    background-image: url(../img/backdrops/base.jpg);
+    background-image: url(../img/backdrops/staff.jpg);
   }
 
   .backdrop.bg-cast {
-    background-image: url(../img/backdrops/base.jpg);
+    background-image: url(../img/backdrops/cast.jpg);
   }
 
   .backdrop.bg-media-gallery {
-    background-image: url(../img/backdrops/base.jpg);
+    background-image: url(../img/backdrops/gallery.jpg);
   }
 
   .backdrop.bg-media-video {
-    background-image: url(../img/backdrops/base.jpg);
+    background-image: url(../img/backdrops/video.jpg);
   }
 
   .backdrop.bg-impressum {
-    background-image: url(../img/backdrops/base.jpg);
+    background-image: url(../img/backdrops/impressum.jpg);
   }
 
   .backdrop.bg-contact {
-    background-image: url(../img/backdrops/base.jpg);
+    background-image: url(../img/backdrops/contact.jpg);
   }
 }
