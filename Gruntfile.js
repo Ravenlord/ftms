@@ -329,6 +329,15 @@ module.exports = function(grunt) {
                   src:      [ 'media/gallery/*.{png,jpg,gif}' ]
         }]
       },
+      mediaGalleryThumb: {
+        options:  { width: 300, quality: 0.8 },
+        files: [{
+                  dest:     'dist/assets/img/media/gallery/thumbs/',
+                  expand:   true,
+                  flatten:  true,
+                  src:      [ 'media/gallery/*.{png,jpg,gif}' ]
+                }]
+      },
       videoGalleryThumb: {
         options:  { width: 300, quality: 0.8 },
         files: [{
