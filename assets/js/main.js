@@ -347,6 +347,7 @@ $(document).ready(function (){
         galleryFullscreenImage.src = '/assets/img/popout.svg';
         $galleryFullscreenElement.removeClass('grid');
         galleryFullscreen = false;
+        loadGalleryElement(parseInt($galleryActive.attr('data-id'), 10), false);
       }
       return event;
     });
