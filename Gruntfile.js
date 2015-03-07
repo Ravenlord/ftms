@@ -97,13 +97,9 @@ module.exports = function(grunt) {
         flatten:  true,
         src:      'config/form/submit.php'
       },
-      gallery: {
-        dest: 'dist/assets/img/',
-        src:  'media/**/*.{png,jpg,gif,svg}'
-      },
       img: {
         dest: 'dist/',
-        src:  'assets/img/**/*.{png,jpg,gif,svg}'
+        src:  [ 'assets/img/**/*.{png,jpg,gif,svg}', '!assets/img/backdrops/*']
       }
     },
 
@@ -227,87 +223,105 @@ module.exports = function(grunt) {
     // Resize images.
     image_resize: {
       backdrops800: {
-        options:  { width: 800 },
+        options:  { width: 800, quality: 0.8 },
         files: [{
                   dest:     'dist/assets/img/backdrops/800/',
                   expand:   true,
                   flatten:  true,
-                  src:      [ 'dist/assets/img/backdrops/*.{png,jpg,gif}' ]
+                  src:      [ 'assets/img/backdrops/*.{png,jpg,gif}' ]
                 }]
       },
       backdrops1024: {
-        options:  { width: 1024 },
+        options:  { width: 1024, quality: 0.8 },
         files: [{
           dest:     'dist/assets/img/backdrops/1024/',
           expand:   true,
           flatten:  true,
-          src:      [ 'dist/assets/img/backdrops/*.{png,jpg,gif}' ]
+          src:      [ 'assets/img/backdrops/*.{png,jpg,gif}' ]
         }]
       },
       backdrops1280: {
-        options:  { width: 1280 },
+        options:  { width: 1280, quality: 0.8 },
         files: [{
                   dest:     'dist/assets/img/backdrops/1280/',
                   expand:   true,
                   flatten:  true,
-                  src:      [ 'dist/assets/img/backdrops/*.{png,jpg,gif}' ]
+                  src:      [ 'assets/img/backdrops/*.{png,jpg,gif}' ]
                 }]
       },
       backdrops1600: {
-        options:  { width: 1600 },
+        options:  { width: 1600, quality: 0.8 },
         files: [{
                   dest:     'dist/assets/img/backdrops/1600/',
                   expand:   true,
                   flatten:  true,
-                  src:      [ 'dist/assets/img/backdrops/*.{png,jpg,gif}' ]
+                  src:      [ 'assets/img/backdrops/*.{png,jpg,gif}' ]
                 }]
       },
       backdrops1920: {
-        options:  { width: 1920 },
+        options:  { width: 1920, quality: 0.8 },
         files: [{
                   dest:     'dist/assets/img/backdrops/1920/',
                   expand:   true,
                   flatten:  true,
-                  src:      [ 'dist/assets/img/backdrops/*.{png,jpg,gif}' ]
+                  src:      [ 'assets/img/backdrops/*.{png,jpg,gif}' ]
                 }]
       },
       backdrops2048: {
-        options:  { width: 2048 },
+        options:  { width: 2048, quality: 0.8 },
         files: [{
                   dest:     'dist/assets/img/backdrops/2048/',
                   expand:   true,
                   flatten:  true,
-                  src:      [ 'dist/assets/img/backdrops/*.{png,jpg,gif}' ]
+                  src:      [ 'assets/img/backdrops/*.{png,jpg,gif}' ]
                 }]
       },
       backdrops2560: {
-        options:  { width: 2560 },
+        options:  { width: 2560, quality: 0.8 },
         files: [{
                   dest:     'dist/assets/img/backdrops/2560/',
                   expand:   true,
                   flatten:  true,
-                  src:      [ 'dist/assets/img/backdrops/*.{png,jpg,gif}' ]
+                  src:      [ 'assets/img/backdrops/*.{png,jpg,gif}' ]
                 }]
       },
       backdrops3200: {
-        options:  { width: 3200 },
+        options:  { width: 3200, quality: 0.8 },
         files: [{
                   dest:     'dist/assets/img/backdrops/3200/',
                   expand:   true,
                   flatten:  true,
-                  src:      [ 'dist/assets/img/backdrops/*.{png,jpg,gif}' ]
+                  src:      [ 'assets/img/backdrops/*.{png,jpg,gif}' ]
+                }]
+      },
+      backdrops5k: {
+        options:  { width: 5120, quality: 0.8 },
+        files: [{
+                  dest:     'dist/assets/img/backdrops/',
+                  expand:   true,
+                  flatten:  true,
+                  src:      [ 'assets/img/backdrops/*.{png,jpg,gif}' ]
                 }]
       },
       castCrew: {
-        options:  { width: 460 },
+        options:  { width: 460, quality: 0.8 },
         files: [{
           dest:     '',
           expand:   true,
           src:      [ 'dist/assets/img/cast/*.{png,jpg,gif}', 'dist/assets/img/crew/**/*.{png,jpg,gif}' ]
         }]
       },
+      mediaGallery: {
+        options:  { width: 2048, height: 1365, quality: 0.8 },
+        files: [{
+                  dest:     'dist/assets/img/media/gallery/',
+                  expand:   true,
+                  flatten:  true,
+                  src:      [ 'media/gallery/*.{png,jpg,gif}' ]
+                }]
+      },
       mediaGalleryPreview: {
-        options:  { width: 780 },
+        options:  { width: 780, height: 520, quality: 0.8 },
         files: [{
                   dest:     'dist/assets/img/media/gallery/previews/',
                   expand:   true,
@@ -315,17 +329,8 @@ module.exports = function(grunt) {
                   src:      [ 'media/gallery/*.{png,jpg,gif}' ]
         }]
       },
-      mediaGalleryThumb: {
-        options:  { width: 300 },
-        files: [{
-                  dest:     'dist/assets/img/media/gallery/thumbs/',
-                  expand:   true,
-                  flatten:  true,
-                  src:      [ 'media/gallery/*.{png,jpg,gif}' ]
-                }]
-      },
       videoGalleryThumb: {
-        options:  { width: 300 },
+        options:  { width: 300, quality: 0.8 },
         files: [{
                   dest:     'dist/assets/img/media/video/thumbs/',
                   expand:   true,
@@ -869,7 +874,7 @@ module.exports = function(grunt) {
   // Build HTML, validate and minify it.
   grunt.registerTask('html-prod', [ 'ftmsHTML', 'validation', 'htmlmin' ]);
 
-  grunt.registerTask('images', [ 'copy:img', 'copy:gallery', 'image_resize', 'imagemin' ]);
+  grunt.registerTask('images', [ 'copy:img', 'image_resize', 'imagemin' ]);
 
   // Copy all JS to the output directory.
   grunt.registerTask('js-dev', [ 'jshint:js', 'concat:jsTop', 'concat:jsBottom' ]);
