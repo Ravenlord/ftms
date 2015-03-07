@@ -99,6 +99,10 @@
   #gallery-grid-close {
     top: 20px;
   }
+
+  #gallery-grid-view-content .img-responsive {
+    max-height: 200px;
+  }
 }
 
 
@@ -145,6 +149,10 @@
   #gallery-grid-close {
     top: 50px;
   }
+
+  #gallery-grid-view-content .img-responsive {
+    max-height: 150px;
+  }
 }
 
 
@@ -154,5 +162,9 @@
 @media (min-width: 992px) {
   #gallery-active {
     min-height: 410px;
+  }
+
+  #gallery-grid-view-content .img-responsive {
+    max-height: 200px;
   }
 }
