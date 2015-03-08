@@ -309,6 +309,24 @@ $(document).ready(function (){
       return false;
     });
 
+    // Bind arrow keys for loading next/previous images.
+    document.onkeydown = function (e) {
+      switch (e.which || e.keyCode) {
+        // Left arrow key.
+        case 37:
+          e.preventDefault();
+          loadGalleryElement(parseInt($galleryActive.attr('data-id'), 10) - 1, fullscreenEnabled());
+          break;
+        // Right arrow key.
+        case 39:
+          e.preventDefault();
+          loadGalleryElement(parseInt($galleryActive.attr('data-id'), 10) + 1, fullscreenEnabled());
+          break;
+        default:
+          return;
+      }
+    };
+
     // Open image in fullscreen mode.
     $('#gallery-fullscreen').click(function (ev) {
       ev.preventDefault();
