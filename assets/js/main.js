@@ -360,9 +360,11 @@ $(document).ready(function (){
     $(document).on('webkitfullscreenchange mozfullscreenchange fullscreenchange MSFullscreenChange', function (event) {
       if (fullscreenEnabled() === true) {
         galleryFullscreenImage.src = '/assets/img/popin.svg';
+        galleryFullscreenImage.title = 'Exit fullscreen mode';
       }
       else {
         galleryFullscreenImage.src = '/assets/img/popout.svg';
+        galleryFullscreenImage.title = 'Show image in fullscreen mode';
         $galleryFullscreenElement.removeClass('grid');
         galleryFullscreen = false;
         loadGalleryElement(parseInt($galleryActive.attr('data-id'), 10), false);
